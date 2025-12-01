@@ -1,7 +1,6 @@
 package:
   name: scipy
   version: 1.14.1
-  pinned: true
   tag:
     - min-scipy-stack
   top-level:
@@ -42,6 +41,7 @@ source:
     - patches/0018-Fix-lapack-larfg-function-signature.patch
 
 build:
+  vendor-sharedlib: true
   # NumPy 2.1 disabled visibility for symbols outside of extension modules
   # by default, so this breaks SciPy tests from modules that use f2py to
   # build because they rely on the visibility of symbols in NumPy. This flag
@@ -140,7 +140,6 @@ requirements:
     - libboost
   run:
     - numpy
-    - libopenblas
   executable:
     - gfortran
 

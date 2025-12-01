@@ -6,8 +6,7 @@ from pytest_pyodide import run_in_pyodide
 
 
 @run_in_pyodide(packages=["aiohttp"])
-async def aiohttp_test_helper(selenium, patch, base_url, lock_data):
-    exec(patch, {})
+async def aiohttp_test_helper(selenium, base_url, lock_data):
     import json
 
     import aiohttp
@@ -24,7 +23,6 @@ async def aiohttp_test_helper(selenium, patch, base_url, lock_data):
 
 @pytest.mark.xfail_browsers(node="Not available")
 def test_aiohttp(selenium):
-    patch = (Path(__file__).parent / "aiohttp_patch.py").read_text()
     dist_dir = cast(str, pytest.pyodide_dist_dir)  # type:ignore[attr-defined]
     lock_data = (Path(dist_dir) / "pyodide-lock.json").read_text()
-    aiohttp_test_helper(selenium, patch, selenium.base_url, lock_data)
+    aiohttp_test_helper(selenium, selenium.base_url, lock_data)

@@ -1,0 +1,24 @@
+diff --git a/setup.cfg b/setup.cfg
+index 52a5ac6..fe0d404 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -25,18 +25,11 @@ classifiers =
+ [options]
+ package_dir = 
+ 	= src
+-packages = pyodc, codc
++packages = pyodc
+ python_requires = >=3.8
+-include_package_data = True
+ test_suite = tests
+ install_requires = 
+-	cffi
+-	findlibs>=0.0.5
+ 	pandas
+-	packaging
+-
+-[options.package_data]
+-* = *.h
+ 
+ [options.extras_require]
+ dev = 

@@ -13,8 +13,6 @@ requirements:
     - libproj
     - libiconv
     - libgeos
-  run:
-    - libgeos
 
 build:
   type: shared_library

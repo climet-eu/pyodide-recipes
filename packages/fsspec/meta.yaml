@@ -4,8 +4,10 @@ package:
   top-level:
     - fsspec
 source:
-  url: https://files.pythonhosted.org/packages/44/4b/e0cfc1a6f17e990f3e64b7d941ddc4acdc7b19d6edd51abf495f32b1a9e4/fsspec-2025.3.2-py3-none-any.whl
-  sha256: 2daf8dc3d1dfa65b6aa37748d112773a7a08416f6c70d96b264c96476ecaf711
+  url: https://files.pythonhosted.org/packages/source/f/fsspec/fsspec-2025.3.2.tar.gz
+  sha256: e52c77ef398680bbd6a98c0e628fbc469491282981209907bbc8aea76a04fdc6
+  patches:
+    - patches/0001-syncify-awaitable.patch
 about:
   home: http://github.com/fsspec/filesystem_spec
   PyPI: https://pypi.org/project/fsspec
