@@ -25,7 +25,7 @@ build:
     export EMSCRIPTEN_LIB=$EMSCRIPTEN_SYSROOT/lib/wasm32-emscripten/pic
 
     embuilder build libjpeg --pic
-    embuilder build libpng-wasm-sjlj --pic
+    embuilder build libpng-legacysjlj --pic
 
     cd build \
         && emcmake cmake ../ \
