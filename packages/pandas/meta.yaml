@@ -1,13 +1,13 @@
 package:
   name: pandas
-  version: 2.3.3
+  version: 2.2.3
   tag:
     - min-scipy-stack
   top-level:
     - pandas
 source:
-  url: https://files.pythonhosted.org/packages/source/p/pandas/pandas-2.3.3.tar.gz
-  sha256: e05e1af93b977f7eafa636d043f9f94c7ee3ac81af99c13508215942e64c993b
+  url: https://files.pythonhosted.org/packages/source/p/pandas/pandas-2.2.3.tar.gz
+  sha256: 4f18ba62b61d7e192368b84517265a99b4d7ee8912f8708660fb4a366cc82667
 build:
   cflags:
     -Werror=implicit-function-declaration -Werror=mismatched-parameter-types
