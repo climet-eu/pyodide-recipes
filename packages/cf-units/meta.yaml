@@ -15,9 +15,9 @@ requirements:
     - numpy
 build:
   script: |
-    export UDUNITS2_XML_PATH="/src/packages/.libs/share/udunits/udunits2.xml";
-    export CFLAGS="${CFLAGS} -I/src/packages/.libs/include";
-    export LDFLAGS="${CFLAGS} -L/src/packages/.libs/lib -lexpat";
+    export UDUNITS2_XML_PATH="${WASM_LIBRARY_DIR}/share/udunits/udunits2.xml";
+    export CFLAGS="${CFLAGS} -I${WASM_LIBRARY_DIR}/include";
+    export LDFLAGS="${CFLAGS} -L${WASM_LIBRARY_DIR}/lib -lexpat";
 about:
   home: https://github.com/SciTools/cf-units
   PyPI: https://pypi.org/project/cf-units
