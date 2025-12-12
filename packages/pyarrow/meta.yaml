@@ -33,7 +33,7 @@ build:
       # pyarrow --continue to debug build errors without having to do a full rebuild
       mkdir cppbuild
       cd cppbuild
-      emcmake cmake --preset ninja-release-emscripten ${PKG_BUILD_DIR}_cpp/cpp
+      emcmake cmake --preset ninja-release-emscripten ${PKG_BUILD_DIR}_cpp/cpp -DARROW_CXXFLAGS=-fwasm-exceptions
     else
       cd cppbuild
     fi
