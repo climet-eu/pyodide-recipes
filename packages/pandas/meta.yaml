@@ -19,7 +19,7 @@ requirements:
   run:
     - lzma             # required
     - numpy            # required
-    - pyarrow          # required
+    # - pyarrow          # required
 about:
   home: https://pandas.pydata.org
   PyPI: https://pypi.org/project/pandas
