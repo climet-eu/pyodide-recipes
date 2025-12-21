@@ -1,22 +1,15 @@
 package:
   name: pyarrow
-  version: 19.0.1
+  version: 22.0.0
   top-level:
     - pyarrow
 source:
-  url: https://github.com/apache/arrow/releases/download/apache-arrow-19.0.1/apache-arrow-19.0.1.tar.gz
-  sha256: acb76266e8b0c2fbb7eb15d542fbb462a73b3fd1e32b80fad6c2fafd95a51160
+  url: https://github.com/apache/arrow/releases/download/apache-arrow-22.0.0/apache-arrow-22.0.0.tar.gz
+  sha256: 131250cd24dec0cddde04e2ad8c9e2bc43edc5e84203a81cf71cf1a33a6e7e0f
   patches:
     - patches/autoload_timezones.patch
     - patches/0002-require-pyodide-unix-timezones.patch
 build:
-  vendor-sharedlib: true
-  cflags: |
-    -fwasm-exceptions
-  cxxflags: |
-    -fwasm-exceptions
-  ldflags: |
-    -fwasm-exceptions
   script: |
     # move things around so that the top level folder is the python folder
     # with the pyproject.toml, so pyodide build works
@@ -34,8 +27,8 @@ build:
       mkdir cppbuild
       cd cppbuild
       emcmake cmake --preset ninja-release-emscripten ${PKG_BUILD_DIR}_cpp/cpp \
-        -DCMAKE_C_FLAGS="${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm'" -DCMAKE_CXX_FLAGS="${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm' -fwasm-exceptions" \
-        -DCMAKE_SHARED_LINKER_FLAGS="${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm' -fwasm-exceptions"
+        -DCMAKE_C_FLAGS="${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm'" -DCMAKE_CXX_FLAGS="${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm'" \
+        -DCMAKE_SHARED_LINKER_FLAGS="${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm'"
     else
       cd cppbuild
     fi
@@ -45,16 +38,12 @@ build:
     export CMAKE_TOOLCHAIN_FILE=${BACKUP_TOOLCHAIN}
     rm -f CMakeCache.txt
     rm -rf CMakeFiles
-    export PYARROW_CXXFLAGS="-Wl,-rpath,\$ORIGIN ${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm' -fwasm-exceptions"
-  cross-script: |
-    cmake --version
-  # post: |
-  #   mv pyarrow/libarrow_python.so ${WASM_LIBRARY_DIR}/lib
+    export PYARROW_CXXFLAGS="-Wl,-rpath,\$ORIGIN ${SIDE_MODULE_CFLAGS} -sSUPPORT_LONGJMP='wasm'"
 about:
   home: https://arrow.apache.org/
   PyPI: https://pypi.org/project/pyarrow
   summary: Python library for Apache Arrow
-  license: Apache License, Version 2.0
+  license: Apache-2.0
 requirements:
   run:
     - numpy                   # required, not loaded immediately
