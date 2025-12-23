@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "numba"
-version = "0.61.2"
+version = "0.63.1"
 
 dependencies = [
-    "numpy >= 1.24",
+    "numpy<2.4,>=1.22",
 ]
