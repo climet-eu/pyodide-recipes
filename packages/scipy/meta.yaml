@@ -138,8 +138,6 @@ requirements:
     - numpy
     - libopenblas
     - libboost
-  run:
-    - numpy
   executable:
     - gfortran
   constraint:

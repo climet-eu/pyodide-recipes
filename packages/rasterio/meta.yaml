@@ -11,8 +11,6 @@ requirements:
     - numpy
     - libgdal
     - libproj
-  run:
-    - numpy
 build:
   vendor-sharedlib: true
   script: |

@@ -11,11 +11,6 @@ source:
     - patches/0002-export-http-exceptions.patch
     - patches/0003-requires-jupyterlite-cors.patch
 
-requirements:
-  run:
-    - frozenlist
-    - jupyterlite-cors
-
 about:
   home: https://github.com/aio-libs/aiohttp
   PyPI: https://pypi.org/project/aiohttp

@@ -10,9 +10,6 @@ source:
   patches:
     - patches/0001-package-shared-library.patch
 requirements:
-  run:
-    - cffi
-    - numpy
   host:
     - libeccodes
 build:

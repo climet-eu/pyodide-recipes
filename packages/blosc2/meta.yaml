@@ -12,13 +12,7 @@ build:
 
 requirements:
   host:
-    # Dependencies that are needed to build the package
     - numpy
-  run:
-    # Dependencies that are needed to run the package
-    - numpy
-    - msgpack
-    - ndindex
 
 about:
   home: https://github.com/Blosc/python-blosc2

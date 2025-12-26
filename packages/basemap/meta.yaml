@@ -9,11 +9,6 @@ source:
 requirements:
   host:
     - libgeos
-  run:
-    - matplotlib
-    - numpy
-    - packaging
-    - pyproj
 
 build:
   vendor-sharedlib: true

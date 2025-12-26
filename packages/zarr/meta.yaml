@@ -8,12 +8,6 @@ source:
   url: https://files.pythonhosted.org/packages/source/z/zarr/zarr-3.0.7.tar.gz
   patches:
     - patches/0001-syncify-awaitable.patch
-requirements:
-  run:
-    - crc32c
-    - numcodecs
-    - numpy
-    - packaging
 about:
   home: https://github.com/zarr-developers/zarr-python
   PyPI: https://pypi.org/project/zarr

@@ -8,8 +8,6 @@ source:
   sha256: 50ac76cc9f10ab7bd46e44a71c51a6927051b499b4407df4f29ab13d741b942f
 
 requirements:
-  run:
-    - numpy
   host:
     - numpy
 

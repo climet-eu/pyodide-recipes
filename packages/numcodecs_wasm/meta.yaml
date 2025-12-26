@@ -11,9 +11,6 @@ source:
 requirements:
   executable:
     - rustup
-  run:
-    - numcodecs
-    - numpy
 about:
   home: https://github.com/juntyr/numcodecs-rs
   PyPI: https://pypi.org/project/numcodecs-wasm

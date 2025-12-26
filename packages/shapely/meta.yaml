@@ -15,8 +15,6 @@ build:
   ldflags: |
     -fwasm-exceptions
 requirements:
-  run:
-    - numpy  # required
   host:
     - libgeos
     - numpy

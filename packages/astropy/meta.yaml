@@ -17,11 +17,6 @@ requirements:
   host:
     - packaging
     - numpy
-  run:
-    - packaging
-    - numpy
-    - pyerfa
-    - PyYAML
 test:
   imports:
     - astropy

@@ -9,8 +9,6 @@ source:
 requirements:
   host:
     - numpy
-  run:
-    - numpy
 about:
   home: https://github.com/liberfa/pyerfa
   PyPI: https://pypi.org/project/pyerfa

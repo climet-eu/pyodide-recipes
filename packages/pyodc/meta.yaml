@@ -9,10 +9,6 @@ source:
   sha256: 78dce79ef8eb0b75dc7bf5988dcd88f77d1c8319d969bbef21dbfe268e0b5b12
   patches:
     - patches/0001-only-pyodc.patch
-requirements:
-  run:
-    # - cffi  # only for codc
-    - pandas
 about:
   home: https://github.com/ecmwf/pyodc
   PyPI: https://pypi.org/project/pyodc

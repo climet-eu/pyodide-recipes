@@ -9,16 +9,6 @@ source:
   extras:
     - - ./extras/requirements.txt
       - ./requirements.txt
-requirements:
-  run:
-    - numpy
-    - matplotlib
-    - netCDF4
-    - pandas
-    - scipy
-    - healpy
-    - cftime
-    - Cartopy
 
 about:
   home: https://gitlab.dkrz.de/m300602/pyicon

@@ -9,9 +9,6 @@ source:
 requirements:
   host:
     - libgdal
-  run:
-    - numpy
-    - packaging
 build:
   vendor-sharedlib: true
   script: |

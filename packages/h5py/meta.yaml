@@ -16,8 +16,6 @@ about:
   license: BSD-3-Clause
 
 requirements:
-  run:
-    - numpy
   host:
     - numpy
     - libhdf5

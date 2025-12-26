@@ -16,10 +16,6 @@ build:
 requirements:
   host:
     - numpy
-  run:
-    - lzma             # required
-    - numpy            # required
-    - pyarrow          # required
 about:
   home: https://pandas.pydata.org
   PyPI: https://pypi.org/project/pandas

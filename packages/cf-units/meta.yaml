@@ -10,9 +10,6 @@ requirements:
   host:
     - libudunits2
     - numpy
-  run:
-    - cftime
-    - numpy
 build:
   script: |
     export UDUNITS2_XML_PATH="${WASM_LIBRARY_DIR}/share/udunits/udunits2.xml";

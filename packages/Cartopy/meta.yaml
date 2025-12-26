@@ -15,15 +15,6 @@ test:
 requirements:
   host:
     - numpy
-  run:
-    - fiona       # required
-    - numpy       # required
-    - matplotlib  # required, not loaded immediately
-    - shapely     # required
-    - packaging   # required, not loaded immediately
-    - pyproj      # required
-    - pillow      # optional
-    - scipy       # optional
 
 build:
   vendor-sharedlib: true

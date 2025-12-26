@@ -16,11 +16,6 @@ requirements:
   host:
     - numpy
     - scipy
-  run:
-    - numpy
-    - scipy
-    - pandas
-    - packaging
 
 test:
   imports:

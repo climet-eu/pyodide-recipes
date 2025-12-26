@@ -9,11 +9,6 @@ source:
   patches:
     - patches/0001-build-no-binaries.patch
 requirements:
-  run:
-    - numpy
-    - astropy
-    - matplotlib
-    - scipy
   executable:
     - gfortran
 build:

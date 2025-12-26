@@ -9,9 +9,6 @@ source:
   patches:
     - patches/0001-cors-proxy.patch
     - patches/0002-requires-jupyterlite-cors.patch
-requirements:
-  run:
-    - jupyterlite-cors
 about:
   home: https://github.com/koenvo/pyodide-http
   PyPI: https://pypi.org/project/pyodide-http

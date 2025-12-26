@@ -10,11 +10,6 @@ requirements:
   host:
     - libhdf5
     - libnetcdf
-  run:
-    - numpy
-    - packaging
-    - h5py
-    - cftime
 test:
   imports:
     - netCDF4

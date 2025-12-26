@@ -45,12 +45,6 @@ build:
 requirements:
   host:
     - numpy
-  run:
-    - contourpy           # required, not loaded immediately
-    - kiwisolver          # required, not loaded immediately
-    - numpy               # required
-    - packaging           # required
-    - pillow              # required
 
 about:
   home: https://matplotlib.org

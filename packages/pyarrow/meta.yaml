@@ -45,8 +45,6 @@ about:
   summary: Python library for Apache Arrow
   license: Apache-2.0
 requirements:
-  run:
-    - numpy                   # required, not loaded immediately
   host:
     - numpy
 extra:

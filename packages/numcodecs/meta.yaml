@@ -16,9 +16,6 @@ build:
 requirements:
   host:
     - numpy
-  run:
-    - numpy
-    - msgpack
 about:
   home: https://github.com/zarr-developers/numcodecs
   PyPI: https://pypi.org/project/numcodecs

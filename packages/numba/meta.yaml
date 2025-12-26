@@ -5,9 +5,6 @@ package:
     - numba
 source:
   path: ./numba
-requirements:
-  run:
-    - numpy
 about:
   home: https://numba.pydata.org
   PyPI: https://pypi.org/project/numba
