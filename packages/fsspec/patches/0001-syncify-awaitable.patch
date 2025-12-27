@@ -1,10 +1,10 @@
 diff --git a/fsspec/asyn.py b/fsspec/asyn.py
-index adeb88f..d96ac03 100644
+index 360758a..4a6c86d 100644
 --- a/fsspec/asyn.py
 +++ b/fsspec/asyn.py
-@@ -11,6 +11,8 @@ from contextlib import contextmanager
+@@ -11,6 +11,8 @@ from collections.abc import Iterable
  from glob import has_magic
- from typing import TYPE_CHECKING, Iterable
+ from typing import TYPE_CHECKING
  
 +import pyodide
 +
@@ -43,7 +43,7 @@ index adeb88f..d96ac03 100644
  def sync(loop, func, *args, timeout=None, **kwargs):
      """
      Make loop run coroutine until it returns. Runs in other thread
-@@ -70,39 +58,29 @@ def sync(loop, func, *args, timeout=None, **kwargs):
+@@ -70,39 +58,28 @@ def sync(loop, func, *args, timeout=None, **kwargs):
                           timeout=timeout, **kwargs)
      """
      timeout = timeout if timeout else None  # convert 0 or 0.0 to None
@@ -82,7 +82,6 @@ index adeb88f..d96ac03 100644
 -    elif isinstance(return_result, BaseException):
 -        raise return_result
 +            coro = asyncio.wait_for(coro, timeout=timeout)
-+
 +        try:
 +            return pyodide.ffi.run_sync(coro)
 +        except asyncio.TimeoutError as err:
@@ -103,10 +102,10 @@ index adeb88f..d96ac03 100644
  
  
  def sync_wrapper(func, obj=None):
-@@ -144,10 +122,6 @@ def get_loop():
+@@ -131,17 +108,12 @@ def get_loop():
+             # previous two calls from another thread
              if loop[0] is None:
-                 with _selector_policy():
-                     loop[0] = asyncio.new_event_loop()
+                 loop[0] = asyncio.new_event_loop()
 -                th = threading.Thread(target=loop[0].run_forever, name="fsspecIO")
 -                th.daemon = True
 -                th.start()
@@ -114,7 +113,14 @@ index adeb88f..d96ac03 100644
      return loop[0]
  
  
-@@ -232,6 +206,10 @@ async def _run_coros_in_chunks(
+ def reset_after_fork():
+     global lock
+     loop[0] = None
+-    iothread[0] = None
+     lock = None
+ 
+ 
+@@ -231,6 +203,10 @@ async def _run_coros_in_chunks(
          If yes, you normally expect smaller batches.
      """
  

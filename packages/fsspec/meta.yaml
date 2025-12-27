@@ -1,11 +1,11 @@
 package:
   name: fsspec
-  version: 2025.3.2
+  version: 2025.12.0
   top-level:
     - fsspec
 source:
-  url: https://files.pythonhosted.org/packages/source/f/fsspec/fsspec-2025.3.2.tar.gz
-  sha256: e52c77ef398680bbd6a98c0e628fbc469491282981209907bbc8aea76a04fdc6
+  url: https://files.pythonhosted.org/packages/source/f/fsspec/fsspec-2025.12.0.tar.gz
+  sha256: c505de011584597b1060ff778bb664c1bc022e87921b0e4f10cc9c44f9635973
   patches:
     - patches/0001-syncify-awaitable.patch
 about:
