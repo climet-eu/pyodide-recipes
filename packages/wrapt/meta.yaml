@@ -1,11 +1,11 @@
 package:
   name: wrapt
-  version: 1.17.2
+  version: 1.17.3
   top-level:
     - wrapt
 source:
-  url: https://files.pythonhosted.org/packages/source/w/wrapt/wrapt-1.17.2.tar.gz
-  sha256: 41388e9d4d1522446fe79d3213196bd9e3b301a336965b9e27ca2788ebd122f3
+  url: https://files.pythonhosted.org/packages/source/w/wrapt/wrapt-1.17.3.tar.gz
+  sha256: f66eb08feaa410fe4eebd17f2a2c8e2e46d3476e9f8c783daa8e09e0faa666d0
 about:
   home: https://github.com/GrahamDumpleton/wrapt
   PyPI: https://pypi.org/project/wrapt
