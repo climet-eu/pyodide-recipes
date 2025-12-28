@@ -8,6 +8,7 @@ source:
   patches:
     - patches/0001-expat-xml-stopparser.patch
     - patches/0002-udunits2-xml-path.patch
+    - patches/0003-no-binary.patch
 
 requirements:
   host:
@@ -23,7 +24,7 @@ build:
     cd build \
         && emcmake cmake ../ \
         -DCMAKE_INSTALL_PREFIX=${WASM_LIBRARY_DIR} \
-        -DBUILD_SHARED_LIBS=off;
+        -DBUILD_SHARED_LIBS=ON;
 
     emmake make -j ${PYODIDE_JOBS:-3};
     emmake make -j ${PYODIDE_JOBS:-3} install;

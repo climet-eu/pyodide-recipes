@@ -1,0 +1,22 @@
+package:
+  name: cfunits
+  version: 3.3.7
+  top-level:
+    - cfunits
+source:
+  url: https://files.pythonhosted.org/packages/source/c/cfunits/cfunits-3.3.7.tar.gz
+  sha256: e271ae2c01765cc437e7eefd802846894367179e3208653ab9b520ade48286d6
+  patches:
+    - patches/0001-libpath.patch
+requirements:
+  host:
+    - libudunits2
+build:
+  post: |
+    mkdir cfunits.libs
+    cp "${WASM_LIBRARY_DIR}/lib/libudunits2.so" cfunits.libs/
+about:
+  home: https://bitbucket.org/cfpython/cfunits-python
+  PyPI: https://pypi.org/project/cfunits
+  summary: A python interface to UNIDATA's UDUNITS-2 package with CF extensions
+  license: MIT

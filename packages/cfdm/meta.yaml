@@ -1,0 +1,13 @@
+package:
+  name: cfdm
+  version: 1.12.3.1
+  top-level:
+    - cfdm
+source:
+  url: https://files.pythonhosted.org/packages/source/c/cfdm/cfdm-1.12.3.1.tar.gz
+  sha256: 932b6b47c950e56125769f76326cffb4430c0f060783e0fcc8fd869142d5af4a
+about:
+  home: https://ncas-cms.github.io/cfdm
+  PyPI: https://pypi.org/project/cfdm
+  summary: A Python reference implementation of the CF data model
+  license: MIT
