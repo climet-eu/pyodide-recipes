@@ -1,0 +1,111 @@
+diff --git a/cf/__init__.py b/cf/__init__.py
+index 7dcf6a9..436b30a 100644
+--- a/cf/__init__.py
++++ b/cf/__init__.py
+@@ -89,11 +89,9 @@ _requires = (
+     "cftime",
+     "cfunits",
+     "cfdm",
+-    "psutil",
+     "dask",
+     "packaging",
+     "scipy",
+-    "distributed",
+ )
+ x = ", ".join(_requires)
+ _error0 = f"cf v{__version__} requires the modules {x}. "
+@@ -186,18 +184,6 @@ else:
+             f"Got {cfunits.__version__} at {cfunits.__file__}"
+         )
+ 
+-try:
+-    import psutil
+-except ImportError as error1:
+-    raise ImportError(_error0 + str(error1))
+-else:
+-    _minimum_vn = "0.6.0"
+-    if Version(psutil.__version__) < Version(_minimum_vn):
+-        raise RuntimeError(
+-            f"Bad psutil version: cf requires psutil>={_minimum_vn}. "
+-            f"Got {psutil.__version__} at {psutil.__file__}"
+-        )
+-
+ # Check the version of dask
+ try:
+     import dask
+@@ -211,19 +197,6 @@ else:
+             f"Got {dask.__version__} at {dask.__file__}"
+         )
+ 
+-try:
+-    import distributed
+-except ImportError as error1:
+-    raise ImportError(_error0 + str(error1))
+-else:
+-    _minimum_vn = "2025.5.1"
+-    if Version(distributed.__version__) < Version(_minimum_vn):
+-        raise RuntimeError(
+-            "Bad distributed version: cf requires "
+-            f"distributed>={_minimum_vn}. "
+-            f"Got {distributed.__version__} at {distributed.__file__}"
+-        )
+-
+ try:
+     import scipy
+ except ImportError as error1:
+diff --git a/cf/constants.py b/cf/constants.py
+index aa2bfd0..d7b7bba 100644
+--- a/cf/constants.py
++++ b/cf/constants.py
+@@ -6,14 +6,13 @@ from tempfile import gettempdir
+ import numpy as np
+ from dask import config
+ from dask.utils import parse_bytes
+-from psutil import virtual_memory
+ 
+ from .units import Units
+ 
+ # --------------------------------------------------------------------
+ # Find the total amount of memory, in bytes
+ # --------------------------------------------------------------------
+-_TOTAL_MEMORY = float(virtual_memory().total)
++_TOTAL_MEMORY = 2**31  # 2 GiB
+ 
+ _CHUNKSIZE = "128 MiB"
+ config.set({"array.chunk-size": _CHUNKSIZE})
+diff --git a/cf/functions.py b/cf/functions.py
+index 3bfdcb3..580af4f 100644
+--- a/cf/functions.py
++++ b/cf/functions.py
+@@ -20,7 +20,6 @@ import cfdm
+ import netCDF4
+ import numpy as np
+ from dask.base import is_dask_collection
+-from psutil import virtual_memory
+ 
+ from . import __file__, __version__
+ from .constants import (
+@@ -153,7 +152,8 @@ else:
+         96496240.0
+ 
+         """
+-        return float(virtual_memory().available)
++        import pyodide_js
++        return total_memory() - pyodide_js._module.HEAPU8.length
+ 
+ 
+ def configuration(
+diff --git a/requirements.txt b/requirements.txt
+index 13ddf3c..266fa58 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -2,9 +2,7 @@ netCDF4==1.7.2
+ cftime>=1.6.4
+ numpy>=2.0.0
+ cfdm>=1.12.3.1, <1.12.4.0
+-psutil>=0.6.0
+ cfunits>=3.3.7
+ dask>=2025.5.1
+-distributed>=2025.5.1
+ packaging>=20.0
+ scipy>=1.10.0
