@@ -6,6 +6,8 @@ package:
 source:
   url: https://files.pythonhosted.org/packages/source/c/cfdm/cfdm-1.12.3.1.tar.gz
   sha256: 932b6b47c950e56125769f76326cffb4430c0f060783e0fcc8fd869142d5af4a
+  patches:
+    - patches/0001-no-distributed.patch
 about:
   home: https://ncas-cms.github.io/cfdm
   PyPI: https://pypi.org/project/cfdm

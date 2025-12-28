@@ -1,0 +1,57 @@
+diff --git a/cfdm/__init__.py b/cfdm/__init__.py
+index 54e4308..c74ad69 100644
+--- a/cfdm/__init__.py
++++ b/cfdm/__init__.py
+@@ -166,20 +166,6 @@ else:
+             f"Got {dask.__version__} at {dask.__file__}"
+         )
+ 
+-# Check the version of distributed
+-try:
+-    import distributed
+-except ImportError as error1:
+-    raise ImportError(_error0 + str(error1))
+-else:
+-    _minimum_vn = "2025.5.1"
+-    if Version(distributed.__version__) < Version(_minimum_vn):
+-        raise ValueError(
+-            "Bad distributed version: cfdm requires "
+-            f"distributed>={_minimum_vn}. "
+-            f"Got {distributed.__version__} at {distributed.__file__}"
+-        )
+-
+ # Check the version of uritools
+ try:
+     import uritools
+diff --git a/cfdm/functions.py b/cfdm/functions.py
+index 799cb7b..0840fa5 100644
+--- a/cfdm/functions.py
++++ b/cfdm/functions.py
+@@ -443,7 +443,6 @@ def environment(display=True, paths=True):
+     out = core.environment(display=False, paths=paths)
+ 
+     dependency_version_paths_mapping = {
+-        "udunits2 library": (ctypes.util.find_library("udunits2"), ""),
+         "HDF5 library": (netCDF4.__hdf5libversion__, ""),
+         "netcdf library": (netCDF4.__netcdf4libversion__, ""),
+         "netCDF4": _get_module_info("netCDF4"),
+@@ -453,7 +452,6 @@ def environment(display=True, paths=True):
+         "s3fs": _get_module_info("s3fs"),
+         "scipy": _get_module_info("scipy"),
+         "dask": _get_module_info("dask"),
+-        "distributed": _get_module_info("distributed"),
+         "cftime": _get_module_info("cftime"),
+         "cfunits": _get_module_info("cfunits"),
+         "cfdm": (__version__, os.path.abspath(__file__)),
+diff --git a/requirements.txt b/requirements.txt
+index 3b37323..3e010cd 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -7,7 +7,6 @@ h5netcdf>=1.3.0
+ h5py>=3.12.0
+ s3fs>=2024.6.0
+ dask>=2025.5.1
+-distributed>=2025.5.1
+ uritools>=4.0.3
+ cfunits>=3.3.7
+ zarr>=3.0.8
