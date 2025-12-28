@@ -1,11 +1,11 @@
 package:
   name: zarr
-  version: 3.0.7
+  version: 3.0.8
   top-level:
     - zarr
 source:
-  sha256: c06da406e08da9565ba368ac0337a4466d7743f643acac2873beee4458b6e5e1
-  url: https://files.pythonhosted.org/packages/source/z/zarr/zarr-3.0.7.tar.gz
+  sha256: 88505d095af899a88ae8ac4db02f4650ef0801d2ff6f65b6d1f0a45dcf760a6d
+  url: https://files.pythonhosted.org/packages/source/z/zarr/zarr-3.0.8.tar.gz
   patches:
     - patches/0001-syncify-awaitable.patch
 about:
