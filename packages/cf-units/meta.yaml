@@ -11,10 +11,11 @@ requirements:
     - libudunits2
     - numpy
 build:
+  vendor-sharedlib: true
   script: |
     export UDUNITS2_XML_PATH="${WASM_LIBRARY_DIR}/share/udunits/udunits2.xml";
     export CFLAGS="${CFLAGS} -I${WASM_LIBRARY_DIR}/include";
-    export LDFLAGS="${CFLAGS} -L${WASM_LIBRARY_DIR}/lib -lexpat";
+    export LDFLAGS="${CFLAGS} -L${WASM_LIBRARY_DIR}/lib";
 about:
   home: https://github.com/SciTools/cf-units
   PyPI: https://pypi.org/project/cf-units

@@ -15,7 +15,7 @@ requirements:
     - libexpat
 
 build:
-  type: static_library
+  type: shared_library
   script: |
     mkdir -p build;
 
@@ -29,4 +29,4 @@ build:
     emmake make -j ${PYODIDE_JOBS:-3};
     emmake make -j ${PYODIDE_JOBS:-3} install;
 
-    cp -P ${WASM_LIBRARY_DIR}/lib/libudunits2.a ${DISTDIR}
+    cp -P ${WASM_LIBRARY_DIR}/lib/libudunits2.so ${DISTDIR}
