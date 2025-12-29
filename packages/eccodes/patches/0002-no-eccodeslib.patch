@@ -1,0 +1,29 @@
+diff --git a/setup.py b/setup.py
+index 105dd3e..3c5fe7c 100644
+--- a/setup.py
++++ b/setup.py
+@@ -17,6 +17,8 @@
+ 
+ import setuptools
+ 
++binary = os.getenv("DEPEND_ON_ECCODESLIB", "") == "1"
++
+ 
+ def read(path):
+     file_path = os.path.join(os.path.dirname(__file__), *path.split("/"))
+@@ -90,9 +92,14 @@ def shared(directory):
+     "attrs",
+     "cffi",
+     "findlibs",
+-    "eccodeslib;platform_system!='Windows'",
+ ]
+ 
++# only add eccodeslib as dependency if building a distribution that should depend on it
++if binary:
++    install_requires += [
++        "eccodeslib;platform_system!='Windows'",
++    ]
++
+ setuptools.setup(
+     name="eccodes",
+     version=parse_version_from("gribapi/bindings.py"),

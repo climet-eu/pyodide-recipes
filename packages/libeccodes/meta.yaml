@@ -1,10 +1,10 @@
 package:
   name: libeccodes
-  version: 2.42.0
+  version: 2.44.0
 
 source:
-  url: https://github.com/ecmwf/eccodes/archive/refs/tags/2.42.0.tar.gz
-  sha256: 24af0919d326572e673ad12790a9d6ebcad168c8cc65507c55f6d6c415318001
+  url: https://github.com/ecmwf/eccodes/archive/refs/tags/2.44.0.tar.gz
+  sha256: 9d5b01a20047eb7af2531a0aeccd60e32056d9d12790a8365844de376e631e8a
   patches:
     - patches/0001-32bit-support-hack.patch
 
@@ -35,7 +35,7 @@ build:
         -DENABLE_JPG=ON \
         -DENABLE_JPG_LIBOPENJPEG=OFF \
         -DENABLE_JPG_LIBJASPER=OFF \
-        -DENABLE_PNG=OFF \
+        -DENABLE_PNG=ON \
         -DENABLE_AEC=ON \
         -DENABLE_FORTRAN=OFF \
         -DENABLE_MEMFS=ON \
