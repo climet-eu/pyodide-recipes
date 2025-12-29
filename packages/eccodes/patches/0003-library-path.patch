@@ -1,0 +1,13 @@
+diff --git a/gribapi/bindings.py b/gribapi/bindings.py
+index a267187..8704339 100644
+--- a/gribapi/bindings.py
++++ b/gribapi/bindings.py
+@@ -53,7 +53,7 @@ def find_binary_libs(name):
+     if int(os.environ.get(env_var, "0")):
+         LOG.debug(f"{name} lib search: {env_var} set, so using findlibs")
+ 
+-    elif os.name == "nt":
++    elif os.name == "nt" or sys.platform == "emscripten":
+         LOG.debug(f"{name} lib search: trying to find binary wheel")
+         here = os.path.dirname(__file__)
+         # eccodes libs are actually in eccodes dir, not gribapi dir

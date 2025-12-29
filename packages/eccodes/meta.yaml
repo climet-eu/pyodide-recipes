@@ -10,6 +10,7 @@ source:
   patches:
     - patches/0001-package-shared-library.patch
     - patches/0002-no-eccodeslib.patch
+    - patches/0003-library-path.patch
 requirements:
   host:
     - libeccodes
