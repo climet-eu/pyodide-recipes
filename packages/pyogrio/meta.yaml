@@ -12,8 +12,12 @@ requirements:
 build:
   vendor-sharedlib: true
   script: |
+    export PYOGRIO_PACKAGE_DATA=1
+
     export GDAL_CONFIG=${WASM_LIBRARY_DIR}/bin/gdal-config
-    echo ${GDAL_CONFIG}
+    export GDAL_DATA=${WASM_LIBRARY_DIR}/share/gdal
+    export PROJ_LIB=${WASM_LIBRARY_DIR}/share/proj
+    echo ${GDAL_CONFIG} ${GDAL_DATA} ${PROJ_LIB}
 about:
   home: https://github.com/geopandas/pyogrio
   PyPI: https://pypi.org/project/pyogrio
