@@ -5,7 +5,9 @@ import js
 CORS_URL = "https://cors.climet.eu/"
 
 # allow same-origin and CORS proxy requests without extra proxying
-cors_origins = {js.location.origin: True, js.URL.new(CORS_URL).origin: True}
+cors_origins = { js.URL.new(CORS_URL).origin: True }
+if hasattr(js, "location"):  # guard for import outside browser
+    cors_origins[js.location.origin] = True
 
 
 def cors_url(url: str) -> str:
