@@ -19,6 +19,10 @@ build:
 
     mkdir -p build;
 
+    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+
     export EMSCRIPTEN_SYSROOT=$(em-config CACHE)/sysroot
     export EMSCRIPTEN_INCLUDE=$EMSCRIPTEN_SYSROOT/include
     export EMSCRIPTEN_BIN=$EMSCRIPTEN_SYSROOT/bin
@@ -36,6 +40,8 @@ build:
         -DENABLE_JPG_LIBOPENJPEG=OFF \
         -DENABLE_JPG_LIBJASPER=OFF \
         -DENABLE_PNG=ON \
+        -DPNG_PNG_INCLUDE_DIR=$EMSCRIPTEN_INCLUDE \
+        -DPNG_LIBRARY_RELEASE=$EMSCRIPTEN_LIB/libpng-legacysjlj.a \
         -DENABLE_AEC=ON \
         -DENABLE_FORTRAN=OFF \
         -DENABLE_MEMFS=ON \
@@ -46,7 +52,9 @@ build:
         -DENABLE_EXAMPLES=OFF \
         -DENABLE_BUILD_TOOLS=OFF \
         -DENABLE_INSTALL_ECCODES_DEFINITIONS=ON \
-        -DENABLE_INSTALL_ECCODES_SAMPLES=OFF;
+        -DENABLE_INSTALL_ECCODES_SAMPLES=OFF \
+        -DCMAKE_C_FLAGS="-fwasm-exceptions" \
+        -DCMAKE_CXX_FLAGS="-fwasm-exceptions";
 
     emmake make -j ${PYODIDE_JOBS:-3};
     emmake make -j ${PYODIDE_JOBS:-3} install;
