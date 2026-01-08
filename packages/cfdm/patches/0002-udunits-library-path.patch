@@ -1,0 +1,41 @@
+diff --git a/cfdm/functions.py b/cfdm/functions.py
+index c3771ac..ae9c827 100644
+--- a/cfdm/functions.py
++++ b/cfdm/functions.py
+@@ -437,13 +437,14 @@ def environment(display=True, paths=True):
+     """
+     import ctypes
+ 
++    import cfunits
+     import netCDF4
+ 
+     # Get cfdm.core env
+     out = core.environment(display=False, paths=paths)
+ 
+     dependency_version_paths_mapping = {
+-        "udunits2 library": (ctypes.util.find_library("udunits2"), ""),
++        "udunits2 library": (cfunits.units._udunits._name, ""),
+         "HDF5 library": (netCDF4.__hdf5libversion__, ""),
+         "netcdf library": (netCDF4.__netcdf4libversion__, ""),
+         "netCDF4": _get_module_info("netCDF4"),
+diff --git a/cfdm/units.py b/cfdm/units.py
+index fbcbf56..c1d447d 100644
+--- a/cfdm/units.py
++++ b/cfdm/units.py
+@@ -1,14 +1,9 @@
+-from ctypes.util import find_library
+-
++import cfunits
+ from cfunits import Units as cfUnits
+ 
+ from .core.meta import DocstringRewriteMeta
+ 
+-_libpath = find_library("udunits2")
+-if _libpath is None:
+-    raise FileNotFoundError(
+-        "cfdm UNIDATA UDUNITS-2. Can't find the 'udunits2' library."
+-    )
++_libpath = cfunits.units._udunits._name
+ 
+ 
+ class Units(metaclass=DocstringRewriteMeta):

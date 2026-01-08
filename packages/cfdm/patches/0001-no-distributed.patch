@@ -24,18 +24,10 @@ index 54e4308..c74ad69 100644
  try:
      import uritools
 diff --git a/cfdm/functions.py b/cfdm/functions.py
-index 799cb7b..0840fa5 100644
+index 799cb7b..c3771ac 100644
 --- a/cfdm/functions.py
 +++ b/cfdm/functions.py
-@@ -443,7 +443,6 @@ def environment(display=True, paths=True):
-     out = core.environment(display=False, paths=paths)
- 
-     dependency_version_paths_mapping = {
--        "udunits2 library": (ctypes.util.find_library("udunits2"), ""),
-         "HDF5 library": (netCDF4.__hdf5libversion__, ""),
-         "netcdf library": (netCDF4.__netcdf4libversion__, ""),
-         "netCDF4": _get_module_info("netCDF4"),
-@@ -453,7 +452,6 @@ def environment(display=True, paths=True):
+@@ -453,7 +453,6 @@ def environment(display=True, paths=True):
          "s3fs": _get_module_info("s3fs"),
          "scipy": _get_module_info("scipy"),
          "dask": _get_module_info("dask"),
