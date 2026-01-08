@@ -74,7 +74,7 @@ index aa2bfd0..d7b7bba 100644
  _CHUNKSIZE = "128 MiB"
  config.set({"array.chunk-size": _CHUNKSIZE})
 diff --git a/cf/functions.py b/cf/functions.py
-index 3bfdcb3..580af4f 100644
+index 3bfdcb3..9b7fc1b 100644
 --- a/cf/functions.py
 +++ b/cf/functions.py
 @@ -20,7 +20,6 @@ import cfdm
@@ -95,6 +95,15 @@ index 3bfdcb3..580af4f 100644
  
  
  def configuration(
+@@ -3216,7 +3216,7 @@ def environment(display=True, paths=True):
+         "esmpy/ESMF": (
+             _get_module_info("esmpy", alternative_name="ESMF", try_except=True)
+         ),
+-        "psutil": _get_module_info("psutil"),
++        # "psutil": _get_module_info("psutil"),
+         "matplotlib": _get_module_info("matplotlib", try_except=True),
+         "cfplot": _get_module_info("cfplot", try_except=True),
+         "cf": (__version__, _os_path_abspath(__file__)),
 diff --git a/requirements.txt b/requirements.txt
 index 13ddf3c..266fa58 100644
 --- a/requirements.txt

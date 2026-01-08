@@ -9,6 +9,7 @@ source:
   patches:
     - patches/0001-make-clean.patch
     - patches/0002-no-psutil-distributed.patch
+    - patches/0003-udunits-library-path.patch
 about:
   home: https://ncas-cms.github.io/cf-python
   PyPI: https://pypi.org/project/cf-python
