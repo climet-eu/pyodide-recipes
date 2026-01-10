@@ -9,6 +9,7 @@ source:
   patches:
     - patches/0001-no-distributed.patch
     - patches/0002-udunits-library-path.patch
+    - patches/0003-early-h5py-import.patch
 about:
   home: https://ncas-cms.github.io/cfdm
   PyPI: https://pypi.org/project/cfdm
