@@ -10,6 +10,9 @@ source:
     - patches/0001-build-no-binaries.patch
     - patches/0002-without-zlib-check-fortran.patch
     - patches/0003-install-path.patch
+requirements:
+  host:
+    - libzlib
 build:
   vendor-sharedlib: true
   exports: requested
@@ -20,10 +23,13 @@ build:
     -fwasm-exceptions
   ldflags: |
     -fwasm-exceptions
-  cross-script: |
+  script: |
     export CXXFLAGS="$CXXFLAGS -sRELOCATABLE=1"
 about:
   home: https://github.com/healpy/healpy
   PyPI: https://pypi.org/project/healpy
   summary: Healpix tools package for Python
   license: GPL-2.0-only
+extra:
+  recipe-maintainers:
+    - juntyr
