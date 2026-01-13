@@ -1,0 +1,21 @@
+package:
+  name: arro3-compute
+  version: 0.6.5
+  tag:
+    - rust
+  top-level:
+    - "arro3.compute"
+source:
+  url: https://files.pythonhosted.org/packages/source/a/arro3_compute/arro3_compute-0.6.5.tar.gz
+  sha256: 5cef7890c8171456ef594d0f1b3372dd4bd00de09e52ef283ebf640ffa200d00
+requirements:
+  executable:
+    - rustup
+about:
+  home: https://github.com/kylebarron/arro3
+  PyPI: https://pypi.org/project/arro3-compute
+  summary: Compute kernels for Apache Arrow memory.
+  license: MIT
+extra:
+  recipe-maintainers:
+    - kylebarron

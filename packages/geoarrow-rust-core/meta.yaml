@@ -1,0 +1,30 @@
+package:
+  name: geoarrow-rust-core
+  version: 0.6.1
+  tag:
+    - rust
+  top-level:
+    - "geoarrow.rust.core"
+source:
+  url: https://github.com/geoarrow/geoarrow-rs/archive/refs/tags/py-v0.6.1.tar.gz
+  sha256: e353965378539d0454dd9c47881749436d435b18b782f2f2ba1d9a94176f6cd0
+  patches:
+    - patches/0001-inline-workspace.patch
+requirements:
+  executable:
+    - rustup
+build:
+  script: |
+    mv python/geoarrow-core .geoarrow-core
+    rm -rf *
+    rm -rf .github .gitignore .gitmodules
+    mv .geoarrow-core/* .
+    rm -rf .geoarrow-core
+about:
+  home: https://github.com/geoarrow/geoarrow-rs
+  PyPI: https://pypi.org/project/geoarrow-rust-core
+  summary: Core data structures to store and manage geometry data in GeoArrow format.
+  license: MIT OR Apache-2.0
+extra:
+  recipe-maintainers:
+    - kylebarron

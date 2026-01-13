@@ -1,0 +1,50 @@
+diff --git a/python/geoarrow-core/Cargo.toml b/python/geoarrow-core/Cargo.toml
+index 803c3bf..97d1ad5 100644
+--- a/python/geoarrow-core/Cargo.toml
++++ b/python/geoarrow-core/Cargo.toml
+@@ -1,16 +1,16 @@
+ [package]
+ name = "geoarrow-rust-core"
+-version = { workspace = true }
+-authors = { workspace = true }
+-edition = { workspace = true }
++version = "0.6.1"
++authors = ["Kyle Barron <kylebarron2@gmail.com>"]
++edition = "2024"
+ description = "Efficient, vectorized geospatial operations in Python."
+ readme = "README.md"
+-repository = { workspace = true }
+-homepage = { workspace = true }
+-license = { workspace = true }
+-keywords = { workspace = true }
+-categories = { workspace = true }
+-rust-version = { workspace = true }
++repository = "https://github.com/geoarrow/geoarrow-rs"
++homepage = "https://geoarrow.org/geoarrow-rs/"
++license = "MIT OR Apache-2.0"
++keywords = ["python", "arrow", "geospatial"]
++categories = ["wasm", "science::geo"]
++rust-version = "1.85"
+ 
+ # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+ [lib]
+@@ -20,11 +20,11 @@ crate-type = ["cdylib"]
+ [features]
+ 
+ [dependencies]
+-arrow-array = { workspace = true }
+-arrow-schema = { workspace = true }
+-pyo3 = { workspace = true }
+-pyo3-arrow = { workspace = true }
+-pyo3-geoarrow = { workspace = true, features = ["geozero"] }
+-geoarrow-array = { workspace = true }
+-geoarrow-schema = { workspace = true }
+-geo-traits = { workspace = true }
++arrow-array = "56"
++arrow-schema = "56"
++pyo3 = { version = "0.26", features = ["hashbrown", "serde", "anyhow"] }
++pyo3-arrow = "0.12"
++pyo3-geoarrow = "0.6.2"
++geoarrow-array = "0.6.2"
++geoarrow-schema = "0.6.2"
++geo-traits = "0.3"
