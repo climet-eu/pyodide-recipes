@@ -12,6 +12,7 @@ source:
     - patches/0001-inline-workspace.patch
     - patches/0002-no-async.patch
     - patches/0003-fix-async-feature.patch
+    - patches/0004-no-py-store.patch
 requirements:
   executable:
     - rustup
