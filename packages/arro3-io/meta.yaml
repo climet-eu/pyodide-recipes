@@ -1,0 +1,32 @@
+package:
+  name: arro3-io
+  version: 0.6.5
+  tag:
+    - rust
+  top-level:
+    - "arro3.io"
+source:
+  url: https://github.com/kylebarron/arro3/archive/refs/tags/py-v0.6.5.tar.gz
+  sha256: cdb9b0a6b17834310b197d064b0eafef27191dda0b342fca289b96325f0a354b
+  patches:
+    - patches/0001-inline-workspace.patch
+    - patches/0002-no-async.patch
+    - patches/0003-fix-async-feature.patch
+requirements:
+  executable:
+    - rustup
+build:
+  script: |
+    mv arro3-io .arro3-io
+    rm -rf *
+    rm -rf .github .gitignore .pre-commit-config.yaml .python-version
+    mv .arro3-io/* .
+    rm -rf .arro3-io
+about:
+  home: https://github.com/kylebarron/arro3
+  PyPI: https://pypi.org/project/arro3-io
+  summary: Read and write tabular data formats to and from Apache Arrow.
+  license: MIT
+extra:
+  recipe-maintainers:
+    - kylebarron

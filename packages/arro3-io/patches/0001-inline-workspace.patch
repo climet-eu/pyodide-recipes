@@ -1,0 +1,67 @@
+diff --git a/arro3-io/Cargo.toml b/arro3-io/Cargo.toml
+index 46a55ac..60f51a7 100644
+--- a/arro3-io/Cargo.toml
++++ b/arro3-io/Cargo.toml
+@@ -1,16 +1,16 @@
+ [package]
+ name = "arro3-io"
+-version = { workspace = true }
+-authors = { workspace = true }
+-edition = { workspace = true }
++version = "0.6.5"
++authors = ["Kyle Barron <kylebarron2@gmail.com>"]
++edition = "2021"
+ description = "Rust-based readers and writers for Arrow in Python."
+ readme = "README.md"
+-repository = { workspace = true }
+-homepage = { workspace = true }
+-license = { workspace = true }
+-keywords = { workspace = true }
+-categories = { workspace = true }
+-rust-version = { workspace = true }
++repository = "https://github.com/kylebarron/arro3"
++homepage = "https://kylebarron.dev/arro3"
++license = "MIT OR Apache-2.0"
++keywords = ["python", "arrow"]
++categories = []
++rust-version = "1.75"
+ 
+ # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+ [lib]
+@@ -31,21 +31,19 @@ abi3-py311 = ["pyo3/abi3-py311"]
+ extension-module = ["pyo3/extension-module"]
+ 
+ [dependencies]
+-arrow-array = { workspace = true }
+-arrow-buffer = { workspace = true }
+-arrow-csv = { workspace = true }
+-arrow-ipc = { workspace = true }
+-arrow-json = { workspace = true }
+-arrow-schema = { workspace = true }
+-bytes = { workspace = true }
++arrow-array = { version = "56.2", features = ["ffi"] }
++arrow-buffer = "56.2"
++arrow-csv = "56.2"
++arrow-ipc = { version = "56.2", features = ["lz4", "zstd"] }
++arrow-json = "56.2"
++arrow-schema = "56.2"
++bytes = "1.7.0"
+ futures = { version = "0.3.30", optional = true }
+-object_store = { workspace = true, optional = true }
+-parquet = { workspace = true }
+-pyo3 = { workspace = true }
+-pyo3-arrow = { workspace = true }
+-pyo3-async-runtimes = { workspace = true, features = [
+-    "tokio-runtime",
+-], optional = true }
+-pyo3-file = { workspace = true }
+-pyo3-object_store = { workspace = true, optional = true }
+-thiserror = { workspace = true }
++object_store = { version = "0.12.4", optional = true }
++parquet = "56.2"
++pyo3 = { version = "0.26", features = ["macros", "indexmap"] }
++pyo3-arrow = "0.12.0"
++pyo3-async-runtimes = { version = "0.26", features = ["tokio-runtime"], optional = true }
++pyo3-file = { git = "https://github.com/alex/pyo3-file", rev = "82b96dc188a48b88421f41b24cb13da114fd2fe8" }
++pyo3-object_store = { version = "0.6", optional = true }
++thiserror = "1.0.63"
