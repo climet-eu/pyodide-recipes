@@ -1,0 +1,20 @@
+diff --git a/gribapi/bindings.py b/gribapi/bindings.py
+index 8704339..6148377 100644
+--- a/gribapi/bindings.py
++++ b/gribapi/bindings.py
+@@ -76,15 +76,6 @@ def find_binary_libs(name):
+                                 LOG.debug(
+                                     f"{name} lib search: returning wheel library from {foundlib}"
+                                 )
+-                                # force linking with the C++ 'glue' library
+-                                try:
+-                                    from eccodes._eccodes import versions as _versions
+-                                except ImportError as e:
+-                                    LOG.warn(str(e))
+-                                    raise
+-                                LOG.debug(
+-                                    f"{name} lib search: versions: %s", _versions()
+-                                )
+                                 return foundlib
+ 
+         LOG.debug(

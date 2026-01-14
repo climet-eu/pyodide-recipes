@@ -11,6 +11,7 @@ source:
     - patches/0001-package-shared-library.patch
     - patches/0002-no-eccodeslib.patch
     - patches/0003-library-path.patch
+    - patches/0004-no-circular-import.patch
 requirements:
   host:
     - libeccodes
