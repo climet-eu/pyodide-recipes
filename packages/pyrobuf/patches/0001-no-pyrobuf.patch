@@ -1,0 +1,24 @@
+diff --git a/setup.py b/setup.py
+index 56aadf6..8c56715 100644
+--- a/setup.py
++++ b/setup.py
+@@ -142,18 +142,12 @@ setup(
+     packages=find_packages(),
+     include_package_data=True,
+     cmdclass={'clean': clean},
+-    entry_points={
+-        'console_scripts': ['pyrobuf = pyrobuf.__main__:main'],
+-        'distutils.setup_keywords': [
+-            'pyrobuf_modules = pyrobuf.setuptools_ext:pyrobuf_modules',
+-        ],
+-    },
+     description='A Cython based protobuf compiler',
+     long_description=open(os.path.join(HERE, 'README.md')).read(),
+     url='https://github.com/appnexus/pyrobuf',
+     author='AppNexus',
+     tests_require=['pytest'] + (['protobuf >= 2.6.0, <3'] if sys.version_info.major == 2 else []),
+     setup_requires=['jinja2 >= 2.8', 'cython >= 0.23', 'pytest-runner'],
+-    install_requires=['jinja2 >= 2.8', 'cython >= 0.23'],
++    install_requires=[],
+     zip_safe=False,
+ )
