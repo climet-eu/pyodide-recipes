@@ -1,0 +1,16 @@
+package:
+  name: spint
+  version: 1.0.7
+  top-level:
+    - spint
+source:
+  url: https://files.pythonhosted.org/packages/source/s/spint/spint-1.0.7.tar.gz
+  sha256: 7ee6bfc725f8b507abd43f3d397bde8eaf6d85b8052f9ecb0c69f613bfeac4ca
+about:
+  home: https://github.com/pysal/spint
+  PyPI: https://pypi.org/project/spint
+  summary: SPatial INTeraction models
+  license: 3-Clause BSD
+extra:
+  recipe-maintainers:
+    - juntyr
