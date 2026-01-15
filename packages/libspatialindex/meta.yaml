@@ -1,0 +1,28 @@
+package:
+  name: libspatialindex
+  version: 2.1.0
+
+source:
+  url: https://github.com/libspatialindex/libspatialindex/archive/refs/tags/2.1.0.tar.gz
+  sha256: a04513cea04dd20ab2c9d153c14cc45692805ee496b30619103f7929f6fb81bf
+
+requirements:
+  host:
+    - libexpat
+
+build:
+  type: shared_library
+  script: |
+    mkdir -p build;
+
+    cd build \
+        && emcmake cmake ../ \
+        -DCMAKE_INSTALL_PREFIX=${WASM_LIBRARY_DIR} \
+        -DBUILD_SHARED_LIBS=ON \
+        -DBUILD_TESTING=OFF;
+
+    emmake make -j ${PYODIDE_JOBS:-3};
+    emmake make -j ${PYODIDE_JOBS:-3} install;
+
+    cp -P ${WASM_LIBRARY_DIR}/lib/libspatialindex.so ${DISTDIR}
+    cp -P ${WASM_LIBRARY_DIR}/lib/libspatialindex_c.so ${DISTDIR}
