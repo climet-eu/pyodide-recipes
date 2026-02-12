@@ -1,8 +1,8 @@
 diff --git a/python/pyproject.toml b/python/pyproject.toml
-index af3f793..2b8db91 100644
+index f137a79..a07a4b4 100644
 --- a/python/pyproject.toml
 +++ b/python/pyproject.toml
-@@ -49,6 +49,7 @@ classifiers  = [
+@@ -48,6 +48,7 @@ classifiers  = [
  maintainers = [
      {name = "Apache Arrow Developers", email = "dev@arrow.apache.org"}
  ]
