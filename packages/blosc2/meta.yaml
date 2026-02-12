@@ -1,11 +1,11 @@
 package:
   name: blosc2
-  version: 3.12.2
+  version: 4.0.0
   top-level:
     - blosc2
 source:
-  url: https://files.pythonhosted.org/packages/source/b/blosc2/blosc2-3.12.2.tar.gz
-  sha256: a42f915c4b73e788bdc205c5473dcd8dd7a0290693408be471391d0ca65fe39f
+  url: https://files.pythonhosted.org/packages/source/b/blosc2/blosc2-4.0.0.tar.gz
+  sha256: aa28272fab4ba23b82396759bd05b6f99ac51a37388abef290e901cb071caf1c
 build:
   backend-flags: |
     skbuild.cmake.define.WITH_OPTIM=OFF

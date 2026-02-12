@@ -1,15 +1,14 @@
 package:
   name: cf-python
-  version: 3.18.2
+  version: 3.19.0
   top-level:
     - cf
 source:
-  url: https://files.pythonhosted.org/packages/source/c/cf_python/cf_python-3.18.2.tar.gz
-  sha256: fa80b9499d433902bd2d093700ef2c76ab6541f501a393b2135f0c032d824e45
+  url: https://files.pythonhosted.org/packages/source/c/cf_python/cf_python-3.19.0.tar.gz
+  sha256: d99a9e0444527b3ae55a4e3ad09ef32086c2dfc8ec629d251b11f4f43c9a1257
   patches:
     - patches/0001-make-clean.patch
     - patches/0002-no-psutil-distributed.patch
-    - patches/0003-udunits-library-path.patch
 about:
   home: https://ncas-cms.github.io/cf-python
   PyPI: https://pypi.org/project/cf-python

@@ -1,8 +1,8 @@
 diff --git a/setup.py b/setup.py
-index 453f9c7..56bea18 100644
+index 3c5fe7c..dd59149 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -37,13 +37,11 @@ def parse_version_from(path):
+@@ -39,13 +39,11 @@ def parse_version_from(path):
  
  
  # for the binary wheel

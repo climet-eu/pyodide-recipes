@@ -1,15 +1,14 @@
 package:
   name: cfdm
-  version: 1.12.3.1
+  version: 1.13.0.0
   top-level:
     - cfdm
 source:
-  url: https://files.pythonhosted.org/packages/source/c/cfdm/cfdm-1.12.3.1.tar.gz
-  sha256: 932b6b47c950e56125769f76326cffb4430c0f060783e0fcc8fd869142d5af4a
+  url: https://files.pythonhosted.org/packages/source/c/cfdm/cfdm-1.13.0.0.tar.gz
+  sha256: ee33be390e12340f35292ec1c860a74ea19de8bc974eab91046c0c06275ed78d
   patches:
     - patches/0001-no-distributed.patch
     - patches/0002-udunits-library-path.patch
-    - patches/0003-early-h5py-import.patch
 about:
   home: https://ncas-cms.github.io/cfdm
   PyPI: https://pypi.org/project/cfdm

@@ -1,5 +1,5 @@
 diff --git a/gribapi/bindings.py b/gribapi/bindings.py
-index a267187..8704339 100644
+index cdbfccf..9f0c8c7 100644
 --- a/gribapi/bindings.py
 +++ b/gribapi/bindings.py
 @@ -53,7 +53,7 @@ def find_binary_libs(name):
