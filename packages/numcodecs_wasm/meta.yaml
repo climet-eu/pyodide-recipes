@@ -8,6 +8,8 @@ package:
 source:
   url: https://files.pythonhosted.org/packages/source/n/numcodecs_wasm/numcodecs_wasm-0.2.3.tar.gz
   sha256: e7a8b46e0bd0506cd1ddb08c5992a106384ec425ee30d13431aee09d75875b4f
+  patches:
+    - patches/0001-pyodide-webassembly-runtime-layer.patch
 requirements:
   executable:
     - rustup

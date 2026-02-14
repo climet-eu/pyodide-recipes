@@ -1,0 +1,29 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index fb108f1..7d4de30 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -3812,9 +3812,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "pyodide-webassembly-runtime-layer"
+-version = "0.10.0"
++version = "0.10.1"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "8f797de50c93188f7b3a16a866e81a1654f59f301d690e53a402f566b19b59c8"
++checksum = "76fc05047febea7508145974e0c242bd0d84481a68190adeac68d23125f6540a"
+ dependencies = [
+  "anyhow",
+  "flagset",
+diff --git a/Cargo.toml b/Cargo.toml
+index c4c9061..a3b5bd2 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -66,7 +66,7 @@ openjpeg-sys = { version = "1.0", default-features = false }
+ pco = { version = "0.4.5", default-features = false }
+ polonius-the-crab = { version = "0.4", default-features = false }
+ postcard = { version = "1.0.8", default-features = false }
+-pyodide-webassembly-runtime-layer = { version = "0.10", default-features = false }
++pyodide-webassembly-runtime-layer = { version = "0.10.1", default-features = false }
+ pyo3 = { version = "0.26", default-features = false }
+ pyo3-error = { version = "0.6", default-features = false }
+ pyo3-log = { version = "0.13.0", default-features = false }
