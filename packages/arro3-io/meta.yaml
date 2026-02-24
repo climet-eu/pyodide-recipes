@@ -1,13 +1,13 @@
 package:
   name: arro3-io
-  version: 0.6.5
+  version: 0.8.0
   tag:
     - rust
   top-level:
     - "arro3.io"
 source:
-  url: https://github.com/kylebarron/arro3/archive/refs/tags/py-v0.6.5.tar.gz
-  sha256: cdb9b0a6b17834310b197d064b0eafef27191dda0b342fca289b96325f0a354b
+  url: https://github.com/kylebarron/arro3/archive/refs/tags/py-v0.8.0.tar.gz
+  sha256: 7cbbe78b83aa70e76f7b4e8e456da64114ff4bab9fe72b16ddf505ea2fe2672a
   patches:
     - patches/0001-inline-workspace.patch
     - patches/0002-no-async.patch

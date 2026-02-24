@@ -1,13 +1,13 @@
 package:
   name: arro3-core
-  version: 0.6.5
+  version: 0.8.0
   tag:
     - rust
   top-level:
     - "arro3.core"
 source:
-  url: https://files.pythonhosted.org/packages/source/a/arro3_core/arro3_core-0.6.5.tar.gz
-  sha256: 768078887cd7ac82de4736f94bbd91f6d660f10779848bd5b019f511badd9d75
+  url: https://files.pythonhosted.org/packages/source/a/arro3_core/arro3_core-0.8.0.tar.gz
+  sha256: b75d8281b87a87d3b66836bab89951ae06421970e5f880717723a93e38743f40
 requirements:
   executable:
     - rustup

@@ -1,5 +1,5 @@
 diff --git a/arro3-io/src/error.rs b/arro3-io/src/error.rs
-index ddeec9c..6db9f00 100644
+index fc7ac5f..0835ad9 100644
 --- a/arro3-io/src/error.rs
 +++ b/arro3-io/src/error.rs
 @@ -13,6 +13,7 @@ pub enum Arro3IoError {
@@ -19,10 +19,10 @@ index ddeec9c..6db9f00 100644
              Arro3IoError::ParquetError(err) => PyException::new_err(err.to_string()),
          }
 diff --git a/arro3-io/src/lib.rs b/arro3-io/src/lib.rs
-index 6c81722..778b23a 100644
+index 2a33cc2..47a5a07 100644
 --- a/arro3-io/src/lib.rs
 +++ b/arro3-io/src/lib.rs
-@@ -39,8 +39,11 @@ fn _io(py: Python, m: &Bound<PyModule>) -> PyResult<()> {
+@@ -40,8 +40,11 @@ fn _io(py: Python, m: &Bound<PyModule>) -> PyResult<()> {
  
      m.add_wrapped(wrap_pyfunction!(___version))?;
  
@@ -34,7 +34,7 @@ index 6c81722..778b23a 100644
  
      m.add_wrapped(wrap_pyfunction!(csv::infer_csv_schema))?;
      m.add_wrapped(wrap_pyfunction!(csv::read_csv))?;
-@@ -57,7 +60,8 @@ fn _io(py: Python, m: &Bound<PyModule>) -> PyResult<()> {
+@@ -58,7 +61,8 @@ fn _io(py: Python, m: &Bound<PyModule>) -> PyResult<()> {
      m.add_wrapped(wrap_pyfunction!(ipc::write_ipc_stream))?;
  
      m.add_wrapped(wrap_pyfunction!(parquet::read_parquet))?;
@@ -45,7 +45,7 @@ index 6c81722..778b23a 100644
  
      Ok(())
 diff --git a/arro3-io/src/parquet.rs b/arro3-io/src/parquet.rs
-index 5380904..ab31345 100644
+index 10311c5..d2a5bc1 100644
 --- a/arro3-io/src/parquet.rs
 +++ b/arro3-io/src/parquet.rs
 @@ -5,6 +5,7 @@ use std::sync::Arc;
@@ -56,7 +56,7 @@ index 5380904..ab31345 100644
  use parquet::arrow::async_reader::ParquetObjectReader;
  use parquet::arrow::ArrowWriter;
  use parquet::basic::{Compression, Encoding};
-@@ -17,6 +18,7 @@ use pyo3_arrow::error::PyArrowResult;
+@@ -18,6 +19,7 @@ use pyo3_arrow::error::PyArrowResult;
  use pyo3_arrow::export::Arro3RecordBatchReader;
  use pyo3_arrow::input::AnyRecordBatch;
  use pyo3_arrow::{PyRecordBatchReader, PyTable};
@@ -64,7 +64,7 @@ index 5380904..ab31345 100644
  use pyo3_object_store::PyObjectStore;
  
  use crate::error::Arro3IoResult;
-@@ -44,6 +46,7 @@ pub fn read_parquet(file: FileReader) -> PyArrowResult<Arro3RecordBatchReader> {
+@@ -45,6 +47,7 @@ pub fn read_parquet(file: FileReader) -> PyArrowResult<Arro3RecordBatchReader> {
      Ok(PyRecordBatchReader::new(iter).into())
  }
  
@@ -72,7 +72,7 @@ index 5380904..ab31345 100644
  #[pyfunction]
  #[pyo3(signature = (path, *, store))]
  pub fn read_parquet_async<'py>(
-@@ -58,6 +61,7 @@ pub fn read_parquet_async<'py>(
+@@ -59,6 +62,7 @@ pub fn read_parquet_async<'py>(
      Ok(fut)
  }
  

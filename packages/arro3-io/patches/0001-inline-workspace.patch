@@ -1,5 +1,5 @@
 diff --git a/arro3-io/Cargo.toml b/arro3-io/Cargo.toml
-index 46a55ac..60f51a7 100644
+index 46a55ac..1cfbbd9 100644
 --- a/arro3-io/Cargo.toml
 +++ b/arro3-io/Cargo.toml
 @@ -1,16 +1,16 @@
@@ -8,7 +8,7 @@ index 46a55ac..60f51a7 100644
 -version = { workspace = true }
 -authors = { workspace = true }
 -edition = { workspace = true }
-+version = "0.6.5"
++version = "0.8.0"
 +authors = ["Kyle Barron <kylebarron2@gmail.com>"]
 +edition = "2021"
  description = "Rust-based readers and writers for Arrow in Python."
@@ -39,12 +39,12 @@ index 46a55ac..60f51a7 100644
 -arrow-json = { workspace = true }
 -arrow-schema = { workspace = true }
 -bytes = { workspace = true }
-+arrow-array = { version = "56.2", features = ["ffi"] }
-+arrow-buffer = "56.2"
-+arrow-csv = "56.2"
-+arrow-ipc = { version = "56.2", features = ["lz4", "zstd"] }
-+arrow-json = "56.2"
-+arrow-schema = "56.2"
++arrow-array = { version = ">=57,<57.2", features = ["ffi"] }
++arrow-buffer = ">=57,<57.2"
++arrow-csv = ">=57,<57.2"
++arrow-ipc = { version = ">=57,<57.2", features = ["lz4", "zstd"] }
++arrow-json = ">=57,<57.2"
++arrow-schema = ">=57,<57.2"
 +bytes = "1.7.0"
  futures = { version = "0.3.30", optional = true }
 -object_store = { workspace = true, optional = true }
@@ -57,11 +57,11 @@ index 46a55ac..60f51a7 100644
 -pyo3-file = { workspace = true }
 -pyo3-object_store = { workspace = true, optional = true }
 -thiserror = { workspace = true }
-+object_store = { version = "0.12.4", optional = true }
-+parquet = "56.2"
-+pyo3 = { version = "0.26", features = ["macros", "indexmap"] }
-+pyo3-arrow = "0.12.0"
-+pyo3-async-runtimes = { version = "0.26", features = ["tokio-runtime"], optional = true }
-+pyo3-file = { git = "https://github.com/alex/pyo3-file", rev = "82b96dc188a48b88421f41b24cb13da114fd2fe8" }
-+pyo3-object_store = { version = "0.6", optional = true }
++object_store = { version = "0.12", optional = true }
++parquet = ">=57,<57.2"
++pyo3 = { version = "0.28", features = ["macros", "indexmap"] }
++pyo3-arrow = "0.16.0"
++pyo3-async-runtimes = { version = "0.28", features = ["tokio-runtime"], optional = true }
++pyo3-file = { git = "https://github.com/kylebarron/pyo3-file", rev = "f724ceaa7e06e7d227bf40b1d60adbb842963a44" }
++pyo3-object_store = { version = "0.10", optional = true }
 +thiserror = "1.0.63"

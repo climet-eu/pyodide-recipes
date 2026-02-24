@@ -1,8 +1,8 @@
 diff --git a/arro3-io/pyproject.toml b/arro3-io/pyproject.toml
-index fea07cf..c981819 100644
+index 62ff523..c8372d4 100644
 --- a/arro3-io/pyproject.toml
 +++ b/arro3-io/pyproject.toml
-@@ -15,6 +15,7 @@ dynamic = ["version"]
+@@ -18,6 +18,7 @@ dynamic = ["version"]
  
  [tool.maturin]
  features = ["pyo3/extension-module"]

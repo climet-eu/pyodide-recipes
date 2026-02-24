@@ -1,14 +1,14 @@
 package:
   name: regex
-  version: 2026.1.15
+  version: 2026.2.19
   tag:
     - core
     - min-scipy-stack
   top-level:
     - regex
 source:
-  sha256: 164759aa25575cbc0651bef59a0b18353e54300d79ace8084c818ad8ac72b7d5
-  url: https://files.pythonhosted.org/packages/source/r/regex/regex-2026.1.15.tar.gz
+  sha256: 6fb8cb09b10e38f3ae17cc6dc04a1df77762bd0351b6ba9041438e7cc85ec310
+  url: https://files.pythonhosted.org/packages/source/r/regex/regex-2026.2.19.tar.gz
 about:
   home: https://github.com/mrabarnett/mrab-regex
   PyPI: https://pypi.org/project/regex
