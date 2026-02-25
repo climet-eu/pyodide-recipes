@@ -1,14 +1,15 @@
+This patch disables multiprocessing and pthread for blosc
 diff --git a/c-blosc/blosc/blosc.c b/c-blosc/blosc/blosc.c
-index a3d137d..73dea7a 100644
+index a3d137d..241984f 100644
 --- a/c-blosc/blosc/blosc.c
 +++ b/c-blosc/blosc/blosc.c
-@@ -1309,6 +1309,7 @@ int blosc_compress(int clevel, int doshuffle, size_t typesize, size_t nbytes,
-   int result;
-   char* envvar;
+@@ -2212,6 +2212,7 @@ void blosc_atfork_child(void) {
  
+ void blosc_init(void)
+ {
 +  g_initlib = 1;
-   /* Check if should initialize */
-   if (!g_initlib) blosc_init();
+   /* Return if we are already initialized */
+   if (g_initlib) return;
  
 diff --git a/c-blosc/blosc/blosc.h b/c-blosc/blosc/blosc.h
 index c9dc8ed..c57ef91 100644

@@ -7,8 +7,8 @@ source:
   sha256: eeed77e4d6636641a2cc605fbc6078c7a8f2cc40f3dfa2b3f61e52e6091b04ff
   url: https://files.pythonhosted.org/packages/source/n/numcodecs/numcodecs-0.15.1.tar.gz
   patches:
-    - patches/fixblosc.patch
-    - patches/fixzlib.patch
+    - patches/0001-blosc-single-threaded.patch
+    - patches/0002-zlib-missing-headers.patch
 build:
   script: |
     export DISABLE_NUMCODECS_SSE2=1
