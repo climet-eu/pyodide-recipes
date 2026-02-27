@@ -1,0 +1,14 @@
+package:
+  name: copernicusmarine
+  version: 2.3.0
+  top-level:
+    - copernicusmarine
+source:
+  url: https://github.com/juntyr/copernicus-marine-toolbox/archive/99a2a85ab0f8f16a35f6299cd78547b93e63f269.tar.gz
+  sha256: 253607f91920708d6d08fe0586438bb81b8dd0609547861952c685f1baed3579
+about:
+  home: https://github.com/mercator-ocean/copernicus-marine-toolbox
+  PyPI: https://pypi.org/project/copernicusmarine
+  summary: Command line interface and Python API for accessing Copernicus Marine
+    data and related services.
+  license: EUPL v1.2
