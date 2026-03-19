@@ -13,6 +13,7 @@ source:
 requirements:
   host:
     - libzlib
+    - numpy
 build:
   vendor-sharedlib: true
   exports: requested
