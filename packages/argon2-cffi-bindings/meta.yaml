@@ -8,8 +8,6 @@ source:
   sha256: b957f3e6ea4d55d820e40ff76f450952807013d361a65d7f28acc0acbf29229d
 build:
   cflags: -mrelaxed-simd
-  post: |
-    ./abc
 extra:
   recipe-maintainers:
     - alarmfox
