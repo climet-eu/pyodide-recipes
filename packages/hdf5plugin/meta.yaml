@@ -10,6 +10,8 @@ source:
     - patches/0001-no-openmp.patch
     - patches/0002-sperr.patch
     - patches/0003-sz3.patch
+build:
+  exports: requested
 about:
   home: https://github.com/silx-kit/hdf5plugin
   PyPI: https://pypi.org/project/hdf5plugin
