@@ -1,0 +1,70 @@
+diff --git a/lib/SPERR/src/Outlier_Coder.cpp b/lib/SPERR/src/Outlier_Coder.cpp
+index bfffb61..9e171ac 100644
+--- a/lib/SPERR/src/Outlier_Coder.cpp
++++ b/lib/SPERR/src/Outlier_Coder.cpp
+@@ -85,11 +85,10 @@ auto sperr::Outlier_Coder::encode() -> RTNType
+   std::fesetround(FE_TONEAREST);
+   assert(FE_TONEAREST == std::fegetround());
+   assert(FLT_ROUNDS == 1);
+-  std::feclearexcept(FE_INVALID);
+-  auto maxint = std::llrint(std::abs(maxerr.err));
+-  if (std::fetestexcept(FE_INVALID))
++  if (!std::isfinite(maxerr.err) || (maxerr.err < std::numeric_limits<long long>::lowest()) || (maxerr.err > std::numeric_limits<long long>::max())) {
+     return RTNType::FE_Invalid;
+-
++  }
++  auto maxint = std::llrint(std::abs(maxerr.err));
+   if (maxint <= std::numeric_limits<uint8_t>::max())
+     m_instantiate_uvec_coders(UINTType::UINT8);
+   else if (maxint <= std::numeric_limits<uint16_t>::max())
+diff --git a/lib/SPERR/src/SPECK_FLT.cpp b/lib/SPERR/src/SPECK_FLT.cpp
+index c9ae961..8cfcf02 100644
+--- a/lib/SPERR/src/SPECK_FLT.cpp
++++ b/lib/SPERR/src/SPECK_FLT.cpp
+@@ -80,7 +80,7 @@ auto sperr::SPECK_FLT::use_bitstream(const void* p, size_t len) -> RTNType
+   //    shorter than what the header reports.
+   auto speck_suppose_len =
+       std::visit([speck_p](auto&& dec) { return dec->get_stream_full_len(speck_p); }, m_decoder);
+-  auto speck_len = std::min(size_t{speck_suppose_len}, remaining_len);
++  auto speck_len = std::min(static_cast<size_t>(speck_suppose_len), remaining_len);
+   std::visit([speck_p, speck_len](auto&& dec) { return dec->use_bitstream(speck_p, speck_len); },
+              m_decoder);
+   pos += speck_len;
+@@ -319,11 +319,12 @@ auto sperr::SPECK_FLT::m_midtread_quantize() -> RTNType
+   // Find the biggest floating point value, then get its quantized integer.
+   auto maxd = *std::max_element(m_vals_d.cbegin(), m_vals_d.cend(),
+                                 [](auto a, auto b) { return std::abs(a) < std::abs(b); });
+-  std::feclearexcept(FE_INVALID);
+   assert(m_q > 0.0);
+-  auto maxll = std::llrint(std::abs(maxd) / m_q);
+-  if (std::fetestexcept(FE_INVALID))
++  auto maxdq = std::abs(maxd) / m_q;
++  if (!std::isfinite(maxdq) || (maxdq < std::numeric_limits<long long>::lowest()) || (maxdq > std::numeric_limits<long long>::max())) {
+     return RTNType::FE_Invalid;
++  }
++  auto maxll = std::llrint(maxdq);
+ 
+   // Decide integer length, and instantiate `m_vals_ui`.
+   if (maxll <= std::numeric_limits<uint8_t>::max())
+diff --git a/lib/SPERR/src/SPECK_INT.cpp b/lib/SPERR/src/SPECK_INT.cpp
+index fa04a87..5e99097 100644
+--- a/lib/SPERR/src/SPECK_INT.cpp
++++ b/lib/SPERR/src/SPECK_INT.cpp
+@@ -273,7 +273,7 @@ auto sperr::SPECK_INT<T>::encoded_bitstream_len() const -> size_t
+   //      `m_budget` happens to be exactly met after a sorting or refinement pass.
+   //      In this case, we can also record all `m_total_bits` bits, same as outcome 1.
+   //
+-  auto bits_to_pack = std::min(m_budget, size_t{m_total_bits});
++  auto bits_to_pack = std::min(m_budget, static_cast<size_t>(m_total_bits));
+   auto bit_in_byte = bits_to_pack / size_t{8};
+   if (bits_to_pack % 8 != 0)
+     ++bit_in_byte;
+@@ -302,7 +302,7 @@ void sperr::SPECK_INT<T>::append_encoded_bitstream(vec8_type& buffer) const
+ 
+   // Step 3: assemble the right amount of bits into bytes.
+   // See discussion on the number of bits to pack in function `encoded_bitstream_len()`.
+-  auto bits_to_pack = std::min(m_budget, size_t{m_total_bits});
++  auto bits_to_pack = std::min(m_budget, static_cast<size_t>(m_total_bits));
+   m_bit_buffer.write_bitstream(ptr + header_size, bits_to_pack);
+ }
+ 

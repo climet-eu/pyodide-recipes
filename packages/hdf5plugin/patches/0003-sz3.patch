@@ -1,0 +1,22 @@
+diff --git a/setup.py b/setup.py
+index 0dbdd76..1721bf1 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1459,7 +1459,7 @@ def _get_sz3_plugin():
+     )
+ 
+ 
+-PLUGIN_LIB_DEPENDENCIES["sz3"] = ("zstd",)
++# PLUGIN_LIB_DEPENDENCIES["sz3"] = ("zstd",)
+ 
+ 
+ def _get_sperr_plugin():
+@@ -1496,7 +1496,7 @@ _EMBEDDED_PLUGIN_EXTENSIONS = {
+     "lz4": _get_lz4_plugin,
+     "sperr": _get_sperr_plugin,
+     "sz": _get_sz_plugin,
+-    "sz3": _get_sz3_plugin,
++    # "sz3": _get_sz3_plugin,
+     "zfp": _get_h5zfp_plugin,
+     "zstd": _get_zstandard_plugin,
+ }
