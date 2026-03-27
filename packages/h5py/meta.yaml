@@ -22,6 +22,7 @@ requirements:
 
 build:
   vendor-sharedlib: true
+  exports: requested
   script: |
     export HDF5_MPI=OFF
     export H5PY_SETUP_REQUIRES="0"
