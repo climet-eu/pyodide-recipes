@@ -1,0 +1,33 @@
+diff --git a/src/hdf5plugin/_utils.py b/src/hdf5plugin/_utils.py
+index cedafa3..7613f7a 100644
+--- a/src/hdf5plugin/_utils.py
++++ b/src/hdf5plugin/_utils.py
+@@ -43,6 +43,10 @@ logger = logging.getLogger(__name__)
+ PLUGIN_PATH: str = os.path.abspath(os.path.join(os.path.dirname(__file__), "plugins"))
+ """Directory where the provided HDF5 filter plugins are stored."""
+ 
++_HDF5_PATH: str = os.path.abspath(os.path.join(
++    os.path.dirname(os.path.dirname(h5py.__file__)), "h5py.libs", "libhdf5.so"
++))
++
+ 
+ def is_filter_available(name: str) -> bool | None:
+     """Returns whether filter is already registered or not.
+@@ -68,7 +72,7 @@ def H5Zregister_ctypes(filter_struct_p: ctypes.c_void_p) -> int:
+     if sys.platform.startswith("win"):
+         libhdf5 = ctypes.cdll.LoadLibrary("hdf5")
+     else:
+-        libhdf5 = ctypes.CDLL(h5py.h5z.__file__)
++        libhdf5 = ctypes.CDLL(_HDF5_PATH)
+     libhdf5.H5Zregister.argtypes = [ctypes.c_void_p]
+     libhdf5.H5Zregister.restype = ctypes.c_int
+     return cast(int, libhdf5.H5Zregister(filter_struct_p))
+@@ -150,7 +154,7 @@ def register_filter(name: str) -> bool:
+             init_filter.argtypes = [ctypes.c_char_p]
+             init_filter.restype = ctypes.c_int
+ 
+-            retval = init_filter(bytes(h5py.h5z.__file__, encoding="utf-8"))
++            retval = init_filter(bytes(_HDF5_PATH, encoding="utf-8"))
+             if retval < 0:
+                 logger.error(f"Cannot initialize filter {name}: {retval}")
+                 return False
