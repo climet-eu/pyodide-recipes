@@ -10,7 +10,7 @@ source:
     - patches/0001-no-openmp.patch
     - patches/0002-sperr.patch
     - patches/0003-sz3.patch
-    - patches/0004-hdf5-path.patch
+    # - patches/0004-hdf5-path.patch
     - patches/0005-init-filter.patch
 build:
   exports: requested
