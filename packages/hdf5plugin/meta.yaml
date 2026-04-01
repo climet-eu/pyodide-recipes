@@ -12,6 +12,7 @@ source:
     - patches/0003-sz3.patch
     - patches/0004-hdf5-path.patch
     - patches/0005-link-hdf5.patch
+    - patches/0006-zfp-word-type.patch
 requirements:
   host:
     - libhdf5
