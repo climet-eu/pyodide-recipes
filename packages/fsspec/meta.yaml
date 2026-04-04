@@ -1,11 +1,11 @@
 package:
   name: fsspec
-  version: 2026.2.0
+  version: 2026.3.0
   top-level:
     - fsspec
 source:
-  url: https://files.pythonhosted.org/packages/source/f/fsspec/fsspec-2026.2.0.tar.gz
-  sha256: 6544e34b16869f5aacd5b90bdf1a71acb37792ea3ddf6125ee69a22a53fb8bff
+  url: https://files.pythonhosted.org/packages/source/f/fsspec/fsspec-2026.3.0.tar.gz
+  sha256: 1ee6a0e28677557f8c2f994e3eea77db6392b4de9cd1f5d7a9e87a0ae9d01b41
   patches:
     - patches/0001-syncify-awaitable.patch
 about:
