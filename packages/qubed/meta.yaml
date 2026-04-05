@@ -1,0 +1,18 @@
+package:
+  name: qubed
+  version: 0.3.1
+  tag:
+    - rust
+  top-level:
+    - qubed
+source:
+  url: https://files.pythonhosted.org/packages/source/q/qubed/qubed-0.3.1.tar.gz
+  sha256: fadcf4be1668f0cfc58fcf430a15613e0f53f0df4e07fd05694c9caba39e8258
+requirements:
+  executable:
+    - rustup
+about:
+  home: https://github.com/ecmwf/qubed
+  PyPI: https://pypi.org/project/qubed
+  summary: A library that provides a tree of datacubes called Qube.
+  license: Apache-2.0
