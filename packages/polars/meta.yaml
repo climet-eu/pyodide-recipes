@@ -1,0 +1,44 @@
+package:
+  name: polars
+  version: 1.32.3
+  top-level:
+    - polars
+source:
+  url: https://github.com/pola-rs/polars/archive/refs/tags/py-1.32.3.tar.gz
+  sha256: 4be1bb37a93954962d5b6accd5022e63c54d9bf1e8d170b979e48c37f9102d2e
+build:
+  script: |
+    # based on https://github.com/xlwings/polars-pyodide/blob/45565fcb05d0f198c0465241df80230d9df8e773/.github/workflows/build.yml
+
+    # serde_json is optional=true in polars-python; make it non-optional before
+    # removing the "json" feature entry (otherwise cargo errors on the feature ref).
+    sed -i 's/serde_json = { workspace = true, optional = true }/serde_json = { workspace = true }/' \
+      crates/polars-python/Cargo.toml || true
+    sed -i 's/  "serde_json", //' crates/polars-python/Cargo.toml || true
+
+    # csv/ipc/json in crates/polars/Cargo.toml include "new_streaming", which pulls in
+    # polars-stream -> polars-io[async,file_cache] -> tokio -> mio (no wasm32 support).
+    # Removing "new_streaming" from those feature lines breaks the chain.
+    sed -i 's/, "new_streaming"//' crates/polars/Cargo.toml || true
+
+    # Strip all remaining wasm-incompatible features from polars-python and py-polars.
+    FEATURES='parquet|json|extract_jsonpath|catalog|cloud|polars_cloud|polars_cloud_client|polars_cloud_server|clipboard|decompress|new_streaming'
+    sed -E -i "/^  \"(${FEATURES})\",$/d" crates/polars-python/Cargo.toml py-polars/Cargo.toml
+    sed -E -i "/^(${FEATURES}) = \[/d"    crates/polars-python/Cargo.toml py-polars/Cargo.toml
+
+    # Remove abi3 feature so maturin produces an exact cpython-tagged wheel
+    # (xbuildenv sysconfig only works with the exact Python version, not abi3)
+    sed -i 's/"abi3-py39", //' py-polars/Cargo.toml crates/polars-python/Cargo.toml || true
+
+    rm rust-toolchain.toml
+    rm py-polars/rust-toolchain.toml
+  
+    cd ..
+    rm -rf "${PKG_BUILD_DIR}-root"
+    mv $PKG_BUILD_DIR ${PKG_BUILD_DIR}-root
+    ln -s ${PKG_BUILD_DIR}-root/py-polars $PKG_BUILD_DIR
+about:
+  home: https://github.com/pola-rs/polars
+  PyPI: https://pypi.org/project/polars
+  summary: Blazingly fast DataFrame library
+  license: MIT
