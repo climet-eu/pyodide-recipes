@@ -15,10 +15,12 @@ source:
     - patches/0002-Hardcode-font-cache-path.patch
     - patches/0003-WebAgg-backend.patch
     - patches/0004-Fix-32bit-casting.patch
+    - patches/0005-Use-system-freetype.patch
 
 build:
   backend-flags: |
     setup-args=-DrcParams-backend=webagg
+    setup-args=-Dsystem-freetype=true
   # RELOCATABLE flag is required because if affects how emscripten build ports.
   cflags: |
     -s RELOCATABLE=1
@@ -33,9 +35,24 @@ build:
     -fwasm-exceptions
   ldflags: |
     -fno-lto
+    -lfreetype-legacysjlj
     -s USE_FREETYPE=1
     -fwasm-exceptions
   script: |
+    embuilder build freetype-legacysjlj --pic
+    # manually add .pc file for https://github.com/emscripten-core/emscripten/pull/24426
+    export MY_PKG_CONFIG_PATH=$(pwd)/my-pkgconfig
+    mkdir -p $MY_PKG_CONFIG_PATH
+    cat <<EOF > $MY_PKG_CONFIG_PATH/freetype.pc
+    Name: freetype
+    Description: freetype port from emscripten
+    Version: VER-2-13-3
+    Libs: -sUSE_FREETYPE
+    Cflags: -sUSE_FREETYPE
+    EOF
+    # matplotlib locates freetype using pkg-config, so we need to set PKG_CONFIG_PATH to point to the directory containing the .pc file for freetype.
+    export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH:$(em-config CACHE)/sysroot/lib/pkgconfig
+    echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
     export SETUPTOOLS_SCM_PRETEND_VERSION=$PKG_VERSION
   post: |
     rm -rf matplotlib/backends/qt_editor
