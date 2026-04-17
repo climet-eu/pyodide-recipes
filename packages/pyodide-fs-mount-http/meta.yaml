@@ -1,0 +1,7 @@
+package:
+  name: pyodide-fs-mount-http
+  version: 0.0.0
+  top-level:
+    - pyodide_fs_mount_http
+source:
+  path: ./pyodide-fs-mount-http
