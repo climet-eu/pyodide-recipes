@@ -73,6 +73,8 @@ class _RawHTTPBlobPyodide {
 } _RawHTTPBlobPyodide
 """)
 
+_DRIVE = Path("/drive")
+
 
 def _get_content_length_encoding_accept_ranges_pyodide(
     url: str,
@@ -154,15 +156,23 @@ def mount_http_files(
             #     f"HTTP file at '{url}' does not support range requests"
             # )
 
-        blobs.append(dict(name=name, data=_RawHTTPBlobPyodide.new(
-            url,
-            name,
-            content_length,
-            buffer_size,
-            pyodide_js,
-        )))
+        blobs.append(
+            dict(
+                name=name,
+                data=_RawHTTPBlobPyodide.new(
+                    url,
+                    name,
+                    content_length,
+                    buffer_size,
+                    pyodide_js,
+                ),
+            )
+        )
 
-    path.mkdir(parents=True, exist_ok=False)
+    path_in_jupyterlite_drive = (path != _DRIVE) and path.is_relative_to(_DRIVE)
+
+    # allow aliasing inside the JupyterLite /drive
+    path.mkdir(parents=True, exist_ok=path_in_jupyterlite_drive)
 
     if len(blobs) > 0:
         pyodide_js.FS.mount(
