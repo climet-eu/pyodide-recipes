@@ -1,8 +1,8 @@
 diff --git a/aiohttp/__init__.py b/aiohttp/__init__.py
-index 357baf0..9e76ed9 100644
+index 1b35d23..fed2a08 100644
 --- a/aiohttp/__init__.py
 +++ b/aiohttp/__init__.py
-@@ -276,3 +276,5 @@ def __getattr__(name: str) -> object:
+@@ -277,3 +277,5 @@ def __getattr__(name: str) -> object:
          return guv if name == "GunicornUVLoopWebWorker" else gw
  
      raise AttributeError(f"module {__name__} has no attribute {name}")

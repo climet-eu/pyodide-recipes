@@ -1,10 +1,10 @@
 diff --git a/pyproject.toml b/pyproject.toml
-index d1550fe..b54a90c 100644
+index bf490bf..6dddeaa 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
 @@ -42,6 +42,7 @@ dependencies = [
-   "multidict >=4.5, < 7.0",
    "propcache >= 0.2.0",
+   "typing_extensions >= 4.4 ; python_version < '3.13'",
    "yarl >= 1.17.0, < 2.0",
 +  "jupyterlite-cors == 0.0.0",
  ]

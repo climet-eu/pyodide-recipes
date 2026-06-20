@@ -1,9 +1,9 @@
 diff --git a/aiohttp/__init__.py b/aiohttp/__init__.py
-index 9e76ed9..8bc05ba 100644
+index fed2a08..28eb7f1 100644
 --- a/aiohttp/__init__.py
 +++ b/aiohttp/__init__.py
-@@ -3,6 +3,7 @@ __version__ = "3.13.3"
- from typing import TYPE_CHECKING, Tuple
+@@ -3,6 +3,7 @@ __version__ = "3.14.1"
+ from typing import TYPE_CHECKING
  
  from . import hdrs as hdrs
 +from . import http_exceptions as http_exceptions
