@@ -16,7 +16,6 @@ requirements:
   host:
     - numpy
     - scipy
-    - setuptools
 
 test:
   imports:
