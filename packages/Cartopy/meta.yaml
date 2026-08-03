@@ -16,12 +16,6 @@ requirements:
   host:
     - libgeos
     - numpy
-  run:
-    - shapely
-    - pyshp
-    - pyproj
-    - matplotlib
-    - scipy
 
 build:
   vendor-sharedlib: true

@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fbc2fde..2298c73 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -216,7 +216,7 @@ IF(BUILD_DLL)
+     REMOVE_DEFINITIONS(-DDLL_EXPORT)
+ ENDIF()
+ 
+-ADD_SUBDIRECTORY (prog)
++# ADD_SUBDIRECTORY (prog)
+ 
+ # The documentation is in texinfo(5) format
+ texi_doc(udunits2.texi version.texi COPYRIGHT)

@@ -1,0 +1,12 @@
+package:
+  name: widgetsnbextension
+  version: 4.0.15
+  top-level:
+    - widgetsnbextension
+source:
+  path: ./widgetsnbextension
+about:
+  home: http://jupyter.org
+  PyPI: https://pypi.org/project/widgetsnbextension
+  summary: Jupyter interactive widgets for Jupyter Notebook
+  license: BSD 3-Clause License

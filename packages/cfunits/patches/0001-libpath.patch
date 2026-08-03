@@ -1,0 +1,30 @@
+diff --git a/cfunits/units.py b/cfunits/units.py
+index b1e4058..90d464b 100644
+--- a/cfunits/units.py
++++ b/cfunits/units.py
+@@ -1,6 +1,7 @@
+ import ctypes
+ import ctypes.util
+ import operator
++from pathlib import Path
+ 
+ from numpy import array as numpy_array
+ from numpy import asanyarray as numpy_asanyarray
+@@ -36,7 +37,7 @@ _ctypes_POINTER = {4: _POINTER(_c_float), 8: _POINTER(_c_double)}
+ # else:
+ #     # Linux
+ #     _udunits = ctypes.CDLL('libudunits2.so.0')
+-_libpath = ctypes.util.find_library("udunits2")
++_libpath = (Path(__file__) / ".." / ".." / "cfunits.libs" / "libudunits2.so").resolve()
+ if _libpath is None:
+     raise FileNotFoundError(
+         "cfunits requires UNIDATA UDUNITS-2. Can't find the 'udunits2' "
+@@ -65,7 +66,7 @@ _ut_read_xml.argtypes = (_c_char_p,)
+ _ut_read_xml.restype = _c_void_p
+ 
+ # print('units: before _udunits.ut_read_xml(',_unit_database,')')
+-_ut_system = _ut_read_xml(None)
++_ut_system = _ut_read_xml(_c_char_p(str((Path(__file__) / ".." / "etc" / "udunits" / "udunits2.xml").resolve()).encode("ascii")))
+ # print('units: after  _udunits.ut_read_xml(',_unit_database,')')
+ 
+ # Reinstate the reporting of error messages

@@ -7,15 +7,14 @@ Subject: [PATCH] Fix incompatible pointer type
 Removed hunks upstreamed in 3.10.0
 
 ---
- h5py/_errors.pxd | 2 +-
- h5py/_errors.pyx | 6 +++---
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ h5py/_errors.templ.pyx | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/h5py/_errors.pyx b/h5py/_errors.pyx
-index 612052fb..dabbc632 100644
---- a/h5py/_errors.pyx
-+++ b/h5py/_errors.pyx
-@@ -120,7 +120,7 @@ cdef int set_exception() except -1:
+diff --git a/h5py/_errors.templ.pyx b/h5py/_errors.templ.pyx
+index 6ea33d1..cb2a3aa 100644
+--- a/h5py/_errors.templ.pyx
++++ b/h5py/_errors.templ.pyx
+@@ -119,7 +119,7 @@ cdef int set_exception() except -1:
  
      err.n = -1
  
@@ -24,7 +23,7 @@ index 612052fb..dabbc632 100644
          raise RuntimeError("Failed to walk error stack")
  
      if err.n < 0:   # No HDF5 exception information found
-@@ -137,7 +137,7 @@ cdef int set_exception() except -1:
+@@ -136,7 +136,7 @@ cdef int set_exception() except -1:
  
      err.n = -1
  

@@ -1,0 +1,28 @@
+diff --git a/ipyfilite/download/fs.js b/ipyfilite/download/fs.js
+index c6cbbac..8391ef0 100644
+--- a/ipyfilite/download/fs.js
++++ b/ipyfilite/download/fs.js
+@@ -87,9 +87,11 @@ Object.create({
+                 }
+             }
+             if (attr.mode !== undefined) {
+-                throw new node._pyodide.FS.ErrnoError(
+-                    node._pyodide.ERRNO_CODES.EPERM
+-                );
++                if ((node.mode & 0o777) != (attr.mode & 0o222 /* a=w */)) {
++                    throw new node._pyodide.FS.ErrnoError(
++                        node._pyodide.ERRNO_CODES.EPERM
++                    );
++                }
+             }
+         },
+         readdir: function(node) {
+@@ -126,7 +128,7 @@ Object.create({
+             }
+             const { channel } = parent._pre_downloads[uuid];
+             const node = parent._pyodide.FS.createNode(
+-                parent, uuid, 0o100000 /* S_IFREG */ | 0o222 /* a=w */,
++                parent, uuid, (0o100000 /* S_IFREG */ | 0o222 /* a=w */) & mode,
+             );
+             node.node_ops = parent.node_ops;
+             node.stream_ops = parent.stream_ops;

@@ -48,17 +48,6 @@ build:
 requirements:
   host:
     - numpy
-  run:
-    - contourpy
-    - cycler
-    - fonttools
-    - kiwisolver
-    - numpy
-    - packaging
-    - Pillow
-    - pyparsing
-    - python-dateutil
-    - pytz
 
 about:
   home: https://matplotlib.org

@@ -1,22 +1,15 @@
 package:
   name: aiohttp
-  version: 3.13.5
+  version: 3.14.1
   top-level:
     - aiohttp
 source:
-  url: https://files.pythonhosted.org/packages/source/a/aiohttp/aiohttp-3.13.5.tar.gz
-  sha256: 9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209dbb7d1
-
-requirements:
-  run:
-    - aiohappyeyeballs
-    - aiosignal
-    - async-timeout
-    - attrs
-    - charset-normalizer
-    - frozenlist
-    - multidict
-    - yarl
+  url: https://files.pythonhosted.org/packages/source/a/aiohttp/aiohttp-3.14.1.tar.gz
+  sha256: 307f2cff90a764d329e77040603fa032db89c5c24fdad50c4c15334cba744035
+  patches:
+    - patches/0001-pyodide-connection.patch
+    - patches/0002-export-http-exceptions.patch
+    - patches/0003-requires-jupyterlite-cors.patch
 
 about:
   home: https://github.com/aio-libs/aiohttp

@@ -1,0 +1,12 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index bf490bf..6dddeaa 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -42,6 +42,7 @@ dependencies = [
+   "propcache >= 0.2.0",
+   "typing_extensions >= 4.4 ; python_version < '3.13'",
+   "yarl >= 1.17.0, < 2.0",
++  "jupyterlite-cors == 0.0.0",
+ ]
+ dynamic = [
+   "version",

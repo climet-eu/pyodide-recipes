@@ -10,8 +10,6 @@ source:
 requirements:
   host:
     - libproj
-  run:
-    - certifi
 
 build:
   script: |

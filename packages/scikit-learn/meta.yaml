@@ -16,10 +16,6 @@ requirements:
   host:
     - numpy
     - scipy
-  run:
-    - scipy
-    - joblib
-    - threadpoolctl
 
 test:
   imports:

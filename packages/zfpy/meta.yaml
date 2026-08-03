@@ -23,8 +23,6 @@ requirements:
   host:
     - libzfp
     - numpy
-  run:
-    - numpy
 
 test:
   imports:

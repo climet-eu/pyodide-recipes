@@ -12,14 +12,6 @@ requirements:
   host:
     - libgdal
     - libgeos
-  run:
-    - attrs
-    - certifi
-    - setuptools
-    - six
-    - click
-    - cligj
-      # - click-plugins  # only for fiona CLI?
 
 build:
   vendor-sharedlib: true

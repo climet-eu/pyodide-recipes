@@ -1,0 +1,43 @@
+diff --git a/lib/SZ3/include/SZ3/encoder/HuffmanEncoder.hpp b/lib/SZ3/include/SZ3/encoder/HuffmanEncoder.hpp
+index ee5a748..87ab300 100644
+--- a/lib/SZ3/include/SZ3/encoder/HuffmanEncoder.hpp
++++ b/lib/SZ3/include/SZ3/encoder/HuffmanEncoder.hpp
+@@ -6,7 +6,10 @@
+ #include "SZ3/utils/ByteUtil.hpp"
+ #include "SZ3/utils/MemoryUtil.hpp"
+ #include "SZ3/utils/Timer.hpp"
+-#include "SZ3/utils/ska_hash/unordered_map.hpp"
++#include <cstdint>
++#if INTPTR_MAX == INT64_MAX // 64bit system
++    #include "SZ3/utils/ska_hash/unordered_map.hpp"
++#endif // INTPTR_MAX == INT64_MAX
+ #include <cassert>
+ #include <cstdlib>
+ #include <cstring>
+@@ -525,7 +528,12 @@ namespace SZ {
+             T max = s[0];
+             offset = s[0]; //offset is min
+ 
+-            ska::unordered_map<T, size_t> frequency;
++            #if INTPTR_MAX == INT64_MAX // 64bit system
++                ska::unordered_map<T, size_t> frequency;
++            #else // most likely 32bit system
++                std::unordered_map<T, size_t> frequency;
++            #endif // INTPTR_MAX == INT64_MAX
++
+             for (size_t i = 0; i < length; i++) {
+                 frequency[s[i]]++;
+             }
+diff --git a/setup.py b/setup.py
+index 0dbdd76..f741c0a 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1437,7 +1437,7 @@ def _get_sz3_plugin():
+     include_dirs += glob(f"{sz3_dir}/include/SZ3/utils/*/")
+     # add version.hpp
+     include_dirs.append("lib/SZ3_extra")
+-    if sys.platform == "darwin":
++    if True:
+         # provide dummy omp.h
+         include_dirs.append("lib/SZ3_extra/darwin")
+     include_dirs.append(f"{h5z_sz3_dir}/include")

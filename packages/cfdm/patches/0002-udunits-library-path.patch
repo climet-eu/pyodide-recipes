@@ -1,0 +1,22 @@
+diff --git a/cfdm/functions.py b/cfdm/functions.py
+index 6894f6a..e02bd30 100644
+--- a/cfdm/functions.py
++++ b/cfdm/functions.py
+@@ -452,15 +452,14 @@ def environment(display=True, paths=True):
+     cfdm: 1.12.2.0
+ 
+     """
+-    import ctypes
+-
++    import cfunits
+     import netCDF4
+ 
+     # Get cfdm.core env
+     out = core.environment(display=False, paths=paths)
+ 
+     dependency_version_paths_mapping = {
+-        "udunits2 library": (ctypes.util.find_library("udunits2"), ""),
++        "udunits2 library": (cfunits.units._udunits._name, ""),
+         "HDF5 library": (netCDF4.__hdf5libversion__, ""),
+         "netcdf library": (netCDF4.__netcdf4libversion__, ""),
+         "netCDF4": _get_module_info("netCDF4"),

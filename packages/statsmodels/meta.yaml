@@ -17,12 +17,6 @@ requirements:
     - numpy
     - scipy
     - setuptools
-  run:
-    - numpy
-    - scipy
-    - pandas
-    - patsy
-    - packaging
 
 test:
   imports:

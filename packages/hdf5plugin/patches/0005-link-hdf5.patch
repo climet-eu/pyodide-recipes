@@ -1,0 +1,79 @@
+diff --git a/setup.py b/setup.py
+index f741c0a..20ecbcd 100644
+--- a/setup.py
++++ b/setup.py
+@@ -667,6 +667,13 @@ class HDF5PluginExtension(Extension):
+         cpp20_required=False,
+         **kwargs,
+     ):
++        hdf5_link_args = ["-lhdf5", "-L/src/pyodide-recipes/packages/.libs/lib", "-Wl,-rpath,$ORIGIN/../../h5py.libs"]
++
++        if "extra_link_args" in kwargs:
++            kwargs["extra_link_args"] += hdf5_link_args
++        else:
++            kwargs["extra_link_args"] = hdf5_link_args
++
+         Extension.__init__(self, name, **kwargs)
+ 
+         if not self.depends:
+@@ -1546,19 +1553,19 @@ def get_libraries_and_extensions():
+         _EMBEDDED_PLUGIN_EXTENSIONS[name]() for name in embedded_extension_names
+     ]
+ 
+-    if extensions and sys.platform != "win32":
+-        # Add hdf5 dynamic loading lib
+-        libraries.append(
+-            (
+-                "hdf5_dl",
+-                {
+-                    "sources": ["lib/hdf5_dl.c"],
+-                    "include_dirs": BuildConfig.get_hdf5_include_dirs(),
+-                    "macros": [("H5_USE_18_API", None)],
+-                    "cflags": [],
+-                },
+-            )
+-        )
++    # if extensions and sys.platform != "win32":
++    #     # Add hdf5 dynamic loading lib
++    #     libraries.append(
++    #         (
++    #             "hdf5_dl",
++    #             {
++    #                 "sources": ["lib/hdf5_dl.c"],
++    #                 "include_dirs": BuildConfig.get_hdf5_include_dirs(),
++    #                 "macros": [("H5_USE_18_API", None)],
++    #                 "cflags": [],
++    #             },
++    #         )
++    #     )
+ 
+     return libraries, extensions
+ 
+diff --git a/src/hdf5plugin/_utils.py b/src/hdf5plugin/_utils.py
+index 7613f7a..eb576ef 100644
+--- a/src/hdf5plugin/_utils.py
++++ b/src/hdf5plugin/_utils.py
+@@ -142,23 +142,6 @@ def register_filter(name: str) -> bool:
+         logger.error(traceback.format_exc())
+         return False
+ 
+-    if not sys.platform.startswith("win"):
+-        # Use init_filter function to initialize DLL
+-        try:
+-            init_filter = lib.init_filter
+-        except AttributeError:
+-            logger.debug(
+-                f"init_filter not found for filter {name}: Init phase skipped."
+-            )
+-        else:
+-            init_filter.argtypes = [ctypes.c_char_p]
+-            init_filter.restype = ctypes.c_int
+-
+-            retval = init_filter(bytes(_HDF5_PATH, encoding="utf-8"))
+-            if retval < 0:
+-                logger.error(f"Cannot initialize filter {name}: {retval}")
+-                return False
+-
+     # Register through H5Zregister
+     lib.H5PLget_plugin_info.restype = ctypes.c_void_p
+     if h5py.version.version_tuple[:3] > (3, 8, 0):

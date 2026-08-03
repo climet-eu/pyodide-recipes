@@ -6,9 +6,7 @@ package:
 source:
   url: https://files.pythonhosted.org/packages/source/a/argon2_cffi_bindings/argon2_cffi_bindings-25.1.0.tar.gz
   sha256: b957f3e6ea4d55d820e40ff76f450952807013d361a65d7f28acc0acbf29229d
-requirements:
-  run:
-    - cffi
+
 build:
   cflags: -mrelaxed-simd
 extra:

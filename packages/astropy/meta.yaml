@@ -17,12 +17,6 @@ requirements:
   host:
     - packaging
     - numpy
-  run:
-    - packaging
-    - numpy
-    - pyerfa
-    - pyyaml
-    - astropy_iers_data
 test:
   imports:
     - astropy

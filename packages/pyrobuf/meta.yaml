@@ -1,0 +1,24 @@
+package:
+  name: pyrobuf
+  version: 0.9.3
+  top-level:
+    - pyrobuf_list
+    - pyrobuf_util
+source:
+  url: https://files.pythonhosted.org/packages/source/p/pyrobuf/pyrobuf-0.9.3.tar.gz
+  sha256: 9cca7f992c674645522247e23cf6c4d81cca42e5a65e4ae1d05f3967b0c07a80
+  patches:
+    - patches/0001-no-pyrobuf.patch
+build:
+  post: |
+    rm -rf pyrobuf tests
+    sed -i '/^pyrobuf$/d' pyrobuf-0.9.3.dist-info/top_level.txt
+    sed -i '/^tests$/d' pyrobuf-0.9.3.dist-info/top_level.txt
+about:
+  home: https://github.com/appnexus/pyrobuf
+  PyPI: https://pypi.org/project/pyrobuf
+  summary: A Cython based protobuf compiler
+  license: Apache-2.0
+extra:
+  recipe-maintainers:
+    - juntyr

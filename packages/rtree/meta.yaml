@@ -1,0 +1,25 @@
+package:
+  name: rtree
+  version: 1.4.1
+  top-level:
+    - rtree
+source:
+  url: https://files.pythonhosted.org/packages/source/r/rtree/rtree-1.4.1.tar.gz
+  sha256: c6b1b3550881e57ebe530cc6cffefc87cd9bf49c30b37b894065a9f810875e46
+requirements:
+  host:
+    - libspatialindex
+build:
+
+  post: |
+    mkdir rtree.libs
+    cp "${WASM_LIBRARY_DIR}/lib/libspatialindex.so" rtree.libs/
+    cp "${WASM_LIBRARY_DIR}/lib/libspatialindex_c.so" rtree.libs/
+about:
+  home: https://github.com/Toblerity/rtree
+  PyPI: https://pypi.org/project/rtree
+  summary: R-Tree spatial index for Python GIS
+  license: MIT
+extra:
+  recipe-maintainers:
+    - juntyr

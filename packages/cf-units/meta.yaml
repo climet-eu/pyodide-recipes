@@ -1,0 +1,25 @@
+package:
+  name: cf-units
+  version: 3.3.1
+  top-level:
+    - cf_units
+source:
+  url: https://files.pythonhosted.org/packages/source/c/cf_units/cf_units-3.3.1.tar.gz
+  sha256: 84339f582994ae32ca5c472075c1e603a89f6c6f5a96cc1031bb5da700a14f3a
+requirements:
+  host:
+    - libudunits2
+    - numpy
+build:
+  vendor-sharedlib: true
+  script: |
+    export UDUNITS2_XML_PATH="${WASM_LIBRARY_DIR}/share/udunits/udunits2.xml";
+    export CFLAGS="${CFLAGS} -I${WASM_LIBRARY_DIR}/include";
+    export LDFLAGS="${CFLAGS} -L${WASM_LIBRARY_DIR}/lib";
+about:
+  home: https://github.com/SciTools/cf-units
+  PyPI: https://pypi.org/project/cf-units
+  summary:
+    Units of measure as required by the Climate and Forecast (CF) metadata
+    conventions
+  license: BSD

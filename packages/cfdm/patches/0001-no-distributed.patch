@@ -1,0 +1,23 @@
+diff --git a/cfdm/functions.py b/cfdm/functions.py
+index d980edc..6894f6a 100644
+--- a/cfdm/functions.py
++++ b/cfdm/functions.py
+@@ -470,7 +470,6 @@ def environment(display=True, paths=True):
+         "s3fs": _get_module_info("s3fs"),
+         "scipy": _get_module_info("scipy"),
+         "dask": _get_module_info("dask"),
+-        "distributed": _get_module_info("distributed"),
+         "cftime": _get_module_info("cftime"),
+         "cfunits": _get_module_info("cfunits"),
+         "cfdm": (__version__, os.path.abspath(__file__)),
+diff --git a/requirements.txt b/requirements.txt
+index f41a371..def04cd 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -7,6 +7,5 @@ h5netcdf>=1.3.0
+ h5py>=3.12.0
+ s3fs>=2024.6.0
+ dask>=2025.5.1
+-distributed>=2025.5.1
+ uritools>=4.0.3
+ cfunits>=3.3.7
