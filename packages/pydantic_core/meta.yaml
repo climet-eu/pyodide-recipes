@@ -1,0 +1,23 @@
+package:
+  name: pydantic_core
+  version: 2.46.4
+  tag:
+    - rust
+  # Warning: pydantic has a pin on pydantic_core, they need to be updated
+  # together
+  top-level:
+    - pydantic_core
+source:
+  url: https://files.pythonhosted.org/packages/source/p/pydantic_core/pydantic_core-2.46.4.tar.gz
+  sha256: 62f875393d7f270851f20523dd2e29f082bcc82292d66db2b64ea71f64b6e1c1
+requirements:
+  executable:
+    - rustup
+about:
+  home: https://github.com/pydantic/pydantic-core
+  PyPI: https://pypi.org/project/pydantic_core
+  summary: ""
+  license: MIT
+extra:
+  recipe-maintainers:
+    - samuelcolvin
