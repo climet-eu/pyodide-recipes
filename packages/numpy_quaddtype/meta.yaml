@@ -12,8 +12,10 @@ requirements:
     - libsleef
 build:
   script: |
-    export CXXFLAGS="${CXXFLAGS} -I${WASM_LIBRARY_DIR}/include -sRELOCATABLE=1";
+    export CXXFLAGS="${CXXFLAGS} -I${WASM_LIBRARY_DIR}/include -sSIDE_MODULE=1";
     export LDFLAGS="${CFLAGS} -L${WASM_LIBRARY_DIR}/lib";
+  backend-flags: |
+    setup-args=-DPYTHON_INCLUDE_DIR=$PYTHONINCLUDE
 about:
   home: https://github.com/numpy/numpy-quaddtype
   PyPI: https://pypi.org/project/numpy-quaddtype
