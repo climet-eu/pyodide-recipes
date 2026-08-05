@@ -1,11 +1,11 @@
 package:
   name: polars
-  version: 1.33.1
+  version: 1.32.3
   top-level:
     - polars
 source:
-  url: https://github.com/xlwings/polars-pyodide/releases/download/polars-1.33.1-pyodide-314.0.0a1/polars-1.33.1-cp314-cp314-pyemscripten_2026_0_wasm32.whl
-  sha256: 3bbe58ed3c0251c65cff0b6b334ac25bd1b9c7d4d7f42e87b49ab193ce11da13
+  url: https://github.com/juntyr/polars-pyodide/releases/download/polars-1.32.3-pyodide-314.0.0/polars-1.32.3-cp314-cp314-pyemscripten_2026_0_wasm32.whl
+  sha256: f486a03f71904664eca722db810f11ad3bee8d25b86eba316a40fb4044c00a30
 about:
   home: https://pola.rs/
   PyPI: https://pypi.org/project/polars
