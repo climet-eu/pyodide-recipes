@@ -18,7 +18,6 @@ requirements:
     - libhdf5
 build:
   vendor-sharedlib: false
-  exports: requested
 about:
   home: https://github.com/silx-kit/hdf5plugin
   PyPI: https://pypi.org/project/hdf5plugin
