@@ -8,7 +8,7 @@ package:
 
 source:
   sha256: 768de165adb8e66906039d8fec4127a57f522dfdf8e6fbff877a4616941ecfd3
-  url: https://files.pythonhosted.org/packages/py3/m/micropip/micropip-0.11.1-py3-none-any.whl
+  url: https://files.pythonhosted.org/packages/17/54/d737f98fe5da2fd3375de34e9231c56550eefdd33ae9b671a25070792430/micropip-0.11.1-py3-none-any.whl
 
 about:
   home: https://github.com/pyodide/micropip
