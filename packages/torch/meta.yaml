@@ -1,6 +1,6 @@
 package:
   name: torch
-  version: 2.13.0
+  version: 2.13.0+pyodide314.0.2.r6
   top-level:
     - torch
 source:
