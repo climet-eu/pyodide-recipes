@@ -13,11 +13,13 @@ source:
     - patches/0004-hdf5-path.patch
     - patches/0005-link-hdf5.patch
     - patches/0006-zfp-word-type.patch
+    - patches/0007-sz-fix-pointer-size.patch
 requirements:
   host:
     - libhdf5
 build:
   vendor-sharedlib: false
+  exports: requested
 about:
   home: https://github.com/silx-kit/hdf5plugin
   PyPI: https://pypi.org/project/hdf5plugin
