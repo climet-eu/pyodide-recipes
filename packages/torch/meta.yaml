@@ -1,11 +1,11 @@
 package:
   name: torch
-  version: 2.13.0+pyodide314.0.2.r6
+  version: 2.13.0
   top-level:
     - torch
 source:
-  url: https://github.com/mmtftr/pyodide-pytorch/releases/download/torch-2.13.0-pyodide-314.0.2-r6/torch-2.13.0+pyodide314.0.2.r6-cp314-cp314-pyemscripten_2026_0_wasm32.whl
-  sha256: 4f7fb41b87ff870f86ee79f6ba089e0fe2ec618c61518fbe951146d5d074b86c
+  url: https://gist.github.com/juntyr/c2fec79998f673c4d59dab07e8a9c308/raw/5ca2cf810852030f7a902f0471d0562da3c25234/torch-2.13.0-cp314-cp314-pyemscripten_2026_0_wasm32.whl
+  sha256: 00301b5e327747e889a2b17d036af1b4c5f00947aba6cdc3f19c243429cc1260
 about:
   home: https://pytorch.org/
   PyPI: https://pypi.org/project/torch
