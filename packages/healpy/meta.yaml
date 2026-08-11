@@ -27,6 +27,11 @@ build:
     -fwasm-exceptions
   script: |
     export CXXFLAGS="$CXXFLAGS -sSIDE_MODULE=1"
+
+    # ensure that dependencies are rebuilt
+    rm -f ${WASM_LIBRARY_DIR}/lib/pkgconfig/cfitsio.pc
+    rm -f ${WASM_LIBRARY_DIR}/lib/pkgconfig/healpix_cxx.pc
+    rm -f ${WASM_LIBRARY_DIR}/lib/pkgconfig/libsharp.pc
 about:
   home: https://github.com/healpy/healpy
   PyPI: https://pypi.org/project/healpy
