@@ -1,40 +1,39 @@
 diff --git a/src/zarr/core/common.py b/src/zarr/core/common.py
-index 9b3d297..cfb17a6 100644
+index 1541683..73418a9 100644
 --- a/src/zarr/core/common.py
 +++ b/src/zarr/core/common.py
-@@ -21,6 +21,7 @@ from typing import (
-     overload,
+@@ -17,6 +17,7 @@ from typing import (
  )
  
+ import numpy as np
 +import pyodide
  from typing_extensions import ReadOnly
  
  from zarr.core.config import config as zarr_config
-@@ -113,7 +114,10 @@ async def concurrent_map(
-             async with sem:
-                 return await func(*item)
+@@ -111,6 +112,10 @@ def concurrent_iter[T: tuple[Any, ...], V](
+     See https://docs.python.org/3/library/asyncio-task.html#coroutines:
+     "Note that simply calling a coroutine will not schedule it to be executed:"
+     """
++
++    if not pyodide.ffi.can_run_sync():
++        return [func(*item) for item in items]
++
+     if limit is None:
+         return [asyncio.ensure_future(func(*item)) for item in items]
  
--        return await asyncio.gather(*[asyncio.ensure_future(run(item)) for item in items])
-+        if pyodide.ffi.can_run_sync():
-+            return await asyncio.gather(*[asyncio.ensure_future(run(item)) for item in items])
-+        else:
-+            return await asyncio.gather(*[run(item) for item in items])
- 
- 
- E = TypeVar("E", bound=Enum)
 diff --git a/src/zarr/core/group.py b/src/zarr/core/group.py
-index 9b5fee2..b315141 100644
+index 922eaf1..6d7b818 100644
 --- a/src/zarr/core/group.py
 +++ b/src/zarr/core/group.py
-@@ -13,6 +13,7 @@ from typing import TYPE_CHECKING, Literal, TypeVar, assert_never, cast, overload
+@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, Literal, assert_never, cast, overload
  
  import numpy as np
  import numpy.typing as npt
 +import pyodide
- from typing_extensions import deprecated
  
  import zarr.api.asynchronous as async_api
-@@ -3520,10 +3521,16 @@ async def _iter_members(
+ from zarr.abc.metadata import Metadata
+@@ -3394,10 +3395,16 @@ async def _iter_members(
      keys = [key async for key in node.store.list_dir(node.path)]
      keys_filtered = tuple(filter(lambda v: v not in skip_keys, keys))
  
@@ -56,10 +55,10 @@ index 9b5fee2..b315141 100644
      for fetched_node_coro in asyncio.as_completed(node_tasks):
          try:
 diff --git a/src/zarr/core/sync.py b/src/zarr/core/sync.py
-index fe435cc..f4f6200 100644
+index 160950b..cb57e7f 100644
 --- a/src/zarr/core/sync.py
 +++ b/src/zarr/core/sync.py
-@@ -1,19 +1,16 @@
+@@ -1,17 +1,15 @@
  from __future__ import annotations
  
  import asyncio
@@ -68,11 +67,10 @@ index fe435cc..f4f6200 100644
 -import os
 -import threading
 -from concurrent.futures import ThreadPoolExecutor, wait
- from typing import TYPE_CHECKING, TypeVar
+ from typing import TYPE_CHECKING
  
 +import pyodide
- from typing_extensions import ParamSpec
- 
++
  from zarr.core.config import config
  
  if TYPE_CHECKING:
@@ -81,7 +79,7 @@ index fe435cc..f4f6200 100644
      from typing import Any
  
  logger = logging.getLogger(__name__)
-@@ -24,101 +21,16 @@ T = TypeVar("T")
+@@ -19,101 +17,17 @@ logger = logging.getLogger(__name__)
  
  # From https://github.com/fsspec/filesystem_spec/blob/master/fsspec/asyn.py
  
@@ -92,7 +90,7 @@ index fe435cc..f4f6200 100644
 -_lock: threading.Lock | None = None  # global lock placeholder
 -_executor: ThreadPoolExecutor | None = None  # global executor placeholder
 -
--
+ 
  class SyncError(Exception):
      pass
  
@@ -172,7 +170,7 @@ index fe435cc..f4f6200 100644
 -    os.register_at_fork(after_in_child=reset_resources_after_fork)
 -
 -
--async def _runner(coro: Coroutine[Any, Any, T]) -> T | BaseException:
+-async def _runner[T](coro: Coroutine[Any, Any, T]) -> T | BaseException:
 -    """
 -    Await a coroutine and return the result of running it. If awaiting the coroutine raises an
 -    exception, the exception will be returned.
@@ -184,8 +182,8 @@ index fe435cc..f4f6200 100644
 +    pass
  
  
- def sync(
-@@ -129,57 +41,20 @@ def sync(
+ def sync[T](
+@@ -124,57 +38,20 @@ def sync[T](
      """
      Make loop run coroutine until it returns. Runs in other thread
      """
@@ -205,7 +203,7 @@ index fe435cc..f4f6200 100644
 +        if timeout is not None:
 +            coro = asyncio.wait_for(coro, timeout=timeout)
 +        return pyodide.ffi.run_sync(coro)
-+
++    
 +    # otherwise fall back to polling the awaitable once
 +    # and hoping that it resolves immediately
      try:
@@ -254,14 +252,14 @@ index fe435cc..f4f6200 100644
 +        raise RuntimeError("could not syncify an awaitable")
  
  
- async def _collect_aiterator(data: AsyncIterator[T]) -> tuple[T, ...]:
-@@ -211,17 +86,3 @@ class SyncMixin:
+ async def _collect_aiterator[T](data: AsyncIterator[T]) -> tuple[T, ...]:
+@@ -206,17 +83,3 @@ class SyncMixin:
              return [item async for item in async_iterator]
  
          return self._sync(iter_to_list())
 -
 -
--async def _with_semaphore(
+-async def _with_semaphore[T](
 -    func: Callable[[], Awaitable[T]], semaphore: asyncio.Semaphore | None = None
 -) -> T:
 -    """

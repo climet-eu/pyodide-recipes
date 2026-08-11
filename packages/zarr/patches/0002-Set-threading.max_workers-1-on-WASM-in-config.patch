@@ -1,0 +1,13 @@
+diff --git a/src/zarr/core/config.py b/src/zarr/core/config.py
+index 42c5ed3..7fa2401 100644
+--- a/src/zarr/core/config.py
++++ b/src/zarr/core/config.py
+@@ -103,7 +103,7 @@ config = Config(
+                 "sharding_coalesce_max_bytes": 16 << 20,  # 16 MiB
+             },
+             "async": {"concurrency": 10, "timeout": None},
+-            "threading": {"max_workers": None},
++            "threading": {"max_workers": 1},
+             "json_indent": 2,
+             "codec_pipeline": {
+                 # FusedCodecPipeline is the faster synchronous pipeline, but it stays

@@ -1,11 +1,11 @@
 package:
   name: healpy
-  version: 1.19.0
+  version: 1.20.0
   top-level:
     - healpy
 source:
-  url: https://files.pythonhosted.org/packages/source/h/healpy/healpy-1.19.0.tar.gz
-  sha256: 28e839cb885a23d36c77fc3423a3cb9271a07fda94085bd12fc329f941130ec5
+  url: https://files.pythonhosted.org/packages/source/h/healpy/healpy-1.20.0.tar.gz
+  sha256: 03b0e1551ae235c7290e9bfdf69fa9cdc194f8a2be51198c1924b15d826102ed
   patches:
     - patches/0001-Skip-linking-cfitsio-and-healpix_cxx-programs-for-Py.patch
     - patches/0002-without-zlib-check-fortran.patch

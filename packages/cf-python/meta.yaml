@@ -1,11 +1,11 @@
 package:
   name: cf-python
-  version: 3.19.0
+  version: 3.20.1
   top-level:
     - cf
 source:
-  url: https://files.pythonhosted.org/packages/source/c/cf_python/cf_python-3.19.0.tar.gz
-  sha256: d99a9e0444527b3ae55a4e3ad09ef32086c2dfc8ec629d251b11f4f43c9a1257
+  url: https://files.pythonhosted.org/packages/source/c/cf_python/cf_python-3.20.1.tar.gz
+  sha256: 0c7ea20e86fd65a2f470d34da703e72af021c411a746f3fd838a1713e8b49fae
   patches:
     - patches/0001-make-clean.patch
     - patches/0002-no-psutil-distributed.patch

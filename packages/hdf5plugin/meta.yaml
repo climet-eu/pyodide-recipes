@@ -1,11 +1,11 @@
 package:
   name: hdf5plugin
-  version: 6.0.0
+  version: 7.0.0
   top-level:
     - hdf5plugin
 source:
-  url: https://files.pythonhosted.org/packages/source/h/hdf5plugin/hdf5plugin-6.0.0.tar.gz
-  sha256: 847ed9e96b451367a110f0ba64a3b260d38d64bbf3f25751858d3b56e094cfe0
+  url: https://files.pythonhosted.org/packages/source/h/hdf5plugin/hdf5plugin-7.0.0.tar.gz
+  sha256: e6e6b1f8b0c4d2ca87e616ddc31d08330b36207e466357040f95269e5e0401c8
   patches:
     - patches/0001-no-openmp.patch
     - patches/0002-sperr.patch

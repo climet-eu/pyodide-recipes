@@ -1,12 +1,12 @@
 package:
   name: pyarrow
-  version: 23.0.1
+  version: 25.0.1
   top-level:
     - pyarrow
 
 source:
-  url: https://github.com/apache/arrow/releases/download/apache-arrow-23.0.1/apache-arrow-23.0.1.tar.gz
-  sha256: bd09adb4feac11fe49d1604f296618866702be610c86e2d513b561d877de6b18
+  url: https://github.com/apache/arrow/releases/download/apache-arrow-25.0.1/apache-arrow-25.0.1.tar.gz
+  sha256: 43d5de0a581f43cf63a2c06b4dcf13b9ff6fcd800f023324596e5781093bc500
   patches:
     - patches/autoload_timezones.patch
     - patches/0002-require-pyodide-unix-timezones.patch

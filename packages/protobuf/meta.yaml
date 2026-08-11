@@ -1,13 +1,13 @@
 package:
   name: protobuf
-  version: 7.34.1
+  version: 7.35.1
   top-level:
   - google
 
 source:
   url: 
-    https://files.pythonhosted.org/packages/source/p/protobuf/protobuf-7.34.1.tar.gz
-  sha256: 9ce42245e704cc5027be797c1db1eb93184d44d1cdd71811fb2d9b25ad541280
+    https://files.pythonhosted.org/packages/source/p/protobuf/protobuf-7.35.1.tar.gz
+  sha256: ce115a26fe0c39a2c29973d914d327e516a6455464489fe3cd1e51a1b354f81a
 
 about:
   home: https://github.com/protocolbuffers/protobuf

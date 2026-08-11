@@ -1,11 +1,11 @@
 package:
   name: cfdm
-  version: 1.13.0.0
+  version: 1.13.2.1
   top-level:
     - cfdm
 source:
-  url: https://files.pythonhosted.org/packages/source/c/cfdm/cfdm-1.13.0.0.tar.gz
-  sha256: ee33be390e12340f35292ec1c860a74ea19de8bc974eab91046c0c06275ed78d
+  url: https://files.pythonhosted.org/packages/source/c/cfdm/cfdm-1.13.2.1.tar.gz
+  sha256: e937bfde036e235af60c8dd8c4143185730b67855d21ceca040b7e2df0188eac
   patches:
     - patches/0001-no-distributed.patch
     - patches/0002-udunits-library-path.patch

@@ -1,11 +1,11 @@
 package:
   name: pyrosm
-  version: 0.6.2
+  version: 0.13.1
   top-level:
     - pyrosm
 source:
-  url: https://files.pythonhosted.org/packages/source/p/pyrosm/pyrosm-0.6.2.tar.gz
-  sha256: 904e9636e71fd558d127807a0beb9b53e4d2e28a2301d3c46ed8ba2d84d5e1b9
+  url: https://files.pythonhosted.org/packages/source/p/pyrosm/pyrosm-0.13.1.tar.gz
+  sha256: 984692c106153adbb6eacf5f698849ee6bbc8eeff6c74a3c76f2204be8a881ef
 about:
   home: https://pyrosm.readthedocs.io/
   PyPI: https://pypi.org/project/pyrosm

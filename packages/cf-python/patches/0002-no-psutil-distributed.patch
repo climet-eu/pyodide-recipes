@@ -1,5 +1,5 @@
 diff --git a/cf/functions.py b/cf/functions.py
-index c4f7abe..2b2f13a 100644
+index ebbc9f4..8849a51 100644
 --- a/cf/functions.py
 +++ b/cf/functions.py
 @@ -145,9 +145,9 @@ else:
@@ -14,7 +14,7 @@ index c4f7abe..2b2f13a 100644
  
  
  def configuration(
-@@ -1496,9 +1496,7 @@ def min_total_memory():
+@@ -1516,9 +1516,7 @@ def min_total_memory():
  
  def total_memory():
      """The total amount of physical memory (in bytes)."""
@@ -25,25 +25,26 @@ index c4f7abe..2b2f13a 100644
  
  
  def is_log_level_info(logger):
-@@ -3247,7 +3245,6 @@ def environment(display=True, paths=True):
+@@ -3212,7 +3210,6 @@ def environment(display=True, paths=True):
          "esmpy/ESMF": (
              _get_module_info("esmpy", alternative_name="ESMF", try_except=True)
          ),
 -        "psutil": _get_module_info("psutil"),
          "matplotlib": _get_module_info("matplotlib", try_except=True),
          "activestorage": _get_module_info("activestorage", try_except=True),
-         "cfplot": _get_module_info("cfplot", try_except=True),
+         "cartopy": _get_module_info("cartopy", try_except=True),
 diff --git a/requirements.txt b/requirements.txt
-index 66cd2d0..7618faa 100644
+index 26133c2..ea1bea6 100644
 --- a/requirements.txt
 +++ b/requirements.txt
-@@ -2,9 +2,7 @@ netCDF4==1.7.2
+@@ -2,10 +2,8 @@ netCDF4>=1.7.2
  cftime>=1.6.4
  numpy>=2.0.0
- cfdm>=1.13.0.0, <1.13.1.0
+ cfdm>=1.13.2.1, <1.13.3.0
 -psutil>=0.6.0
  cfunits>=3.3.7
  dask>=2025.5.1
 -distributed>=2025.5.1
  packaging>=20.0
  scipy>=1.10.0
+ pyfive>=1.1.1

@@ -1,0 +1,30 @@
+diff --git a/src/zarr/storage/_local.py b/src/zarr/storage/_local.py
+index 1627c1a..0d63081 100644
+--- a/src/zarr/storage/_local.py
++++ b/src/zarr/storage/_local.py
+@@ -2,6 +2,7 @@ from __future__ import annotations
+ 
+ import asyncio
+ import contextlib
++import errno
+ import io
+ import os
+ import shutil
+@@ -49,13 +50,11 @@ if sys.platform == "win32":
+     # On Windows, if dst exists a FileExistsError is always raised.
+     _safe_move = os.rename
+ else:
+-    # On Unix, os.rename silently replace files, so instead we use os.link like
+-    # atomicwrites:
+-    # https://github.com/untitaker/python-atomicwrites/blob/1.4.1/atomicwrites/__init__.py#L59-L60
+-    # This also raises FileExistsError if dst exists.
+     def _safe_move(src: Path, dst: Path) -> None:
+-        os.link(src, dst)
+-        os.unlink(src)
++        if dst.exists():
++            src.unlink(missing_ok=True)
++            raise FileExistsError(errno.EEXIST, os.strerror(errno.EEXIST), str(dst))
++        os.rename(src, dst)
+ 
+ 
+ @contextlib.contextmanager

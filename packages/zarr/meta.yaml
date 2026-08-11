@@ -1,13 +1,15 @@
 package:
   name: zarr
-  version: 3.1.5
+  version: 3.3.0
   top-level:
     - zarr
 source:
-  sha256: fbe0c79675a40c996de7ca08e80a1c0a20537bd4a9f43418b6d101395c0bba2b
-  url: https://files.pythonhosted.org/packages/source/z/zarr/zarr-3.1.5.tar.gz
+  sha256: cd0c8cf738b4bb4807815bc1255acad5bdf1a7b7264b606c5a1bc0d0392a306b
+  url: https://files.pythonhosted.org/packages/source/z/zarr/zarr-3.3.0.tar.gz
   patches:
-    - patches/0001-syncify-awaitable.patch
+    - patches/0001-Add-WASM-compatible-sync-for-Pyodide.patch
+    - patches/0002-Set-threading.max_workers-1-on-WASM-in-config.patch
+    - patches/0003-Fix-exclusive-atomic-writes-on-Emscripten.patch
 about:
   home: https://github.com/zarr-developers/zarr-python
   PyPI: https://pypi.org/project/zarr
