@@ -1,5 +1,5 @@
 diff --git a/aiohttp/__init__.py b/aiohttp/__init__.py
-index 1b35d23..fed2a08 100644
+index e548b4f..b92b871 100644
 --- a/aiohttp/__init__.py
 +++ b/aiohttp/__init__.py
 @@ -277,3 +277,5 @@ def __getattr__(name: str) -> object:
@@ -10,10 +10,10 @@ index 1b35d23..fed2a08 100644
 +from . import patch
 diff --git a/aiohttp/patch.py b/aiohttp/patch.py
 new file mode 100644
-index 0000000..2cfcc58
+index 0000000..6d5cb9c
 --- /dev/null
 +++ b/aiohttp/patch.py
-@@ -0,0 +1,283 @@
+@@ -0,0 +1,309 @@
 +from collections.abc import Iterable
 +from contextlib import suppress
 +from io import BytesIO
@@ -24,6 +24,7 @@ index 0000000..2cfcc58
 +from yarl import URL
 +
 +from . import ClientSession, ClientTimeout, InvalidURL, hdrs, payload
++from .abc import AbstractStreamWriter
 +from .client_reqrep import _merge_ssl_params
 +from .helpers import TimeoutHandle, get_env_proxy_for_url, strip_auth_from_url
 +
@@ -50,6 +51,29 @@ index 0000000..2cfcc58
 +
 +    def set_exception(self, exc: BaseException) -> None:
 +        self._exception = exc
++
++
++class CompletedStreamWriter(AbstractStreamWriter):
++    async def write(self, chunk):
++        raise RuntimeError("already completed")
++
++    async def write_eof(self, chunk = b""):
++        raise RuntimeError("already completed")
++
++    async def drain(self):
++        return
++
++    def enable_compression(self, encoding = "deflate", strategy = None):
++        raise RuntimeError("already completed")
++
++    def enable_chunking(self):
++        raise RuntimeError("already completed")
++
++    async def write_headers(self, status_line, headers):
++        raise RuntimeError("already completed")
++
++    def send_headers(self):
++        return
 +
 +
 +async def _request(
@@ -201,6 +225,7 @@ index 0000000..2cfcc58
 +                traces=req._traces,
 +                loop=req.loop,
 +                session=req._session,
++                stream_writer=CompletedStreamWriter(),
 +            )
 +
 +            import js
@@ -233,6 +258,7 @@ index 0000000..2cfcc58
 +            resp._raw_headers = tuple(
 +                (k.encode('utf-8'), v.encode('utf-8')) for k, v in headers.items()
 +            )
++            resp._output_size = len(body)
 +
 +            resp.content = Content(body)
 +
