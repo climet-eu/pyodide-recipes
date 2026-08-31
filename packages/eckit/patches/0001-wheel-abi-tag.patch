@@ -1,0 +1,13 @@
+diff --git a/python/eckit/setup.py b/python/eckit/setup.py
+index 81e7637..8bac7b0 100644
+--- a/python/eckit/setup.py
++++ b/python/eckit/setup.py
+@@ -23,7 +23,7 @@ class bdist_wheel_ext(bdist_wheel):
+ 
+ ext_kwargs = {
+     "darwin": {},
+-    "linux": {"cmdclass": {"bdist_wheel": bdist_wheel_ext}},
++    "linux": {"cmdclass": {"bdist_wheel": bdist_wheel}},
+ }
+ 
+ setup(

@@ -1,0 +1,27 @@
+package:
+  name: eckit
+  version: 2.1.0.21
+
+source:
+  url: https://github.com/ecmwf/eckit/archive/refs/tags/2.1.0.tar.gz
+  sha256: bb7e888498b39925d724019f02c14b981761e7c94de899b5322cffe025d1e3d6
+  patches:
+    - patches/0001-wheel-abi-tag.patch
+
+requirements:
+  host:
+    - libeckit
+
+build:
+  script: |
+    cd ..
+    mv $PKG_BUILD_DIR ${PKG_BUILD_DIR}_cpp
+    cp -r ${PKG_BUILD_DIR}_cpp/python/eckit $PKG_BUILD_DIR
+    rm $PKG_BUILD_DIR/LICENSE
+    rm $PKG_BUILD_DIR/VERSION
+    cp ${PKG_BUILD_DIR}_cpp/LICENSE $PKG_BUILD_DIR/LICENSE
+    cp ${PKG_BUILD_DIR}_cpp/VERSION $PKG_BUILD_DIR/VERSION
+    echo "2.1.0.21" > $PKG_BUILD_DIR/VERSION
+    cd ${PKG_BUILD_DIR}
+
+# TODO: handle cython build from https://github.com/ecmwf/eckit/blob/2.1.0/python/CMakeLists.txt

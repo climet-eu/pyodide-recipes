@@ -1,0 +1,13 @@
+diff --git a/src/eckit/codec/RecordReader.h b/src/eckit/codec/RecordReader.h
+index 560db6e..cd626c8 100644
+--- a/src/eckit/codec/RecordReader.h
++++ b/src/eckit/codec/RecordReader.h
+@@ -37,7 +37,7 @@ public:
+ 
+         if (stream_) {
+             trace("stream", __FILE__, __LINE__, __func__);
+-            requests_.emplace(key, ReadRequest{stream_, offset_, key, value});
++            requests_.emplace(key, ReadRequest{stream_, static_cast<size_t>(offset_), key, value});
+         }
+         else {
+             requests_.emplace(key, ReadRequest{uri(key), value});

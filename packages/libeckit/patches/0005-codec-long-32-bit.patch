@@ -1,0 +1,64 @@
+diff --git a/src/eckit/codec/detail/DataType.h b/src/eckit/codec/detail/DataType.h
+index 1d0b73e..d8bc47e 100644
+--- a/src/eckit/codec/detail/DataType.h
++++ b/src/eckit/codec/detail/DataType.h
+@@ -110,12 +110,12 @@ inline std::string DataType::str<const int>() {
+ }
+ template <>
+ inline std::string DataType::str<long>() {
+-    static_assert(sizeof(long) == 8);
++    static_assert(sizeof(long) == 4);
+     return int64_str();
+ }
+ template <>
+ inline std::string DataType::str<const long>() {
+-    static_assert(sizeof(long) == 8);
++    static_assert(sizeof(long) == 4);
+     return int64_str();
+ }
+ template <>
+@@ -150,12 +150,12 @@ inline std::string DataType::str<const double>() {
+ }
+ template <>
+ inline std::string DataType::str<unsigned long>() {
+-    static_assert(sizeof(unsigned long) == 8);
++    static_assert(sizeof(unsigned long) == 4);
+     return uint64_str();
+ }
+ template <>
+ inline std::string DataType::str<const unsigned long>() {
+-    static_assert(sizeof(unsigned long) == 8);
++    static_assert(sizeof(unsigned long) == 4);
+     return uint64_str();
+ }
+ 
+@@ -219,12 +219,12 @@ inline DataType::kind_t DataType::kind<const int>() {
+ }
+ template <>
+ inline DataType::kind_t DataType::kind<long>() {
+-    static_assert(sizeof(long) == 8);
++    static_assert(sizeof(long) == 4);
+     return KIND_INT64;
+ }
+ template <>
+ inline DataType::kind_t DataType::kind<const long>() {
+-    static_assert(sizeof(long) == 8);
++    static_assert(sizeof(long) == 4);
+     return KIND_INT64;
+ }
+ template <>
+@@ -239,12 +239,12 @@ inline DataType::kind_t DataType::kind<const long long>() {
+ }
+ template <>
+ inline DataType::kind_t DataType::kind<unsigned long>() {
+-    static_assert(sizeof(unsigned long) == 8);
++    static_assert(sizeof(unsigned long) == 4);
+     return KIND_UINT64;
+ }
+ template <>
+ inline DataType::kind_t DataType::kind<const unsigned long>() {
+-    static_assert(sizeof(unsigned long) == 8);
++    static_assert(sizeof(unsigned long) == 4);
+     return KIND_UINT64;
+ }
+ template <>

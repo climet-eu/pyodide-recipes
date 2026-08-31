@@ -1,0 +1,31 @@
+package:
+  name: eckitlib
+  version: 2.1.0.21
+  top-level:
+    - eckitlib
+
+source:
+  path: ./eckitlib
+
+requirements:
+  host:
+    - libeckit
+
+build:
+  post: |
+    mkdir -p eckitlib/share
+    cp -r ${WASM_LIBRARY_DIR}/share/eckit eckitlib/share
+    mkdir -p eckitlib/lib
+    cp ${WASM_LIBRARY_DIR}/lib/libeckit*.so eckitlib/lib
+    mkdir -p eckitlib/lib/pkgconfig
+    cp ${WASM_LIBRARY_DIR}/lib/pkgconfig/eckit*.pc eckitlib/lib/pkgconfig
+    mkdir -p eckitlib/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/eckit eckitlib/lib/cmake
+    mkdir -p eckitlib/include
+    cp -r ${WASM_LIBRARY_DIR}/include/eckit eckitlib/include
+
+about:
+  home: https://github.com/ecmwf/eckit
+  PyPI: https://pypi.org/project/numba
+  summary: eckitlib
+  license: Apache License Version 2.0

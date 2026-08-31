@@ -1,0 +1,13 @@
+diff --git a/src/eckit/log/Log.cc b/src/eckit/log/Log.cc
+index 505dabc..453fbf9 100644
+--- a/src/eckit/log/Log.cc
++++ b/src/eckit/log/Log.cc
+@@ -32,7 +32,7 @@ namespace eckit {
+ 
+ //----------------------------------------------------------------------------------------------------------------------
+ 
+-#if defined(_GNU_SOURCE)
++#if 0 //defined(_GNU_SOURCE)
+ 
+ /* To use with GNU libc strerror_r */
+ 

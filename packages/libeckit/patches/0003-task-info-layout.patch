@@ -1,0 +1,40 @@
+diff --git a/src/eckit/runtime/TaskInfo.h b/src/eckit/runtime/TaskInfo.h
+index 3ad6b97..d9a96c3 100644
+--- a/src/eckit/runtime/TaskInfo.h
++++ b/src/eckit/runtime/TaskInfo.h
+@@ -37,7 +37,9 @@ class JSON;
+ ///          TaskInfo.cc.
+ struct Info {
+     bool busy_{};
++    char _padding_0[7]{};
+     pthread_t thread_{};
++    char _padding_1[4]{};
+     pid_t pid_{};
+ 
+     time_t start_{};
+@@ -46,12 +48,12 @@ struct Info {
+ 
+     bool show_{};
+ 
+-    unsigned long late_{};
++    unsigned long long late_{};
+ 
+     // Logging
+     static constexpr int size_{10240};
+     char buffer_[size_]{};
+-    unsigned long pos_{};
++    unsigned long long pos_{};
+ 
+     char name_[80]{};
+     char kind_[80]{};
+@@ -86,8 +88,8 @@ struct Info {
+     int config_{};
+     char resource_{};
+ 
+-    long parent_{};
+-    long depth_{};
++    long long parent_{};
++    long long depth_{};
+ 
+     char state_{};
+ 

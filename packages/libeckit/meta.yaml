@@ -1,0 +1,52 @@
+package:
+  name: libeckit
+  version: 2.1.0.21
+
+source:
+  url: https://github.com/ecmwf/eckit/archive/refs/tags/2.1.0.tar.gz
+  sha256: bb7e888498b39925d724019f02c14b981761e7c94de899b5322cffe025d1e3d6
+  patches:
+    - patches/0001-uid_t.patch
+    - patches/0002-strerror_r.patch
+    - patches/0003-task-info-layout.patch
+    - patches/0004-no-floating-point-exceptions.patch
+    - patches/0005-codec-long-32-bit.patch
+    - patches/0006-size_t-32-bit-cast.patch
+    - patches/0007-no-tools.patch
+
+build:
+  type: shared_library
+  script: |
+    git clone --branch 3.7.0 --depth 1 https://github.com/ecmwf/ecbuild;
+
+    mkdir -p build;
+
+    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+
+    export EMSCRIPTEN_SYSROOT=$(em-config CACHE)/sysroot
+    export EMSCRIPTEN_INCLUDE=$EMSCRIPTEN_SYSROOT/include
+    export EMSCRIPTEN_BIN=$EMSCRIPTEN_SYSROOT/bin
+    export EMSCRIPTEN_LIB=$EMSCRIPTEN_SYSROOT/lib/wasm32-emscripten/pic
+
+    cd build \
+        && emcmake cmake ../ \
+        -DCMAKE_INSTALL_PREFIX=${WASM_LIBRARY_DIR} \
+        -DBUILD_SHARED_LIBS=ON \
+        -DDISABLE_OS_CHECK=ON \
+        -DENABLE_TESTS=OFF \
+        -DENABLE_BUILD_TOOLS=OFF \
+        -DENABLE_AEC=OFF \
+        -DENABLE_BZIP2=ON \
+        -DENABLE_XXHASH=ON \
+        -DENABLE_ECKIT_CODEC=ON \
+        -DENABLE_ECKIT_SPEC=ON \
+        -DENABLE_ECKIT_GEO=ON \
+        -DCMAKE_C_FLAGS="-fwasm-exceptions" \
+        -DCMAKE_CXX_FLAGS="-fwasm-exceptions";
+
+    emmake make -j ${PYODIDE_JOBS:-3};
+    emmake make -j ${PYODIDE_JOBS:-3} install;
+
+    cp -P ${WASM_LIBRARY_DIR}/lib/libeckit.so ${DISTDIR}
