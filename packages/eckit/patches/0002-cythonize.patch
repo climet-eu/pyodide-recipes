@@ -1,0 +1,119 @@
+diff --git a/python/eckit/pyproject.toml b/python/eckit/pyproject.toml
+index c588c51..fa3b45c 100644
+--- a/python/eckit/pyproject.toml
++++ b/python/eckit/pyproject.toml
+@@ -9,7 +9,7 @@
+ 
+ 
+ [build-system]
+-requires = ["setuptools>=65", "wheel"]
++requires = ["setuptools>=65", "wheel", "Cython"]
+ build-backend = "setuptools.build_meta"
+ 
+ [project]
+diff --git a/python/eckit/setup.py b/python/eckit/setup.py
+index 8bac7b0..7738547 100644
+--- a/python/eckit/setup.py
++++ b/python/eckit/setup.py
+@@ -1,7 +1,8 @@
+ import platform
+ import sys
+ 
+-from setuptools import setup
++from Cython.Build import cythonize
++from setuptools import setup, Extension
+ from wheel.bdist_wheel import bdist_wheel
+ 
+ with open("VERSION", "r") as fVersion:
+@@ -32,7 +33,10 @@ setup(
+     package_data={
+         "": ["*.so"],
+     },
+-    has_ext_modules=lambda: True,
++    ext_modules=cythonize([
++        Extension("eckit._eckit", ["src/_eckit/_eckit.pyx"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
++        Extension("eckit.geo._eckit_geo", ["src/_eckit/_eckit_geo.pyx"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
++    ]),
+     install_requires=install_requires,
+     **ext_kwargs[sys.platform],
+ )
+diff --git a/python/eckit/src/_eckit/_eckit.pyx b/python/eckit/src/_eckit/_eckit.pyx
+index c73c524..df67385 100644
+--- a/python/eckit/src/_eckit/_eckit.pyx
++++ b/python/eckit/src/_eckit/_eckit.pyx
+@@ -16,11 +16,11 @@ eckit.eckit_main_initialise()
+ 
+ 
+ def version() -> str:
+-    return eckit.LibEcKit.instance().version()
++    return eckit.LibEcKit.instance().version().decode("ASCII")
+ 
+ 
+ def git_sha1() -> str:
+-    return eckit.LibEcKit.instance().gitsha1(40)
++    return eckit.LibEcKit.instance().gitsha1(40).decode("ASCII")
+ 
+ 
+ def easycurl_setopt(str name, object value) -> None:
+@@ -39,12 +39,15 @@ def easycurl_setopt(str name, object value) -> None:
+     cdef cppstring c_value
+ 
+     if isinstance(value, bool):
+-        eckit.easycurl_setopt_bool(c_name, value)
++        pass
++        # eckit.easycurl_setopt_bool(c_name, value)
+     elif isinstance(value, int):
+-        eckit.easycurl_setopt_long(c_name, <long>value)
++        pass
++        # eckit.easycurl_setopt_long(c_name, <long>value)
+     elif isinstance(value, str):
+-        c_value = value.encode("utf-8")
+-        eckit.easycurl_setopt_string(c_name, c_value)
++        pass
++        # c_value = value.encode("utf-8")
++        # eckit.easycurl_setopt_string(c_name, c_value)
+     else:
+         raise TypeError(f"Unsupported type for CURL option value: {type(value)}")
+ 
+@@ -54,4 +57,4 @@ def easycurl_clear_options() -> None:
+ 
+     Resets the CURL options defaults that apply to new handles.
+     """
+-    eckit.easycurl_clear_options()
++    # eckit.easycurl_clear_options()
+diff --git a/python/eckit/src/_eckit/_eckit_geo.pyx b/python/eckit/src/_eckit/_eckit_geo.pyx
+index d8e6034..dfae037 100644
+--- a/python/eckit/src/_eckit/_eckit_geo.pyx
++++ b/python/eckit/src/_eckit/_eckit_geo.pyx
+@@ -18,11 +18,11 @@ eckit.eckit_main_initialise()
+ 
+ 
+ def version() -> str:
+-    return eckit_geo.LibEcKitGeo.instance().version()
++    return eckit_geo.LibEcKitGeo.instance().version().decode("ASCII")
+ 
+ 
+ def git_sha1() -> str:
+-    return eckit_geo.LibEcKitGeo.instance().gitsha1(40)
++    return eckit_geo.LibEcKitGeo.instance().gitsha1(40).decode("ASCII")
+ 
+ 
+ def cache_dir_purge() -> None:
+diff --git a/python/eckit/src/_eckit/eckit.pxd b/python/eckit/src/_eckit/eckit.pxd
+index 92d2c0c..04a53cc 100644
+--- a/python/eckit/src/_eckit/eckit.pxd
++++ b/python/eckit/src/_eckit/eckit.pxd
+@@ -35,8 +35,8 @@ cdef extern from "eckit/log/JSON.h" namespace "eckit":
+         JSON(std.ostream&)
+ 
+ 
+-cdef extern from "eckit/io/EasyCURL.h" namespace "eckit":
+-    void easycurl_setopt_bool(string option_name, bool value)
+-    void easycurl_setopt_long(string option_name, long value)
+-    void easycurl_setopt_string(string option_name, string value)
+-    void easycurl_clear_options()
++# cdef extern from "eckit/io/EasyCURL.h" namespace "eckit":
++#     void easycurl_setopt_bool(string option_name, bool value)
++#     void easycurl_setopt_long(string option_name, long value)
++#     void easycurl_setopt_string(string option_name, string value)
++#     void easycurl_clear_options()
