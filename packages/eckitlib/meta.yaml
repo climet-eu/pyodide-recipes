@@ -12,6 +12,7 @@ requirements:
     - libeckit
 
 build:
+  vendor-sharedlib: false
   post: |
     mkdir -p eckitlib/share
     cp -r ${WASM_LIBRARY_DIR}/share/eckit eckitlib/share

@@ -1,0 +1,43 @@
+diff --git a/atlas_io/CMakeLists.txt b/atlas_io/CMakeLists.txt
+index bb69c22..9adb921 100644
+--- a/atlas_io/CMakeLists.txt
++++ b/atlas_io/CMakeLists.txt
+@@ -90,7 +90,7 @@ if( HAVE_ECKIT_CODEC )
+ else()
+   add_subdirectory( src )
+ endif()
+-add_subdirectory( tests )
++# add_subdirectory( tests )
+ 
+ ################################################################################
+ # Export and summarize
+diff --git a/pluto/CMakeLists.txt b/pluto/CMakeLists.txt
+index e1d67e3..6825483 100644
+--- a/pluto/CMakeLists.txt
++++ b/pluto/CMakeLists.txt
+@@ -79,8 +79,8 @@ endif()
+ include("cmake/pluto_hic_macros.cmake")
+ 
+ add_subdirectory(src)
+-add_subdirectory(examples)
+-add_subdirectory(tests)
++# add_subdirectory(examples)
++# add_subdirectory(tests)
+ 
+ ecbuild_install_project( NAME pluto )
+ ecbuild_print_summary()
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d134154..3bd8079 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -135,8 +135,8 @@ if( atlas_HAVE_FORTRAN )
+  add_subdirectory( atlas_f )
+ endif()
+ 
+-add_subdirectory( apps )
+-add_subdirectory( tests )
++# add_subdirectory( apps )
++# add_subdirectory( tests )
+ 
+ if( HAVE_SANDBOX )
+     add_subdirectory( sandbox )

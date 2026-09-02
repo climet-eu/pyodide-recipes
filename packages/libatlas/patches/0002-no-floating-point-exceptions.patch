@@ -1,0 +1,209 @@
+diff --git a/src/atlas/functionspace/detail/StructuredColumns.cc b/src/atlas/functionspace/detail/StructuredColumns.cc
+index 9692947..e2f0052 100644
+--- a/src/atlas/functionspace/detail/StructuredColumns.cc
++++ b/src/atlas/functionspace/detail/StructuredColumns.cc
+@@ -76,8 +76,8 @@ array::LocalView<T, 3> make_leveled_view(Field& field) {
+ 
+ template <typename T>
+ std::string checksum_3d_field(const parallel::Checksum& checksum, const Field& field) {
+-    bool disabled_fpe_overflow = library::disable_floating_point_exception(FE_OVERFLOW);
+-    bool disabled_fpe_invalid  = library::disable_floating_point_exception(FE_INVALID);
++    // bool disabled_fpe_overflow = library::disable_floating_point_exception(FE_OVERFLOW);
++    // bool disabled_fpe_invalid  = library::disable_floating_point_exception(FE_INVALID);
+     auto values = make_leveled_view<const T>(field);
+     array::ArrayT<T> surface_field(values.shape(0), values.shape(2));
+     auto surface     = array::make_view<T, 2>(surface_field);
+@@ -90,12 +90,12 @@ std::string checksum_3d_field(const parallel::Checksum& checksum, const Field& f
+             }
+         }
+     }
+-    if (disabled_fpe_overflow) {
+-        library::enable_floating_point_exception(FE_OVERFLOW);
+-    }
+-    if (disabled_fpe_invalid) {
+-        library::enable_floating_point_exception(FE_INVALID);
+-    }
++    // if (disabled_fpe_overflow) {
++    //     library::enable_floating_point_exception(FE_OVERFLOW);
++    // }
++    // if (disabled_fpe_invalid) {
++    //     library::enable_floating_point_exception(FE_INVALID);
++    // }
+     return checksum.execute(surface.data(), surface_field.stride(0));
+ }
+ 
+diff --git a/src/atlas/interpolation/method/unstructured/ConservativeSphericalPolygonInterpolation.cc b/src/atlas/interpolation/method/unstructured/ConservativeSphericalPolygonInterpolation.cc
+index f4063b2..10d0acd 100644
+--- a/src/atlas/interpolation/method/unstructured/ConservativeSphericalPolygonInterpolation.cc
++++ b/src/atlas/interpolation/method/unstructured/ConservativeSphericalPolygonInterpolation.cc
+@@ -1227,15 +1227,15 @@ void ConservativeSphericalPolygonInterpolation::intersect_polygons(const Polygon
+     std::vector<double> intersection_weights;
+     std::vector<PointXYZ> intersection_src_centroids;
+ 
+-    bool fpe_for_polygon = Polygon::fpe();
+-    Polygon::fpe(false);
+-    bool fpe_disabled = fpe_for_polygon ? atlas::library::disable_floating_point_exception(FE_INVALID) : false;
+-    auto restore_fpe = [fpe_disabled, fpe_for_polygon] {
+-        if (fpe_disabled) {
+-            atlas::library::enable_floating_point_exception(FE_INVALID);
+-        }
+-        Polygon::fpe(fpe_for_polygon);
+-    };
++    // bool fpe_for_polygon = Polygon::fpe();
++    // Polygon::fpe(false);
++    // bool fpe_disabled = fpe_for_polygon ? atlas::library::disable_floating_point_exception(FE_INVALID) : false;
++    // auto restore_fpe = [fpe_disabled, fpe_for_polygon] {
++    //     if (fpe_disabled) {
++    //         atlas::library::enable_floating_point_exception(FE_INVALID);
++    //     }
++    //     Polygon::fpe(fpe_for_polygon);
++    // };
+ 
+     const auto cell_halo   = array::make_view<const int, 1>(tgt_mesh_.cells().halo());
+     const auto node_ghost  = array::make_view<int, 1>(tgt_mesh_.nodes().ghost());
+@@ -1343,7 +1343,7 @@ void ConservativeSphericalPolygonInterpolation::intersect_polygons(const Polygon
+         }
+     }
+ 
+-    restore_fpe();
++    // restore_fpe();
+ 
+     timings.polygon_intersections  = stopwatch_polygon_intersections.elapsed();
+     timings.source_kdtree_search   = stopwatch_kdtree_search.elapsed();
+@@ -1523,12 +1523,12 @@ ConservativeSphericalPolygonInterpolation::Triplets ConservativeSphericalPolygon
+ 
+     struct ScopedDisableFPE {
+         ScopedDisableFPE() {
+-            fpe_disabled = atlas::library::disable_floating_point_exception(FE_DIVBYZERO);
++            // fpe_disabled = atlas::library::disable_floating_point_exception(FE_DIVBYZERO);
+         }
+         ~ScopedDisableFPE() {
+-            if (fpe_disabled) {
+-                atlas::library::enable_floating_point_exception(FE_DIVBYZERO);
+-            }
++            // if (fpe_disabled) {
++            //     atlas::library::enable_floating_point_exception(FE_DIVBYZERO);
++            // }
+         }
+         bool fpe_disabled;
+     } disable_fpe;
+@@ -1651,12 +1651,12 @@ ConservativeSphericalPolygonInterpolation::Triplets ConservativeSphericalPolygon
+ 
+     struct ScopedDisableFPE {
+         ScopedDisableFPE() {
+-            fpe_disabled = atlas::library::disable_floating_point_exception(FE_DIVBYZERO);
++            // fpe_disabled = atlas::library::disable_floating_point_exception(FE_DIVBYZERO);
+         }
+         ~ScopedDisableFPE() {
+-            if (fpe_disabled) {
+-                atlas::library::enable_floating_point_exception(FE_DIVBYZERO);
+-            }
++            // if (fpe_disabled) {
++            //     atlas::library::enable_floating_point_exception(FE_DIVBYZERO);
++            // }
+         }
+         bool fpe_disabled;
+     } disable_fpe;
+diff --git a/src/atlas/library/FloatingPointExceptions.cc b/src/atlas/library/FloatingPointExceptions.cc
+index 1666f52..6dae42f 100644
+--- a/src/atlas/library/FloatingPointExceptions.cc
++++ b/src/atlas/library/FloatingPointExceptions.cc
+@@ -103,12 +103,12 @@ static int atlas_fedisableexcept(unsigned int excepts) {
+ namespace atlas {
+ namespace library {
+ 
+-static std::map<std::string, int> str_to_except = {{"FE_INVALID", FE_INVALID},     {"FE_INEXACT", FE_INEXACT},
+-                                                   {"FE_DIVBYZERO", FE_DIVBYZERO}, {"FE_OVERFLOW", FE_OVERFLOW},
+-                                                   {"FE_UNDERFLOW", FE_UNDERFLOW}, {"FE_ALL_EXCEPT", FE_ALL_EXCEPT}};
+-static std::map<int, std::string> except_to_str = {{FE_INVALID, "FE_INVALID"},     {FE_INEXACT, "FE_INEXACT"},
+-                                                   {FE_DIVBYZERO, "FE_DIVBYZERO"}, {FE_OVERFLOW, "FE_OVERFLOW"},
+-                                                   {FE_UNDERFLOW, "FE_UNDERFLOW"}, {FE_ALL_EXCEPT, "FE_ALL_EXCEPT"}};
++static std::map<std::string, int> str_to_except = {{"FE_INVALID", 0},     {"FE_INEXACT", 0},
++                                                   {"FE_DIVBYZERO", 0}, {"FE_OVERFLOW", 0},
++                                                   {"FE_UNDERFLOW", 0}, {"FE_ALL_EXCEPT", 0}};
++static std::map<int, std::string> except_to_str = {{0, "FE_INVALID"},     {0, "FE_INEXACT"},
++                                                   {0, "FE_DIVBYZERO"}, {0, "FE_OVERFLOW"},
++                                                   {0, "FE_UNDERFLOW"}, {0, "FE_ALL_EXCEPT"}};
+ 
+ static std::map<std::string, int> str_to_signal = {{"SIGINT", SIGINT},  {"SIGILL", SIGILL},   {"SIGABRT", SIGABRT},
+                                                    {"SIGFPE", SIGFPE},  {"SIGKILL", SIGKILL}, {"SIGSEGV", SIGSEGV},
+@@ -388,9 +388,9 @@ void enable_floating_point_exceptions() {
+                 skip_map = true;
+             }
+             else if (s == "yes" || s == "on" || s == "true" || s == "1") {
+-                enable(FE_INVALID);
+-                enable(FE_DIVBYZERO);
+-                enable(FE_OVERFLOW);
++                // enable(FE_INVALID);
++                // enable(FE_DIVBYZERO);
++                // enable(FE_OVERFLOW);
+                 skip_map = true;
+             }
+         }
+diff --git a/src/atlas/mesh/actions/WriteLoadBalanceReport.cc b/src/atlas/mesh/actions/WriteLoadBalanceReport.cc
+index ba3ea75..d8aeb65 100644
+--- a/src/atlas/mesh/actions/WriteLoadBalanceReport.cc
++++ b/src/atlas/mesh/actions/WriteLoadBalanceReport.cc
+@@ -81,7 +81,7 @@ void write_load_balance_report(const Mesh& mesh, std::ostream& ofs) {
+             mpi::comm().gather(nghost, nb_ghost_nodes, root);
+         }
+ 
+-        bool disabled_fpe = library::disable_floating_point_exception(FE_INVALID);
++        // bool disabled_fpe = library::disable_floating_point_exception(FE_INVALID);
+ 
+         for (idx_t p = 0; p < npart; ++p) {
+             if (nb_owned_nodes[p]) {
+@@ -91,9 +91,9 @@ void write_load_balance_report(const Mesh& mesh, std::ostream& ofs) {
+                 ghost_ratio_nodes[p] = -1;
+             }
+         }
+-        if (disabled_fpe) {
+-            library::enable_floating_point_exception(FE_INVALID);
+-        }
++        // if (disabled_fpe) {
++        //     library::enable_floating_point_exception(FE_INVALID);
++        // }
+     }
+ 
+     bool has_edges = mesh.edges().size();
+diff --git a/src/atlas/util/ConvexSphericalPolygon.cc b/src/atlas/util/ConvexSphericalPolygon.cc
+index f85ee34..0ecd34f 100644
+--- a/src/atlas/util/ConvexSphericalPolygon.cc
++++ b/src/atlas/util/ConvexSphericalPolygon.cc
+@@ -438,12 +438,12 @@ void ConvexSphericalPolygon::clip(const GreatCircleSegment& great_circle, Clippe
+ // @param[out] intersecting polygon
+ ConvexSphericalPolygon ConvexSphericalPolygon::intersect(const ConvexSphericalPolygon& plg, std::ostream* out, double pointsSameEPS) const {
+ 
+-    bool fpe_disabled = fpe_ ? atlas::library::disable_floating_point_exception(FE_INVALID) : false;
+-    auto restore_fpe = [fpe_disabled] {
+-        if (fpe_disabled) {
+-            atlas::library::enable_floating_point_exception(FE_INVALID);
+-        }
+-    };
++    // bool fpe_disabled = fpe_ ? atlas::library::disable_floating_point_exception(FE_INVALID) : false;
++    // auto restore_fpe = [fpe_disabled] {
++    //     if (fpe_disabled) {
++    //         atlas::library::enable_floating_point_exception(FE_INVALID);
++    //     }
++    // };
+ 
+     ConvexSphericalPolygon intersection;
+     const ConvexSphericalPolygon* intersector;
+@@ -492,7 +492,7 @@ ConvexSphericalPolygon ConvexSphericalPolygon::intersect(const ConvexSphericalPo
+ #endif
+             intersection.clip(GreatCircleSegment(s1, s2), clipped_sph_coords, pointsSameEPS, out);
+             if (not intersection.valid_) {
+-                restore_fpe();
++                // restore_fpe();
+                 return intersection;
+             }
+         }
+@@ -500,7 +500,7 @@ ConvexSphericalPolygon ConvexSphericalPolygon::intersect(const ConvexSphericalPo
+     intersection.computed_area_     = false;
+     intersection.computed_radius_   = false;
+     intersection.computed_centroid_ = false;
+-    restore_fpe();
++    // restore_fpe();
+     return intersection;
+ }
+ 

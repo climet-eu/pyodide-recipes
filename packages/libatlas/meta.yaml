@@ -1,18 +1,18 @@
 package:
-  name: libeckit
-  version: 2.1.0
+  name: libatlas
+  version: 0.46.0
 
 source:
-  url: https://github.com/ecmwf/eckit/archive/refs/tags/2.1.0.tar.gz
-  sha256: bb7e888498b39925d724019f02c14b981761e7c94de899b5322cffe025d1e3d6
+  url: https://github.com/ecmwf/atlas/archive/refs/tags/0.46.0.tar.gz
+  sha256: 482d92e0dd0c2cffe5af9aeffd9681f64e21f3dbf2b34d51fa3aa805de0a7370
   patches:
-    - patches/0001-uid_t.patch
-    - patches/0002-strerror_r.patch
-    - patches/0003-task-info-layout.patch
-    - patches/0004-no-floating-point-exceptions.patch
-    - patches/0005-codec-long-32-bit.patch
-    - patches/0006-size_t-32-bit-cast.patch
-    - patches/0007-no-tools.patch
+    - patches/0001-disable-tests.patch
+    - patches/0002-no-floating-point-exceptions.patch
+    - patches/0003-fix-iterator.patch
+
+requirements:
+  host:
+    - libeckit
 
 build:
   type: shared_library
@@ -36,17 +36,11 @@ build:
         -DBUILD_SHARED_LIBS=ON \
         -DDISABLE_OS_CHECK=ON \
         -DENABLE_TESTS=OFF \
-        -DENABLE_BUILD_TOOLS=OFF \
-        -DENABLE_AEC=OFF \
-        -DENABLE_BZIP2=ON \
-        -DENABLE_XXHASH=ON \
-        -DENABLE_ECKIT_CODEC=ON \
-        -DENABLE_ECKIT_SPEC=ON \
-        -DENABLE_ECKIT_GEO=ON \
+        -DENABLE_FORTRAN=OFF \
         -DCMAKE_C_FLAGS="-fwasm-exceptions" \
         -DCMAKE_CXX_FLAGS="-fwasm-exceptions";
 
     emmake make -j ${PYODIDE_JOBS:-3};
     emmake make -j ${PYODIDE_JOBS:-3} install;
 
-    cp -P ${WASM_LIBRARY_DIR}/lib/libeckit*.so ${DISTDIR}
+    cp -P ${WASM_LIBRARY_DIR}/lib/libatlas.so ${DISTDIR}
