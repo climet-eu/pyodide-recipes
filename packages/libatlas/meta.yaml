@@ -9,6 +9,7 @@ source:
     - patches/0001-disable-tests.patch
     - patches/0002-no-floating-point-exceptions.patch
     - patches/0003-fix-iterator.patch
+    - patches/0004-utils-long-32-bit.patch
 
 requirements:
   host:
