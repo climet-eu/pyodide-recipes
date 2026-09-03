@@ -1,24 +1,25 @@
 package:
-  name: libatlas
-  version: 0.46.0
+  name: libmir
+  version: 1.30.0
 
 source:
-  url: https://github.com/ecmwf/atlas/archive/refs/tags/0.46.0.tar.gz
-  sha256: 482d92e0dd0c2cffe5af9aeffd9681f64e21f3dbf2b34d51fa3aa805de0a7370
+  url: https://github.com/ecmwf/mir/archive/refs/tags/1.30.0.tar.gz
+  sha256: d9f9b1650db00dd9372b667c645e65f72b72fc4eee765f316985ad890cce175d
   patches:
-    - patches/0001-disable-tests.patch
-    - patches/0002-no-floating-point-exceptions.patch
-    - patches/0003-fix-iterator.patch
-    - patches/0004-utils-long-32-bit.patch
+    - patches/0002-const-buffer-size.patch
+    - patches/0003-no-tools.patch
 
 requirements:
   host:
+    - libatlas
+    - libeccodes
     - libeckit
 
 build:
   type: shared_library
   script: |
-    git clone --branch 3.7.0 --depth 1 https://github.com/ecmwf/ecbuild;
+    git clone --branch 3.15.0 --depth 1 https://github.com/ecmwf/ecbuild;
+    cd ecbuild && git apply ../../../patches/0001-ecbuild-math-escape.patch && cd ..;
 
     mkdir -p build;
 
@@ -31,17 +32,22 @@ build:
     export EMSCRIPTEN_BIN=$EMSCRIPTEN_SYSROOT/bin
     export EMSCRIPTEN_LIB=$EMSCRIPTEN_SYSROOT/lib/wasm32-emscripten/pic
 
+    embuilder build libpng-legacysjlj --pic
+
     cd build \
         && emcmake cmake ../ \
         -DCMAKE_INSTALL_PREFIX=${WASM_LIBRARY_DIR} \
         -DBUILD_SHARED_LIBS=ON \
         -DDISABLE_OS_CHECK=ON \
         -DENABLE_TESTS=OFF \
-        -DENABLE_FORTRAN=OFF \
+        -DENABLE_BUILD_TOOLS=OFF \
+        -DENABLE_PNG=ON \
+        -DPNG_PNG_INCLUDE_DIR=$EMSCRIPTEN_INCLUDE \
+        -DPNG_LIBRARY_RELEASE=$EMSCRIPTEN_LIB/libpng-legacysjlj.a \
         -DCMAKE_C_FLAGS="-fwasm-exceptions" \
         -DCMAKE_CXX_FLAGS="-fwasm-exceptions";
 
     emmake make -j ${PYODIDE_JOBS:-3};
     emmake make -j ${PYODIDE_JOBS:-3} install;
 
-    cp -P ${WASM_LIBRARY_DIR}/lib/libatlas*.so ${DISTDIR}
+    cp -P ${WASM_LIBRARY_DIR}/lib/libmir.so ${DISTDIR}

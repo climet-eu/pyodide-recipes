@@ -1,0 +1,13 @@
+diff --git a/cmake/ecbuild_download_resource.cmake b/cmake/ecbuild_download_resource.cmake
+index e54da5d..23bdf94 100644
+--- a/cmake/ecbuild_download_resource.cmake
++++ b/cmake/ecbuild_download_resource.cmake
+@@ -54,7 +54,7 @@ function( ecbuild_download_resource _p_OUT _p_URL )
+       if( WGET_PROGRAM )
+ 
+         # wget takes the total number of tries, curl the number or retries
+-        math( EXPR ECBUILD_DOWNLOAD_RETRIES ${ECBUILD_DOWNLOAD_RETRIES} + 1 )
++        math( EXPR ECBUILD_DOWNLOAD_RETRIES "${ECBUILD_DOWNLOAD_RETRIES} + 1" )
+ 
+         execute_process( COMMAND ${WGET_PROGRAM} -nv -O ${_p_OUT}
+                                  -t ${ECBUILD_DOWNLOAD_RETRIES}

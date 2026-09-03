@@ -1,0 +1,26 @@
+diff --git a/src/mir/action/transform/ShToGridded.cc b/src/mir/action/transform/ShToGridded.cc
+index baab60b..58b5423 100644
+--- a/src/mir/action/transform/ShToGridded.cc
++++ b/src/mir/action/transform/ShToGridded.cc
+@@ -38,7 +38,7 @@
+ namespace mir::action::transform {
+ 
+ 
+-constexpr size_t CAPACITY_MEMORY = 8L * 1024 * 1024 * 1024;
++constexpr size_t CAPACITY_MEMORY = 8L * 1024 * 1024;
+ constexpr size_t CAPACITY_SHARED = CAPACITY_MEMORY;
+ static caching::InMemoryCache<TransCache> trans_cache("mirCoefficient", CAPACITY_MEMORY, CAPACITY_SHARED,
+                                                       "$MIR_COEFFICIENT_CACHE");
+diff --git a/src/mir/compare/FieldComparator.cc b/src/mir/compare/FieldComparator.cc
+index b260d1a..21cb243 100644
+--- a/src/mir/compare/FieldComparator.cc
++++ b/src/mir/compare/FieldComparator.cc
+@@ -46,7 +46,7 @@
+ namespace mir::compare {
+ 
+ 
+-constexpr long bufferSize      = 5L * 1024 * 1024 * 1024;
++constexpr long bufferSize      = 5L * 1024 * 1024;
+ constexpr size_t cacheCapacity = 256;
+ 
+ // TODO: change name of env. variable

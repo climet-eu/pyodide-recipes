@@ -1,10 +1,10 @@
 package:
   name: libeccodes
-  version: 2.46.0
+  version: 2.47.0
 
 source:
-  url: https://github.com/ecmwf/eccodes/archive/refs/tags/2.46.0.tar.gz
-  sha256: cf6deef3c74d73997fd782b84d92a23a50f9728dd5ad38f9fcd365fcd66610d7
+  url: https://github.com/ecmwf/eccodes/archive/refs/tags/2.47.0.tar.gz
+  sha256: 6318a6a1e296d6698bcd83719212cf630b9bb45c054723c22bbc449090ae0c0e
   patches:
     - patches/0001-32bit-support-hack.patch
 
@@ -43,6 +43,7 @@ build:
         -DPNG_PNG_INCLUDE_DIR=$EMSCRIPTEN_INCLUDE \
         -DPNG_LIBRARY_RELEASE=$EMSCRIPTEN_LIB/libpng-legacysjlj.a \
         -DENABLE_AEC=ON \
+        -DENABLE_USE_SHARED_LIB_AEC=OFF \
         -DENABLE_FORTRAN=OFF \
         -DENABLE_MEMFS=ON \
         -DDISABLE_OS_CHECK=ON \
