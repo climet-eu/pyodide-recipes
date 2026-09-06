@@ -22,9 +22,9 @@ build:
 
     mkdir -p build;
 
-    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
-    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
-    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN:/lib/python3.14/site-packages/eckitlib/lib/'"
+    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN:/lib/python3.14/site-packages/eckitlib/lib/'"
+    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN:/lib/python3.14/site-packages/eckitlib/lib/'"
 
     export EMSCRIPTEN_SYSROOT=$(em-config CACHE)/sysroot
     export EMSCRIPTEN_INCLUDE=$EMSCRIPTEN_SYSROOT/include

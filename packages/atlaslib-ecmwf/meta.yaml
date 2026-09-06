@@ -12,7 +12,7 @@ requirements:
     - libatlas
 
 build:
-  vendor-sharedlib: true
+  vendor-sharedlib: false
   post: |
     mkdir -p atlaslib_ecmwf/lib
     cp ${WASM_LIBRARY_DIR}/lib/libpluto.so atlaslib_ecmwf/lib

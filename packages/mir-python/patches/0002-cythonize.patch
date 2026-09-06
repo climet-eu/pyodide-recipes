@@ -12,7 +12,7 @@ index fc2c37b..8df0ec5 100644
  
  [project]
 diff --git a/python/mir/setup.py b/python/mir/setup.py
-index 57b1bf3..840a177 100644
+index 57b1bf3..627f12f 100644
 --- a/python/mir/setup.py
 +++ b/python/mir/setup.py
 @@ -1,7 +1,9 @@
@@ -26,22 +26,48 @@ index 57b1bf3..840a177 100644
  from wheel.bdist_wheel import bdist_wheel
  
  with open("VERSION", "r") as fVersion:
-@@ -34,7 +36,9 @@ setup(
+@@ -34,7 +36,18 @@ setup(
      package_data={
          "": ["*.so"],
      },
 -    has_ext_modules=lambda: True,
 +    ext_modules=cythonize([
-+        Extension("mir._mir", ["src/_mir/_mir.pyx"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include", np.get_include()]),
++        Extension("mir._mir", [
++            "src/_mir/_mir.pyx",
++            "src/_mir/mir/appendix.cc",
++            "src/_mir/mir/input/ArrayInput.cc",
++            "src/_mir/mir/input/PyGribInput.cc",
++            "src/_mir/mir/output/PyGribOutput.cc",
++        ], language="c++", include_dirs=[
++            "/src/pyodide-recipes/packages/.libs/include",
++            np.get_include(),
++        ]),
 +    ]),
      install_requires=install_requires,
      **ext_kwargs[sys.platform],
  )
 diff --git a/python/mir/src/_mir/_mir.pyx b/python/mir/src/_mir/_mir.pyx
-index 8d6de6b..4e7cc7d 100644
+index 8d6de6b..93e5467 100644
 --- a/python/mir/src/_mir/_mir.pyx
 +++ b/python/mir/src/_mir/_mir.pyx
-@@ -56,19 +56,19 @@ init(_args)
+@@ -11,6 +11,7 @@
+ cimport eckit_defs as eckit
+ cimport mir_defs as mir
+ cimport numpy as cnp
++cnp.import_array()
+ from cython.operator cimport dereference
+ from libc.stdlib cimport free
+ from libc.stdlib cimport malloc
+@@ -42,7 +43,7 @@ cdef class Args:
+             raise MemoryError("Args: failed to allocate argv")
+ 
+         for i, arg in enumerate(sys.argv):
+-            self.argv[i] = strdup(arg)
++            self.argv[i] = strdup(arg.encode("ASCII"))
+ 
+     def __dealloc__(self):
+         free(self.argv)
+@@ -56,19 +57,19 @@ init(_args)
  
  
  def home() -> str:

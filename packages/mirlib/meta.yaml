@@ -12,7 +12,7 @@ requirements:
     - libmir
 
 build:
-  vendor-sharedlib: true
+  vendor-sharedlib: false
   post: |
     mkdir -p mirlib/lib
     cp ${WASM_LIBRARY_DIR}/lib/libmir.so mirlib/lib

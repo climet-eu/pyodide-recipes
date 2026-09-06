@@ -19,9 +19,9 @@ build:
 
     mkdir -p build;
 
-    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
-    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
-    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm'"
+    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN'"
+    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN'"
+    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN'"
 
     export EMSCRIPTEN_SYSROOT=$(em-config CACHE)/sysroot
     export EMSCRIPTEN_INCLUDE=$EMSCRIPTEN_SYSROOT/include
