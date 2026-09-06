@@ -1,6 +1,8 @@
 package:
   name: mir-python
   version: 1.29.0.21
+  top-level:
+    - mir
 
 source:
   url: https://github.com/ecmwf/mir/archive/refs/tags/1.29.0.tar.gz

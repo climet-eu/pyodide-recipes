@@ -12,7 +12,7 @@ index c588c51..fa3b45c 100644
  
  [project]
 diff --git a/python/eckit/setup.py b/python/eckit/setup.py
-index 8bac7b0..7738547 100644
+index 8bac7b0..ea64a92 100644
 --- a/python/eckit/setup.py
 +++ b/python/eckit/setup.py
 @@ -1,7 +1,8 @@
@@ -31,8 +31,8 @@ index 8bac7b0..7738547 100644
      },
 -    has_ext_modules=lambda: True,
 +    ext_modules=cythonize([
-+        Extension("eckit._eckit", ["src/_eckit/_eckit.pyx"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
-+        Extension("eckit.geo._eckit_geo", ["src/_eckit/_eckit_geo.pyx"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
++        Extension("eckit._eckit", ["src/_eckit/_eckit.pyx", "src/_eckit/eckit.cc"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
++        Extension("eckit.geo._eckit_geo", ["src/_eckit/_eckit_geo.pyx", "src/_eckit/eckit.cc"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
 +    ]),
      install_requires=install_requires,
      **ext_kwargs[sys.platform],

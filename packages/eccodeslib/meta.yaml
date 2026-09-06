@@ -12,7 +12,7 @@ requirements:
     - libeccodes
 
 build:
-  vendor-sharedlib: false
+  vendor-sharedlib: true
   post: |
     mkdir -p eccodeslib/lib
     cp ${WASM_LIBRARY_DIR}/lib/libeccodes*.so eccodeslib/lib

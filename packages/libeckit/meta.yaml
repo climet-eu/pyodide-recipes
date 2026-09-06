@@ -13,6 +13,8 @@ source:
     - patches/0005-codec-long-32-bit.patch
     - patches/0006-size_t-32-bit-cast.patch
     - patches/0007-no-tools.patch
+    - patches/0008-system-info.patch
+    - patches/0009-library-path.patch
 
 build:
   type: shared_library

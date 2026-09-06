@@ -1,0 +1,16 @@
+diff --git a/src/eckit/os/System.cc b/src/eckit/os/System.cc
+index dabd1c2..2dbe048 100644
+--- a/src/eckit/os/System.cc
++++ b/src/eckit/os/System.cc
+@@ -42,6 +42,11 @@ std::string System::addrToPath(const void* addr) {
+     result = info.dli_fname;
+ #endif
+ 
++    if (result == "/UNKNOWN") {
++        // FIXME: update Python version
++        result = "/lib/python3.14/site-packages/eckitlib/lib/libeckit.so";
++    }
++
+     /// @todo: what do we do with archives (.a)
+     ///  * maybe we rely on env variable set?
+     ///  * or rely on etc/path
