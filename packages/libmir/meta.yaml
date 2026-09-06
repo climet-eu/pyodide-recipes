@@ -1,10 +1,10 @@
 package:
   name: libmir
-  version: 1.30.0
+  version: 1.29.0
 
 source:
-  url: https://github.com/ecmwf/mir/archive/refs/tags/1.30.0.tar.gz
-  sha256: d9f9b1650db00dd9372b667c645e65f72b72fc4eee765f316985ad890cce175d
+  url: https://github.com/ecmwf/mir/archive/refs/tags/1.29.0.tar.gz
+  sha256: 448f84fa8035c5215480392d0147263b99b79eda8a200e62d8ec54d21783d116
   patches:
     - patches/0002-const-buffer-size.patch
     - patches/0003-no-tools.patch

@@ -1,0 +1,26 @@
+package:
+  name: mir-python
+  version: 1.29.0.21
+
+source:
+  url: https://github.com/ecmwf/mir/archive/refs/tags/1.29.0.tar.gz
+  sha256: 448f84fa8035c5215480392d0147263b99b79eda8a200e62d8ec54d21783d116
+  patches:
+    - patches/0001-wheel-abi-tag.patch
+    - patches/0002-cythonize.patch
+
+requirements:
+  host:
+    - libmir
+
+build:
+  script: |
+    cd ..
+    mv $PKG_BUILD_DIR ${PKG_BUILD_DIR}_cpp
+    cp -r ${PKG_BUILD_DIR}_cpp/python/mir $PKG_BUILD_DIR
+    rm $PKG_BUILD_DIR/LICENSE
+    rm $PKG_BUILD_DIR/VERSION
+    cp ${PKG_BUILD_DIR}_cpp/LICENSE $PKG_BUILD_DIR/LICENSE
+    cp ${PKG_BUILD_DIR}_cpp/VERSION $PKG_BUILD_DIR/VERSION
+    echo "1.29.0.21" > $PKG_BUILD_DIR/VERSION
+    cd ${PKG_BUILD_DIR}

@@ -1,0 +1,30 @@
+package:
+  name: mirlib
+  version: 1.29.0.21
+  top-level:
+    - mirlib
+
+source:
+  path: ./mirlib
+
+requirements:
+  host:
+    - libmir
+
+build:
+  vendor-sharedlib: false
+  post: |
+    mkdir -p mirlib/lib
+    cp ${WASM_LIBRARY_DIR}/lib/libmir.so mirlib/lib
+    mkdir -p mirlib/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/mir mirlib/lib/cmake
+    mkdir -p mirlib/include
+    cp -r ${WASM_LIBRARY_DIR}/include/mir mirlib/include
+    mkdir -p mirlib/etc
+    cp -r ${WASM_LIBRARY_DIR}/etc/mir mirlib/etc
+
+about:
+  home: https://github.com/ecmwf/mir
+  PyPI: https://pypi.org/project/mirlib
+  summary: mirlib
+  license: Apache License Version 2.0

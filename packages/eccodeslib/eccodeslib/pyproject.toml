@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eccodeslib"
+version = "2.47.3.21"
+dependencies = ["eckitlib==2.1.0.21"]

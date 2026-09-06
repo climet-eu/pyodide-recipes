@@ -1,0 +1,13 @@
+diff --git a/python/mir/setup.py b/python/mir/setup.py
+index c11a44e..57b1bf3 100644
+--- a/python/mir/setup.py
++++ b/python/mir/setup.py
+@@ -26,7 +26,7 @@ class bdist_wheel_ext(bdist_wheel):
+ 
+ ext_kwargs = {
+     "darwin": {},
+-    "linux": {"cmdclass": {"bdist_wheel": bdist_wheel_ext}},
++    "linux": {"cmdclass": {"bdist_wheel": bdist_wheel}},
+ }
+ 
+ setup(

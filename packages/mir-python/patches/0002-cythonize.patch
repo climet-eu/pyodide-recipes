@@ -1,0 +1,67 @@
+diff --git a/python/mir/pyproject.toml b/python/mir/pyproject.toml
+index fc2c37b..8df0ec5 100644
+--- a/python/mir/pyproject.toml
++++ b/python/mir/pyproject.toml
+@@ -9,7 +9,7 @@
+ 
+ 
+ [build-system]
+-requires = ["setuptools>=65", "wheel"]
++requires = ["setuptools>=65", "wheel", "Cython", "numpy"]
+ build-backend = "setuptools.build_meta"
+ 
+ [project]
+diff --git a/python/mir/setup.py b/python/mir/setup.py
+index 57b1bf3..840a177 100644
+--- a/python/mir/setup.py
++++ b/python/mir/setup.py
+@@ -1,7 +1,9 @@
+ import platform
+ import sys
+ 
+-from setuptools import setup
++import numpy as np
++from Cython.Build import cythonize
++from setuptools import setup, Extension
+ from wheel.bdist_wheel import bdist_wheel
+ 
+ with open("VERSION", "r") as fVersion:
+@@ -34,7 +36,9 @@ setup(
+     package_data={
+         "": ["*.so"],
+     },
+-    has_ext_modules=lambda: True,
++    ext_modules=cythonize([
++        Extension("mir._mir", ["src/_mir/_mir.pyx"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include", np.get_include()]),
++    ]),
+     install_requires=install_requires,
+     **ext_kwargs[sys.platform],
+ )
+diff --git a/python/mir/src/_mir/_mir.pyx b/python/mir/src/_mir/_mir.pyx
+index 8d6de6b..4e7cc7d 100644
+--- a/python/mir/src/_mir/_mir.pyx
++++ b/python/mir/src/_mir/_mir.pyx
+@@ -56,19 +56,19 @@ init(_args)
+ 
+ 
+ def home() -> str:
+-    return mir.LibMir.homeDir()
++    return mir.LibMir.homeDir().decode("ASCII")
+ 
+ 
+ def cache() -> str:
+-    return mir.LibMir.cacheDir()
++    return mir.LibMir.cacheDir().decode("ASCII")
+ 
+ 
+ def version() -> str:
+-    return mir.LibMir.instance().version()
++    return mir.LibMir.instance().version().decode("ASCII")
+ 
+ 
+ def git_sha1() -> str:
+-    return mir.LibMir.instance().gitsha1(40)
++    return mir.LibMir.instance().gitsha1(40).decode("ASCII")
+ 
+ 
+ def grid_box_areas(grid):

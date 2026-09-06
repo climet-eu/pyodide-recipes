@@ -1,0 +1,34 @@
+package:
+  name: eccodeslib
+  version: 2.47.3.21
+  top-level:
+    - eccodeslib
+
+source:
+  path: ./eccodeslib
+
+requirements:
+  host:
+    - libeccodes
+
+build:
+  vendor-sharedlib: false
+  post: |
+    mkdir -p eccodeslib/lib
+    cp ${WASM_LIBRARY_DIR}/lib/libeccodes*.so eccodeslib/lib
+    mkdir -p eccodeslib/lib/pkgconfig
+    cp ${WASM_LIBRARY_DIR}/lib/pkgconfig/eccodes.pc eccodeslib/lib/pkgconfig
+    mkdir -p eccodeslib/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/eccodes eccodeslib/lib/cmake
+    mkdir -p eccodeslib/include
+    cp ${WASM_LIBRARY_DIR}/include/libaec.h eccodeslib/include
+    cp ${WASM_LIBRARY_DIR}/include/grib_api.h eccodeslib/include
+    cp ${WASM_LIBRARY_DIR}/include/eccodes*.h eccodeslib/include
+    mkdir -p eccodeslib/cmake
+    cp ${WASM_LIBRARY_DIR}/cmake/libaec*.cmake eccodeslib/cmake
+
+about:
+  home: https://github.com/ecmwf/eccodes
+  PyPI: https://pypi.org/project/eccodeslib
+  summary: eccodeslib
+  license: Apache License Version 2.0

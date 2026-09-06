@@ -27,6 +27,6 @@ build:
 
 about:
   home: https://github.com/ecmwf/eckit
-  PyPI: https://pypi.org/project/numba
+  PyPI: https://pypi.org/project/eckitlib
   summary: eckitlib
   license: Apache License Version 2.0

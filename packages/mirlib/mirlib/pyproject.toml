@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mirlib"
+version = "1.29.0.21"
+dependencies = [
+    "eccodeslib==2.47.3.21",
+    "eckitlib==2.1.0.21",
+    "atlaslib-ecmwf==0.46.0.21",
+]

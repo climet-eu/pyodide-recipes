@@ -1,0 +1,37 @@
+package:
+  name: atlaslib-ecmwf
+  version: 0.46.0.21
+  top-level:
+    - atlaslib_ecmwf
+
+source:
+  path: ./atlaslib-ecmwf
+
+requirements:
+  host:
+    - libatlas
+
+build:
+  vendor-sharedlib: false
+  post: |
+    mkdir -p atlaslib_ecmwf/lib
+    cp ${WASM_LIBRARY_DIR}/lib/libpluto.so atlaslib_ecmwf/lib
+    cp ${WASM_LIBRARY_DIR}/lib/libatlas*.so atlaslib_ecmwf/lib
+    mkdir -p atlaslib_ecmwf/lib/pkgconfig
+    cp ${WASM_LIBRARY_DIR}/lib/pkgconfig/atlas*.pc atlaslib_ecmwf/lib/pkgconfig
+    mkdir -p atlaslib_ecmwf/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/pluto atlaslib_ecmwf/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/hic atlaslib_ecmwf/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/atlas_io atlaslib_ecmwf/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/atlas atlaslib_ecmwf/lib/cmake
+    mkdir -p atlaslib_ecmwf/include
+    cp -r ${WASM_LIBRARY_DIR}/include/pluto atlaslib_ecmwf/include
+    cp -r ${WASM_LIBRARY_DIR}/include/hic atlaslib_ecmwf/include
+    cp -r ${WASM_LIBRARY_DIR}/include/atlas_io atlaslib_ecmwf/include
+    cp -r ${WASM_LIBRARY_DIR}/include/atlas atlaslib_ecmwf/include
+
+about:
+  home: https://github.com/ecmwf/atlas
+  PyPI: https://pypi.org/project/atlaslib-ecmwf
+  summary: atlaslib-ecmwf
+  license: Apache License Version 2.0
