@@ -1,11 +1,11 @@
 package:
   name: python-rapidjson
-  version: "1.23"
+  version: "1.25"
   top-level:
     - rapidjson
 source:
-  url: https://files.pythonhosted.org/packages/source/p/python_rapidjson/python_rapidjson-1.23.tar.gz
-  sha256: 0f845daeb26be147f5720a8c410308235092bb4fbb81ea408aa77203e26296fb
+  url: https://files.pythonhosted.org/packages/source/p/python_rapidjson/python_rapidjson-1.25.tar.gz
+  sha256: 97c1de449552ec28ac5ae89350c2b53e4c5d21a9b4308d7a1630b1099e5db9fc
 about:
   home: https://github.com/python-rapidjson/python-rapidjson
   PyPI: https://pypi.org/project/python-rapidjson

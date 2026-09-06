@@ -1,11 +1,11 @@
 package:
   name: ujson
-  version: 5.13.0
+  version: 6.0.0
   top-level:
     - ujson
 source:
-  url: https://files.pythonhosted.org/packages/source/u/ujson/ujson-5.13.0.tar.gz
-  sha256: d62e3d7625384c08082abad81a077af587fdef2761bb14c3822f4234b8d07d75
+  url: https://files.pythonhosted.org/packages/source/u/ujson/ujson-6.0.0.tar.gz
+  sha256: 80e23393feb707582e0ad495c397a4477b646d08094d2df64f7316f9fafd8aae
 about:
   home: https://github.com/ultrajson/ultrajson
   PyPI: https://pypi.org/project/ujson
