@@ -1,0 +1,17 @@
+diff --git a/requirements.txt b/requirements.txt
+index 86b7362..ffdbc5f 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -7,9 +7,9 @@ pandas
+ cmocean
+ scipy
+ ipywidgets
+-ipykernel
+-jupytext
+-nbconvert
++#ipykernel
++#jupytext
++#nbconvert
+ healpy
+ cftime
+ #cartopy         # cannot easily be installed with pip

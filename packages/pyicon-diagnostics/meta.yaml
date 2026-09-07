@@ -1,14 +1,16 @@
 package:
   name: pyicon-diagnostics
-  version: 0.3.6
+  version: 0.4.0
   top-level:
     - pyicon
 source:
-  url: https://files.pythonhosted.org/packages/99/8d/e8757581c9d8ad25d2df94d5559d8e6ee5e5a5f7353d7a74485d20add32c/pyicon_diagnostics-0.3.6.tar.gz
-  sha256: df2adf98e1b43895b0140286e67bcb8f169de5df41bb0b86ee4e4c939859f765
+  url: https://files.pythonhosted.org/packages/source/p/pyicon_diagnostics/pyicon_diagnostics-0.4.0.tar.gz
+  sha256: 38606b846f9b14a65cb71fec2e95de0fe978da14604c976ffe815c995b348e02
   extras:
-    - - ./extras/requirements.txt
-      - ./requirements.txt
+    - [./extras/requirements_development.txt, ./requirements_development.txt]
+    - [./extras/requirements_documentation.txt, ./requirements_documentation.txt]
+  patches:
+    - patches/0001-no-jupyter-dependencies.patch
 
 about:
   home: https://gitlab.dkrz.de/m300602/pyicon

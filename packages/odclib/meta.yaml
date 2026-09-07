@@ -1,0 +1,30 @@
+package:
+  name: odclib
+  version: 1.6.3.21
+  top-level:
+    - odclib
+
+source:
+  path: ./odclib
+
+requirements:
+  host:
+    - libodc
+
+build:
+  vendor-sharedlib: false
+  post: |
+    mkdir -p odclib/lib
+    cp ${WASM_LIBRARY_DIR}/lib/libodc*.so odclib/lib
+    mkdir -p odclib/lib/pkgconfig
+    cp ${WASM_LIBRARY_DIR}/lib/pkgconfig/odc.pc odclib/lib/pkgconfig
+    mkdir -p odclib/lib/cmake
+    cp -r ${WASM_LIBRARY_DIR}/lib/cmake/odc odclib/lib/cmake
+    mkdir -p odclib/include
+    cp -r ${WASM_LIBRARY_DIR}/include/odc odclib/include
+
+about:
+  home: https://github.com/ecmwf/odc
+  PyPI: https://pypi.org/project/odclib
+  summary: odclib
+  license: Apache License Version 2.0

@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odclib"
+version = "1.6.3.21"
+dependencies = ["eckitlib==2.1.0.21"]

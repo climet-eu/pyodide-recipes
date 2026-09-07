@@ -1,0 +1,44 @@
+package:
+  name: libodc
+  version: 1.6.3
+
+source:
+  url: https://github.com/ecmwf/odc/archive/refs/tags/1.6.3.tar.gz
+  sha256: 3d81fd02b368b1f74a19c1d630d951f36aaac48f47d4798fb99b6fd46f6573f6
+  patches:
+    - patches/0001-32bit-long.patch
+    - patches/0002-sizeof-elem.patch
+    - patches/0003-no-bins-or-tests.patch
+
+requirements:
+  host:
+    - libeckit
+
+build:
+  type: shared_library
+  script: |
+    git clone --branch 3.7.0 --depth 1 https://github.com/ecmwf/ecbuild;
+
+    mkdir -p build;
+
+    export CFLAGS="${CFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN:/lib/python3.14/site-packages/eckitlib/lib/'"
+    export CXXFLAGS="${CXXFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN:/lib/python3.14/site-packages/eckitlib/lib/'"
+    export LDFLAGS="${LDFLAGS} -fwasm-exceptions -sSUPPORT_LONGJMP='wasm' -Wl,-rpath,'\$ORIGIN:/lib/python3.14/site-packages/eckitlib/lib/'"
+
+    export EMSCRIPTEN_SYSROOT=$(em-config CACHE)/sysroot
+    export EMSCRIPTEN_INCLUDE=$EMSCRIPTEN_SYSROOT/include
+    export EMSCRIPTEN_BIN=$EMSCRIPTEN_SYSROOT/bin
+    export EMSCRIPTEN_LIB=$EMSCRIPTEN_SYSROOT/lib/wasm32-emscripten/pic
+
+    cd build \
+        && emcmake cmake ../ \
+        -DCMAKE_INSTALL_PREFIX=${WASM_LIBRARY_DIR} \
+        -DBUILD_SHARED_LIBS=ON \
+        -DDISABLE_OS_CHECK=ON \
+        -DENABLE_TESTS=OFF \
+        -DENABLE_FORTRAN=OFF;
+
+    emmake make -j ${PYODIDE_JOBS:-3};
+    emmake make -j ${PYODIDE_JOBS:-3} install;
+
+    cp -P ${WASM_LIBRARY_DIR}/lib/libodc*.so ${DISTDIR}

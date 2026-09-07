@@ -1,0 +1,27 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 420aa34..48642ad 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -87,7 +87,7 @@ include(cmake/compiler_warnings.cmake) # optionally handle compiler specific war
+ 
+ add_subdirectory( src )
+ add_subdirectory( regressions )
+-add_subdirectory( tests )
++# add_subdirectory( tests )
+ 
+ ############################################################################################
+ # finalize
+diff --git a/src/odc/tools/CMakeLists.txt b/src/odc/tools/CMakeLists.txt
+index 1a8c368..38a2bc1 100644
+--- a/src/odc/tools/CMakeLists.txt
++++ b/src/odc/tools/CMakeLists.txt
+@@ -95,6 +95,6 @@ ecbuild_add_library( TARGET     odctest
+ 
+ ## TODO: Re-enable odctest
+ 
+-ecbuild_add_executable( TARGET    odc
+-                        SOURCES   odc.cc
+-                        LIBS      odccore odctools odctest )
++# ecbuild_add_executable( TARGET    odc
++#                         SOURCES   odc.cc
++#                         LIBS      odccore odctools odctest )

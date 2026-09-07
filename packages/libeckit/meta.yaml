@@ -43,8 +43,9 @@ build:
         -DENABLE_BZIP2=ON \
         -DENABLE_XXHASH=ON \
         -DENABLE_ECKIT_CODEC=ON \
-        -DENABLE_ECKIT_SPEC=ON \
         -DENABLE_ECKIT_GEO=ON \
+        -DENABLE_ECKIT_SPEC=ON \
+        -DENABLE_ECKIT_SQL=ON \
         -DCMAKE_C_FLAGS="-fwasm-exceptions" \
         -DCMAKE_CXX_FLAGS="-fwasm-exceptions";
 
