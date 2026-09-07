@@ -12,7 +12,7 @@ index c588c51..fa3b45c 100644
  
  [project]
 diff --git a/python/eckit/setup.py b/python/eckit/setup.py
-index 8bac7b0..ea64a92 100644
+index 8bac7b0..db6d54f 100644
 --- a/python/eckit/setup.py
 +++ b/python/eckit/setup.py
 @@ -1,7 +1,8 @@
@@ -33,28 +33,14 @@ index 8bac7b0..ea64a92 100644
 +    ext_modules=cythonize([
 +        Extension("eckit._eckit", ["src/_eckit/_eckit.pyx", "src/_eckit/eckit.cc"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
 +        Extension("eckit.geo._eckit_geo", ["src/_eckit/_eckit_geo.pyx", "src/_eckit/eckit.cc"], language="c++", include_dirs=["/src/pyodide-recipes/packages/.libs/include"]),
-+    ]),
++    ], compiler_directives={ "language_level": "3", "c_string_type": "unicode", "c_string_encoding": "utf8" }),
      install_requires=install_requires,
      **ext_kwargs[sys.platform],
  )
 diff --git a/python/eckit/src/_eckit/_eckit.pyx b/python/eckit/src/_eckit/_eckit.pyx
-index c73c524..df67385 100644
+index c73c524..3443912 100644
 --- a/python/eckit/src/_eckit/_eckit.pyx
 +++ b/python/eckit/src/_eckit/_eckit.pyx
-@@ -16,11 +16,11 @@ eckit.eckit_main_initialise()
- 
- 
- def version() -> str:
--    return eckit.LibEcKit.instance().version()
-+    return eckit.LibEcKit.instance().version().decode("ASCII")
- 
- 
- def git_sha1() -> str:
--    return eckit.LibEcKit.instance().gitsha1(40)
-+    return eckit.LibEcKit.instance().gitsha1(40).decode("ASCII")
- 
- 
- def easycurl_setopt(str name, object value) -> None:
 @@ -39,12 +39,15 @@ def easycurl_setopt(str name, object value) -> None:
      cdef cppstring c_value
  
@@ -81,24 +67,6 @@ index c73c524..df67385 100644
      """
 -    eckit.easycurl_clear_options()
 +    # eckit.easycurl_clear_options()
-diff --git a/python/eckit/src/_eckit/_eckit_geo.pyx b/python/eckit/src/_eckit/_eckit_geo.pyx
-index d8e6034..dfae037 100644
---- a/python/eckit/src/_eckit/_eckit_geo.pyx
-+++ b/python/eckit/src/_eckit/_eckit_geo.pyx
-@@ -18,11 +18,11 @@ eckit.eckit_main_initialise()
- 
- 
- def version() -> str:
--    return eckit_geo.LibEcKitGeo.instance().version()
-+    return eckit_geo.LibEcKitGeo.instance().version().decode("ASCII")
- 
- 
- def git_sha1() -> str:
--    return eckit_geo.LibEcKitGeo.instance().gitsha1(40)
-+    return eckit_geo.LibEcKitGeo.instance().gitsha1(40).decode("ASCII")
- 
- 
- def cache_dir_purge() -> None:
 diff --git a/python/eckit/src/_eckit/eckit.pxd b/python/eckit/src/_eckit/eckit.pxd
 index 92d2c0c..04a53cc 100644
 --- a/python/eckit/src/_eckit/eckit.pxd

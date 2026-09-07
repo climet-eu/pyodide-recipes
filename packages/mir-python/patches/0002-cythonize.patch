@@ -12,7 +12,7 @@ index fc2c37b..8df0ec5 100644
  
  [project]
 diff --git a/python/mir/setup.py b/python/mir/setup.py
-index 57b1bf3..627f12f 100644
+index 57b1bf3..3c4d726 100644
 --- a/python/mir/setup.py
 +++ b/python/mir/setup.py
 @@ -1,7 +1,9 @@
@@ -42,12 +42,12 @@ index 57b1bf3..627f12f 100644
 +            "/src/pyodide-recipes/packages/.libs/include",
 +            np.get_include(),
 +        ]),
-+    ]),
++    ], compiler_directives={ "language_level": "3", "c_string_type": "unicode", "c_string_encoding": "utf8" }),
      install_requires=install_requires,
      **ext_kwargs[sys.platform],
  )
 diff --git a/python/mir/src/_mir/_mir.pyx b/python/mir/src/_mir/_mir.pyx
-index 8d6de6b..93e5467 100644
+index 8d6de6b..3d45994 100644
 --- a/python/mir/src/_mir/_mir.pyx
 +++ b/python/mir/src/_mir/_mir.pyx
 @@ -11,6 +11,7 @@
@@ -58,36 +58,3 @@ index 8d6de6b..93e5467 100644
  from cython.operator cimport dereference
  from libc.stdlib cimport free
  from libc.stdlib cimport malloc
-@@ -42,7 +43,7 @@ cdef class Args:
-             raise MemoryError("Args: failed to allocate argv")
- 
-         for i, arg in enumerate(sys.argv):
--            self.argv[i] = strdup(arg)
-+            self.argv[i] = strdup(arg.encode("ASCII"))
- 
-     def __dealloc__(self):
-         free(self.argv)
-@@ -56,19 +57,19 @@ init(_args)
- 
- 
- def home() -> str:
--    return mir.LibMir.homeDir()
-+    return mir.LibMir.homeDir().decode("ASCII")
- 
- 
- def cache() -> str:
--    return mir.LibMir.cacheDir()
-+    return mir.LibMir.cacheDir().decode("ASCII")
- 
- 
- def version() -> str:
--    return mir.LibMir.instance().version()
-+    return mir.LibMir.instance().version().decode("ASCII")
- 
- 
- def git_sha1() -> str:
--    return mir.LibMir.instance().gitsha1(40)
-+    return mir.LibMir.instance().gitsha1(40).decode("ASCII")
- 
- 
- def grid_box_areas(grid):
