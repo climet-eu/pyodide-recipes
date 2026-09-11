@@ -1,0 +1,13 @@
+diff --git a/src/earthkit/plots/resample/reproject.py b/src/earthkit/plots/resample/reproject.py
+index e21f94a..18f9250 100644
+--- a/src/earthkit/plots/resample/reproject.py
++++ b/src/earthkit/plots/resample/reproject.py
+@@ -228,7 +228,7 @@ def reproject_to_grid(
+     # Use parallel transformation for large grids (pyproj releases GIL)
+     t0 = time.time() if ENABLE_TIMING else None
+     grid_size = nx * ny
+-    use_parallel = grid_size > 100000  # Use parallel for grids larger than 100k points
++    use_parallel = False
+ 
+     if gpu_enabled:
+         # Convert to CPU for transformation, then back to GPU

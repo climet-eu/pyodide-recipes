@@ -1,0 +1,15 @@
+package:
+  name: earthkit-plots
+  version: 1.0.4
+  top-level:
+    - earthkit
+source:
+  url: https://files.pythonhosted.org/packages/source/e/earthkit_plots/earthkit_plots-1.0.4.tar.gz
+  sha256: e1b8dd35820a79eb96aeae1587bddd2da470df6ccc719780db34a0638b254ae6
+  patches:
+    - patches/0001-no-parallel.patch
+about:
+  home: https://github.com/ecmwf/earthkit-plots/
+  PyPI: https://pypi.org/project/earthkit-plots
+  summary: Visualisation tools for earth science data
+  license: Apache-2.0
