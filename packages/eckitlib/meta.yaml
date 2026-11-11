@@ -24,6 +24,10 @@ build:
     cp -r ${WASM_LIBRARY_DIR}/lib/cmake/eckit eckitlib/lib/cmake
     mkdir -p eckitlib/include
     cp -r ${WASM_LIBRARY_DIR}/include/eckit eckitlib/include
+    ls ${WASM_LIBRARY_DIR}
+    ls ${WASM_LIBRARY_DIR}/lib
+    ls ${WASM_LIBRARY_DIR}/share
+    ls ${WASM_LIBRARY_DIR}/etc
 
 about:
   home: https://github.com/ecmwf/eckit
